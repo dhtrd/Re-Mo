@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>لوحة المبيعات — يوليو 2026</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --font:'Tajawal','IBM Plex Sans Arabic','Segoe UI',Tahoma,Arial,sans-serif;
+  --bg:#07101f;--bg1:#0c1830;--bg2:#111f3a;
+  --glass:rgba(255,255,255,.06);--glass2:rgba(255,255,255,.10);
+  --gb:rgba(255,255,255,.11);--gb2:rgba(255,255,255,.20);
+  --t:#00d4aa;--t2:#00a88a;--tg:rgba(0,212,170,.14);
+  --g:#f5c842;--g2:#c9a020;--gg:rgba(245,200,66,.13);
+  --v:#a78bfa;--vg:rgba(167,139,250,.13);
+  --pos:#34d399;--posg:rgba(52,211,153,.14);
+  --neg:#f87171;--negg:rgba(248,113,113,.13);
+  --tx:#eef2ff;--tx2:#9bb0d4;--tx3:#4d6580;
+  --line:rgba(255,255,255,.07);--r:16px;
+  --shadow:0 2px 20px rgba(0,0,0,.4);
+}
+html[data-theme="light"]{
+  --bg:#f0f4f8;--bg1:#ffffff;--bg2:#e8edf4;
+  --glass:rgba(255,255,255,.75);--glass2:rgba(255,255,255,.90);
+  --gb:rgba(0,0,0,.10);--gb2:rgba(0,0,0,.18);
+  --t:#007a63;--t2:#005a48;--tg:rgba(0,122,99,.10);
+  --g:#b8860b;--g2:#8b6508;--gg:rgba(184,134,11,.10);
+  --v:#6d44d0;--vg:rgba(109,68,208,.10);
+  --pos:#1a8a5a;--posg:rgba(26,138,90,.12);
+  --neg:#c0392b;--negg:rgba(192,57,43,.12);
+  --tx:#111827;--tx2:#374151;--tx3:#6b7280;
+  --line:rgba(0,0,0,.08);--r:16px;
+  --shadow:0 2px 16px rgba(0,0,0,.08);
+}
+html,body{min-height:100vh;font-family:var(--font);
+  background:var(--bg);color:var(--tx);-webkit-font-smoothing:antialiased;
+  background-attachment:fixed;transition:background .3s,color .3s}
+html[data-theme="dark"]{background-image:
+  radial-gradient(ellipse 80% 50% at 90% -5%,rgba(0,212,170,.09),transparent),
+  radial-gradient(ellipse 60% 40% at 5% 90%,rgba(167,139,250,.07),transparent)}
+
+.wrap{max-width:1380px;margin:0 auto;padding:0 22px 80px}
+
+/* ── CARD ── */
+.card{background:var(--glass);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border:1px solid var(--gb);border-radius:var(--r);box-shadow:var(--shadow);transition:border .2s,background .3s}
+.card:hover{border-color:var(--gb2)}
+
+/* ── HEADER ── */
+.hdr{padding:26px 0 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.logo{display:flex;align-items:center;gap:13px}
+.crest{width:46px;height:46px;border-radius:13px;
+  background:linear-gradient(145deg,var(--t),var(--t2));
+  display:grid;place-items:center;color:#fff;font:900 21px/1 'Tajawal';
+  box-shadow:0 0 20px var(--tg),0 0 0 1px rgba(0,212,170,.2)}
+.logo-txt .sub{font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--g);text-transform:uppercase}
+.logo-txt h1{font:800 19px/1.25 'Tajawal';margin-top:2px;color:var(--tx)}
+.hdr-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.hb{display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:100px;font-size:12px;font-weight:700;
+  background:var(--glass2);border:1px solid var(--gb);color:var(--tx)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--t);box-shadow:0 0 6px var(--t);flex:none}
+.hb.gold{color:var(--g);border-color:rgba(245,200,66,.25);background:var(--gg)}
+
+/* THEME TOGGLE */
+.theme-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--gb);
+  background:var(--glass2);color:var(--tx);cursor:pointer;display:grid;place-items:center;
+  font-size:17px;transition:.2s;flex:none}
+.theme-btn:hover{border-color:var(--t);background:var(--tg)}
+
+.rule{height:1px;background:linear-gradient(90deg,var(--t) 0%,var(--g) 11%,var(--line) 11%,transparent)}
+.sub-desc{margin-top:10px;font-size:12px;color:var(--tx2);line-height:1.75;max-width:820px}
+
+/* ── FILTER BAR ── */
+.fbar{margin:22px 0 0;display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.fbar label{font-size:12px;color:var(--tx2);font-weight:700}
+.sel-wrap{position:relative}
+.fbar select{font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;color:var(--tx);
+  background:var(--bg1);border:1px solid var(--gb);border-radius:11px;
+  padding:9px 34px 9px 13px;outline:none;cursor:pointer;appearance:none;
+  min-width:250px;transition:border .2s;box-shadow:var(--shadow)}
+.fbar select:hover{border-color:var(--t)}
+.fbar select:focus{border-color:var(--t);box-shadow:0 0 0 3px var(--tg)}
+.fbar select option{background:var(--bg1);color:var(--tx)}
+.chev{position:absolute;left:11px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--tx3)}
+.scope-pill{font-size:11px;font-weight:800;padding:7px 13px;border-radius:100px;
+  background:var(--tg);color:var(--t);border:1px solid rgba(0,212,170,.22);max-width:220px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ── SECTION HEADING ── */
+.sec{margin-top:28px}
+.sec-hd{display:flex;align-items:center;gap:9px;margin-bottom:13px}
+.sec-hd .ix{font:800 10.5px 'Tajawal';color:var(--g);background:var(--gg);
+  border:1px solid rgba(245,200,66,.22);border-radius:7px;padding:3px 8px}
+.sec-hd h2{font:800 15px/1 'Tajawal';color:var(--tx)}
+.sec-hd .hint{font-size:11px;color:var(--tx3);margin-inline-start:auto}
+
+/* ── KPI ROW ── */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.kc{padding:20px 20px 17px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px}
+.kc .glo{position:absolute;width:130px;height:130px;border-radius:50%;top:-45px;left:-45px;opacity:.5;pointer-events:none}
+.kc .lbl{font-size:11px;color:var(--tx2);font-weight:700;position:relative;letter-spacing:.02em}
+.kc .val{font:900 30px/1.1 'Tajawal';position:relative;color:var(--tx);word-break:break-all}
+.kc .unit{font-size:12px;font-weight:700;color:var(--tx3);margin-inline-start:3px}
+.kc .dlt{display:inline-flex;align-items:center;gap:4px;margin-top:3px;font-size:11px;font-weight:800;
+  padding:4px 9px;border-radius:100px;position:relative;width:fit-content}
+.kc .dlt.up{background:var(--posg);color:var(--pos)}
+.kc .dlt.dn{background:var(--negg);color:var(--neg)}
+.kc .dlt.fl{background:var(--glass2);color:var(--tx2)}
+.kc .prev{font-size:10.5px;color:var(--tx3);position:relative;margin-top:1px}
+
+/* ── MID BAND ── */
+.mid{display:grid;grid-template-columns:300px 1fr;gap:14px}
+.gov-card{padding:22px 24px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}
+.gov-card::before{content:"";position:absolute;top:-55px;right:-55px;width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,var(--vg),transparent 70%);pointer-events:none}
+.gov-hd{display:flex;align-items:center;justify-content:space-between;position:relative}
+.gov-hd .ttl{font:800 13.5px 'Tajawal';color:var(--tx)}
+.gov-hd .chip{font-size:10.5px;font-weight:800;color:var(--g);background:var(--gg);
+  padding:4px 9px;border-radius:100px;border:1px solid rgba(245,200,66,.2)}
+.gauge-wrap{display:flex;align-items:center;gap:16px;position:relative}
+.gauge{position:relative;width:120px;height:120px;flex:none}
+.gauge .pct{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
+.gauge .pct b{font:900 28px/1 'Tajawal';color:var(--t)}
+.gauge .pct span{font-size:10px;color:var(--tx3)}
+.wf{display:flex;flex-direction:column;gap:9px;flex:1}
+.wf-row{display:flex;align-items:center;gap:8px}
+.wf-sw{width:8px;height:8px;border-radius:3px;flex:none}
+.wf-nm{font-size:11.5px;color:var(--tx2);flex:1}
+.wf-vl{font:800 13px/1 'Tajawal'}
+.gov-note{font-size:10.5px;color:var(--tx3);border-top:1px dashed var(--line);padding-top:11px;line-height:1.75;position:relative}
+
+/* ── EFF ── */
+.eff-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ec{padding:17px 19px;position:relative;overflow:hidden}
+.ec .lbl{font-size:11px;color:var(--tx2);font-weight:700}
+.ec .val{font:900 24px/1.25 'Tajawal';margin:6px 0 11px;color:var(--tx)}
+.ec .bar{height:7px;background:var(--line);border-radius:100px;overflow:hidden}
+.ec .bar span{display:block;height:100%;border-radius:100px;transition:width .85s cubic-bezier(.2,.7,.2,1)}
+.ec .meta{display:flex;justify-content:space-between;font-size:10px;color:var(--tx3);margin-top:7px}
+
+/* ── CHARTS ── */
+.ch-area{display:grid;grid-template-columns:1.45fr 1fr;gap:14px}
+.ch-card{padding:18px 20px}
+.ch-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:9px}
+.ch-hd .t{font:800 13px 'Tajawal';color:var(--tx)}
+.ch-hd .s{font-size:11px;color:var(--tx3);margin-top:3px}
+.ch-hd .pill{font-size:10.5px;font-weight:800;color:var(--t);background:var(--tg);
+  border:1px solid rgba(0,212,170,.18);padding:4px 9px;border-radius:100px;white-space:nowrap;flex:none}
+.ch-wrap{position:relative}
+.h370{height:370px}.h280{height:280px}.h250{height:250px}
+.ch2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.don-layout{display:grid;grid-template-columns:1fr 1fr;gap:6px;align-items:center}
+.don-leg{display:flex;flex-direction:column;gap:9px}
+.don-leg .dr{display:flex;align-items:center;gap:8px}
+.don-sw{width:9px;height:9px;border-radius:3px;flex:none}
+.don-nm{font-size:12px;color:var(--tx2);flex:1}
+.don-vl{font:800 12.5px/1 'Tajawal';color:var(--tx)}
+.don-pc{font-size:10.5px;color:var(--tx3);min-width:36px;text-align:left}
+
+/* ── TABLE ── */
+.tbl-card{overflow:hidden}
+.tbl-scroll{overflow-x:auto;max-height:440px;overflow-y:auto}
+.tbl-scroll::-webkit-scrollbar{width:5px;height:5px}
+.tbl-scroll::-webkit-scrollbar-thumb{background:var(--gb);border-radius:4px}
+table{width:100%;border-collapse:collapse;font-size:12px;min-width:800px}
+thead th{font:800 11px 'Tajawal';color:var(--tx3);padding:13px 13px;border-bottom:1px solid var(--line);
+  text-align:right;position:sticky;top:0;background:var(--bg1);cursor:pointer;user-select:none;
+  white-space:nowrap;z-index:2;transition:background .3s}
+thead th:hover{color:var(--tx)}
+.ar-s{font-size:9px;margin-inline-start:3px}
+tbody td{padding:11px 13px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--tx)}
+td.nm{font-weight:700;text-align:right;white-space:normal;max-width:210px}
+td.nb{font:700 12px/1 'Tajawal';text-align:left}
+tbody tr{cursor:pointer;transition:background .12s}
+tbody tr:hover{background:var(--glass2)}
+tbody tr.sel{background:var(--tg)}
+tbody tr.tot-row td{font-weight:800;border-top:1px solid var(--gb2);border-bottom:none;background:var(--bg2)}
+.mbar{display:inline-block;height:5px;border-radius:3px;
+  background:linear-gradient(90deg,var(--t2),var(--t));
+  vertical-align:middle;margin-inline-end:7px}
+.pmg{font:800 11px 'Tajawal';padding:3px 8px;border-radius:7px}
+.posc{color:var(--pos)}.negc{color:var(--neg)}.goldc{color:var(--g)}
+
+/* ── INSIGHTS ── */
+.ins-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ins{padding:18px 20px;display:flex;gap:12px;align-items:flex-start;position:relative;overflow:hidden}
+.ins::before{content:"";position:absolute;top:-50px;right:-50px;width:140px;height:140px;
+  border-radius:50%;opacity:.45;pointer-events:none}
+.ins.good::before{background:radial-gradient(circle,var(--posg),transparent 70%)}
+.ins.warn::before{background:radial-gradient(circle,var(--negg),transparent 70%)}
+.ins.info::before{background:radial-gradient(circle,var(--tg),transparent 70%)}
+.ins.rec::before{background:radial-gradient(circle,var(--gg),transparent 70%)}
+.ins .mk{width:36px;height:36px;border-radius:11px;flex:none;display:grid;place-items:center}
+.ins.good .mk{background:var(--posg);color:var(--pos)}
+.ins.warn .mk{background:var(--negg);color:var(--neg)}
+.ins.info .mk{background:var(--tg);color:var(--t)}
+.ins.rec  .mk{background:var(--gg);color:var(--g)}
+.ins .bd .tag{font-size:10px;font-weight:800;padding:2px 7px;border-radius:6px;display:inline-block;margin-bottom:5px}
+.ins.good .tag{background:var(--posg);color:var(--pos)}
+.ins.warn .tag{background:var(--negg);color:var(--neg)}
+.ins.info .tag{background:var(--tg);color:var(--t)}
+.ins.rec  .tag{background:var(--gg);color:var(--g)}
+.ins .bd h4{font:800 13px 'Tajawal';color:var(--tx);margin-bottom:4px}
+.ins .bd p{font-size:12px;color:var(--tx2);line-height:1.7}
+.ins .bd p b{color:var(--tx);font-family:'Tajawal';font-weight:800}
+
+/* ── RECS ── */
+.recs-card{padding:24px 26px;background:linear-gradient(135deg,rgba(0,212,170,.08),rgba(167,139,250,.06));
+  border:1px solid rgba(0,212,170,.16);margin-top:14px;position:relative;overflow:hidden}
+.recs-card::before{content:"";position:absolute;top:-60px;left:-60px;width:220px;height:220px;
+  border-radius:50%;background:radial-gradient(circle,var(--tg),transparent 70%);pointer-events:none}
+.recs-card h3{font:800 14.5px 'Tajawal';color:var(--tx);display:flex;align-items:center;gap:8px;position:relative}
+.recs-card ul{list-style:none;margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px 26px;position:relative}
+.recs-card li{display:flex;gap:9px;font-size:12px;line-height:1.7;color:var(--tx2)}
+.recs-card li .n{font:900 11.5px 'Tajawal';color:var(--t);flex:none}
+
+/* ── SIGS ── */
+.sigs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+.sig-card{padding:17px 18px;text-align:center}
+.sig-card .role{font-size:10px;color:var(--tx3);letter-spacing:.08em;text-transform:uppercase}
+.sig-card .ln{height:1px;background:linear-gradient(90deg,transparent,var(--gb2),transparent);margin:18px 12px 9px}
+.sig-card .who{font:700 13px 'Tajawal';color:var(--tx)}
+.fn{margin-top:20px;font-size:11px;color:var(--tx3);text-align:center;line-height:1.85}
+.fn b{color:var(--tx2)}
+
+/* ── SIDEBAR ── */
+.sb-btn{position:fixed;top:50%;right:0;transform:translateY(-50%);z-index:60;
+  background:linear-gradient(160deg,var(--t),var(--t2));color:#fff;border:none;cursor:pointer;
+  padding:15px 9px;border-radius:13px 0 0 13px;
+  box-shadow:-3px 0 18px rgba(0,212,170,.25),0 0 0 1px rgba(0,212,170,.2);
+  writing-mode:vertical-rl;font:800 12px 'Tajawal';letter-spacing:.04em;
+  display:flex;flex-direction:column;align-items:center;gap:7px;transition:.2s}
+.sb-btn:hover{padding-inline-end:14px}
+.ov{position:fixed;inset:0;background:rgba(4,8,18,.65);backdrop-filter:blur(5px);
+  opacity:0;visibility:hidden;transition:.28s;z-index:65}
+.ov.open{opacity:1;visibility:visible}
+.sb{position:fixed;top:0;right:0;height:100vh;width:330px;max-width:92vw;
+  background:var(--bg1);backdrop-filter:blur(24px);
+  border-left:1px solid var(--gb);box-shadow:-16px 0 46px rgba(0,0,0,.55);
+  transform:translateX(100%);transition:transform .3s cubic-bezier(.2,.7,.2,1);z-index:70;
+  display:flex;flex-direction:column}
+.sb.open{transform:translateX(0)}
+.sb-hd{padding:20px 18px 14px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;justify-content:space-between}
+.sb-hd .sub{font-size:10px;font-weight:800;letter-spacing:.15em;color:var(--g);text-transform:uppercase}
+.sb-hd .ttl{font:800 14.5px 'Tajawal';margin-top:3px;color:var(--tx)}
+.sb-hd small{display:block;font:400 11px 'Tajawal';color:var(--tx3);margin-top:2px}
+.sb-cls{width:30px;height:30px;border-radius:8px;border:1px solid var(--gb);background:var(--glass2);
+  color:var(--tx2);cursor:pointer;display:grid;place-items:center;font-size:14px;transition:.15s}
+.sb-cls:hover{background:var(--negg);color:var(--neg)}
+.sb-col{display:flex;justify-content:space-between;padding:9px 18px 7px;font-size:10px;
+  font-weight:800;color:var(--tx3);letter-spacing:.05em;
+  background:var(--glass2);border-bottom:1px solid var(--line)}
+.sb-list{flex:1;overflow-y:auto;padding:6px}
+.sb-list::-webkit-scrollbar{width:4px}
+.sb-list::-webkit-scrollbar-thumb{background:var(--gb);border-radius:3px}
+.sb-item{display:block;width:100%;text-align:right;background:none;border:none;cursor:pointer;
+  padding:10px 10px;border-radius:10px;transition:background .12s;position:relative;color:var(--tx)}
+.sb-item:hover{background:var(--glass2)}
+.sb-item.active{background:var(--tg);border:1px solid rgba(0,212,170,.2)}
+.sb-item.active::before{content:"";position:absolute;top:9px;bottom:9px;right:0;
+  width:3px;border-radius:3px;background:var(--t)}
+.sb-item.tot{background:var(--gg);border:1px solid rgba(245,200,66,.15);margin-bottom:5px}
+.sb-item.tot.active{background:var(--gg)}
+.sb-item.tot.active::before{background:var(--g)}
+.sb-row{display:flex;align-items:center;justify-content:space-between;gap:7px}
+.sb-nm{font-size:12px;font-weight:700;color:var(--tx)}
+.sb-vl{font:800 12.5px/1 'Tajawal';color:var(--t);white-space:nowrap}
+.sb-item.tot .sb-vl{color:var(--g)}
+.sb-bar{height:4px;border-radius:100px;background:var(--line);overflow:hidden;margin-top:6px}
+.sb-bar span{display:block;height:100%;border-radius:100px;
+  background:linear-gradient(90deg,var(--t2),var(--t))}
+.sb-item.tot .sb-bar span{background:linear-gradient(90deg,var(--g2),var(--g))}
+.sb-ft{padding:13px 18px;border-top:1px solid var(--line);display:flex;align-items:center;
+  justify-content:space-between;background:var(--glass2)}
+.sb-ft span{font-size:11.5px;color:var(--tx2)}
+.sb-ft b{font:800 14px 'Tajawal';color:var(--t)}
+
+@media(max-width:1080px){.mid,.ch-area{grid-template-columns:1fr}.kpi-row{grid-template-columns:1fr 1fr}}
+@media(max-width:740px){.kpi-row,.eff-row,.ins-grid,.sigs,.recs-card ul,.ch2{grid-template-columns:1fr}
+  .don-layout{grid-template-columns:1fr}.wrap{padding:0 14px 60px}}
+@media print{.sb-btn,.ov,.sb{display:none}}
+</style>
+</head>
+<body>
+
+<button class="sb-btn" id="sbBtn" aria-label="فتح الفروع">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round">
+    <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+  </svg>
+  الفروع
+</button>
+<div class="ov" id="ov"></div>
+<aside class="sb" id="sb">
+  <div class="sb-hd">
+    <div>
+      <div class="sub">قائمة جانبية</div>
+      <div class="ttl">الفروع<small>المتبقّي للصرف (ر.س)</small></div>
+    </div>
+    <button class="sb-cls" id="sbCls" aria-label="إغلاق">✕</button>
+  </div>
+  <div class="sb-col"><span>اسم الفرع</span><span>المتبقّي</span></div>
+  <div class="sb-list" id="sbList"></div>
+  <div class="sb-ft"><span>الإجمالي المتبقّي</span><b id="sbFt">—</b></div>
+</aside>
+
+<div class="wrap">
+  <!-- HEADER -->
+  <header class="hdr">
+    <div class="logo">
+      <div class="crest">ض</div>
+      <div class="logo-txt">
+        <div class="sub">تقرير الإدارة التنفيذية</div>
+        <h1>لوحة مبيعات وصرف الفروع — يوليو 2026</h1>
+      </div>
+    </div>
+    <div class="hdr-right">
+      <div class="hb"><span class="dot"></span><b>يوليو 2026</b></div>
+      <div class="hb gold">١٩ فرعاً وقسماً</div>
+      <button class="theme-btn" id="themeBtn" aria-label="تغيير المظهر" title="تغيير المظهر">🌙</button>
+    </div>
+  </header>
+  <div class="rule"></div>
+  <p class="sub-desc">قراءة تنفيذية موحّدة لأداء المبيعات والتكاليف ومخصّصات الصرف لكافة الفروع خلال يوليو 2026 مع مقارنة بالشهر الماضي (يونيو). اختر فرعاً لرؤية تفاصيله.</p>
+
+  <!-- FILTER BAR -->
+  <div class="fbar">
+    <label for="branchSel">الفرع:</label>
+    <div class="sel-wrap">
+      <select id="branchSel"></select>
+      <svg class="chev" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+    <span class="scope-pill" id="scopePill">إجمالي الفروع</span>
+  </div>
+
+  <!-- 01 KPIs -->
+  <div class="sec">
+    <div class="sec-hd"><span class="ix">٠١</span><h2>الملخّص التنفيذي</h2><span class="hint" id="kpiHint">إجمالي الفروع</span></div>
+    <div class="kpi-row" id="kpiRow"></div>
+  </div>
+
+  <!-- 02 GAUGE + SALES CHART -->
+  <div class="sec">
+    <div class="sec-hd"><span class="ix">٠٢</span><h2>حوكمة المخصّصات والمبيعات</h2></div>
+    <div class="mid">
+      <div class="card gov-card">
+        <div class="gov-hd"><span class="ttl">النسبة المتبقية للصرف</span><span class="chip">حوكمة</span></div>
+        <div class="gauge-wrap">
+          <div class="gauge">
+            <svg viewBox="0 0 120 120" width="120" height="120">
+              <defs>
+                <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#00d4aa"/>
+                  <stop offset="100%" stop-color="#a78bfa"/>
+                </linearGradient>
+              </defs>
+              <circle cx="60" cy="60" r="48" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="10"/>
+              <circle id="gaugeArc" cx="60" cy="60" r="48" fill="none" stroke="url(#gaugeGrad)"
+                stroke-width="10" stroke-linecap="round"
+                stroke-dasharray="301.593" stroke-dashoffset="301.593"
+                transform="rotate(-90 60 60)"
+                style="transition:stroke-dashoffset 1.1s cubic-bezier(.2,.7,.2,1)"/>
+            </svg>
+            <div class="pct"><b id="gaugePct">—</b><span>متبقٍ</span></div>
+          </div>
+          <div class="wf" id="wf"></div>
+        </div>
+        <p class="gov-note">يُحتسب المخصّص كنسبة من المبيعات (٠٫٧٥٪ للأثاث / ٠٫٥٪ لغيره)، تُقتطع منه ٢٠٪ للإدارة ليتبقّى ٨٠٪ للصرف.</p>
+      </div>
+      <div class="card ch-card">
+        <div class="ch-hd">
+          <div><div class="t">المبيعات حسب الفرع</div><div class="s">ترتيب تنازلي — الشهر الحالي</div></div>
+          <span class="pill">شريطي أفقي</span>
+        </div>
+        <div class="ch-wrap h370"><canvas id="chSales"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 EFF -->
+  <div class="sec">
+    <div class="sec-hd"><span class="ix">٠٣</span><h2>مؤشّرات الكفاءة</h2><span class="hint" id="effHint">إجمالي الفروع</span></div>
+    <div class="eff-row" id="effRow"></div>
+  </div>
+
+  <!-- 04 CHARTS -->
+  <div class="sec">
+    <div class="sec-hd"><span class="ix">٠٤</span><h2>التحليل البصري</h2></div>
+    <div class="ch-area">
+      <div class="card ch-card">
+        <div class="ch-hd"><div><div class="t">مقارنة المبيعات شهرياً</div><div class="s">أكبر ٨ فروع</div></div><span class="pill">شريطي</span></div>
+        <div class="ch-wrap h280"><canvas id="chCmp"></canvas></div>
+      </div>
+      <div class="card ch-card">
+        <div class="ch-hd"><div><div class="t">تكوين المبيعات</div><div class="s" id="donLbl">إجمالي الفروع</div></div><span class="pill">دائري</span></div>
+        <div class="don-layout">
+          <div class="ch-wrap h250"><canvas id="chDon"></canvas></div>
+          <div class="don-leg" id="donLeg"></div>
+        </div>
+      </div>
+    </div>
+    <div class="ch2">
+      <div class="card ch-card">
+        <div class="ch-hd"><div><div class="t">هامش الربح حسب الفرع</div><div class="s">نسبة ومتوسط عام</div></div><span class="pill">خطّي</span></div>
+        <div class="ch-wrap h280"><canvas id="chMrg"></canvas></div>
+      </div>
+      <div class="card ch-card">
+        <div class="ch-hd"><div><div class="t">المتبقّي للصرف — أكبر ١٠</div><div class="s">ترتيب تنازلي</div></div><span class="pill">عمودي</span></div>
+        <div class="ch-wrap h280"><canvas id="chRem"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 TABLE -->
+  <div class="sec">
+    <div class="sec-hd"><span class="ix">٠٥</span><h2>جدول الأداء التفصيلي</h2><span class="hint">انقر رأس العمود للترتيب</span></div>
+    <div class="card tbl-card">
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr>
+            <th data-k="name">الفرع</th>
+            <th data-k="cs">المبيعات (الحالي)<span class="ar-s">▾</span></th>
+            <th data-k="cc">التكاليف</th>
+            <th data-k="cp">صافي الربح</th>
+            <th data-k="cm">هامش الربح</th>
+            <th data-k="mom">التغيّر ش/ش</th>
+            <th data-k="remain">المتبقّي للصرف</th>
+          </tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 INSIGHTS -->
+  <div class="sec">
+    <div class="sec-hd"><span class="ix">٠٦</span><h2>الملاحظات والاستنتاجات</h2><span class="hint" id="insHint">إجمالي الفروع</span></div>
+    <div class="ins-grid" id="insGrid"></div>
+  </div>
+
+  <!-- RECS -->
+  <div class="card recs-card">
+    <h3>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/><path d="M9 21h6"/></svg>
+      توصيات لتعزيز ضبط الصرف ورفع الكفاءة
+    </h3>
+    <ul id="recsList"></ul>
+  </div>
+
+  <!-- SIGS -->
+  <div class="sigs">
+    <div class="card sig-card"><div class="role">إدارة المبيعات</div><div class="ln"></div><div class="who">إدارة المبيعات</div></div>
+    <div class="card sig-card"><div class="role">الإدارة المالية</div><div class="ln"></div><div class="who">الإدارة المالية</div></div>
+    <div class="card sig-card"><div class="role">المدير العام</div><div class="ln"></div><div class="who">صالح علي العبري</div></div>
+  </div>
+  <p class="fn">المصدر: ورقة «نسبة العمولات يوليو 2026» — <b>تقرير يوليو 2026</b> · جميع المبالغ بالريال السعودي (ر.س)</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+/* ====================================================
+   DATA — pre-calculated, no floating-point surprises
+==================================================== */
+const RAW = [
+  {name:"الضبيبي للاثاث والانارة - بن دايل",    ps:51310.31,  pc:34768.48,  cs:63944.71,  cc:44465.59,  allow:479.59,  mgmt:96,    remain:384},
+  {name:"التميز للسجاد - العمرة",                ps:129842.49, pc:89092.20,  cs:135361.60, cc:92912.86,  allow:676.81,  mgmt:135,   remain:541},
+  {name:"الرائد للسجاد الراقي - بن دايل",        ps:190188.20, pc:138332.86, cs:198492.18, cc:145537.22, allow:992.46,  mgmt:198,   remain:794},
+  {name:"الضبيبي الأثاث - الجموم",               ps:57352.97,  pc:37625.81,  cs:61129.99,  cc:39739.73,  allow:458.47,  mgmt:92,    remain:367},
+  {name:"الضبيبي للاثاث - العمرة",               ps:95198.30,  pc:61483.09,  cs:124777.79, cc:81628.01,  allow:935.83,  mgmt:187,   remain:749},
+  {name:"الضبيبي للسجاد - العمرة",               ps:105810.32, pc:70749.04,  cs:113700.40, cc:76819.87,  allow:568.50,  mgmt:114,   remain:455},
+  {name:"الضبيبي للمفروشات - الدواس",            ps:81993.11,  pc:58531.33,  cs:128625.17, cc:92908.17,  allow:643.13,  mgmt:129,   remain:515},
+  {name:"الضبيبي للمفروشات - العمرة",            ps:196485.04, pc:142528.13, cs:205048.01, cc:149568.78, allow:1025.24, mgmt:205,   remain:820},
+  {name:"الضبيبي للمفروشات - بن دايل",           ps:158748.60, pc:113983.21, cs:144251.28, cc:103819.23, allow:721.26,  mgmt:144,   remain:577},
+  {name:"الضبيبي للسجاد - الدواس",               ps:41799.12,  pc:26795.13,  cs:57622.62,  cc:37617.07,  allow:288.11,  mgmt:58,    remain:230},
+  {name:"العز للاثاث والانارة - الدواس",          ps:233031.48, pc:161453.00, cs:297111.72, cc:202356.76, allow:2228.34, mgmt:446,   remain:1783},
+  {name:"الرائد للسجاد الراقي - الدواس",         ps:36280.00,  pc:26045.20,  cs:16456.49,  cc:11947.54,  allow:82.28,   mgmt:16,    remain:66},
+  {name:"العز للمفروشات والاثاث - العمرة",        ps:37584.16,  pc:24012.74,  cs:53336.42,  cc:33183.49,  allow:400.02,  mgmt:80,    remain:320},
+  {name:"قمر للمفروشات - الدواس",                ps:117995.63, pc:88287.52,  cs:155372.27, cc:113356.48, allow:776.86,  mgmt:155,   remain:621},
+  {name:"قمر للمفروشات - العمرة",                ps:118891.10, pc:83652.78,  cs:160817.64, cc:111163.99, allow:804.09,  mgmt:161,   remain:643},
+  {name:"قسم المشاريع",                          ps:448139.14, pc:358639.09, cs:243495.67, cc:187011.85, allow:2434.96, mgmt:487,   remain:1948},
+  {name:"الضبيبي للمفروشات والاثاث - ولي العهد", ps:119332.03, pc:72909.03,  cs:120430.39, cc:74984.61,  allow:602.15,  mgmt:120,   remain:482},
+  {name:"قسم الخياطة",                           ps:226.08,    pc:74.29,     cs:661.17,    cc:217.10,    allow:16.53,   mgmt:3,     remain:13},
+  {name:"الإدارة",                               ps:95225.29,  pc:77077.67,  cs:0,         cc:0,         allow:0,       mgmt:0,     remain:0},
+];
+
+// Derive computed fields
+RAW.forEach(b => {
+  b.pp = b.ps - b.pc;
+  b.pm = b.ps > 0 ? b.pp / b.ps : 0;
+  b.cp = b.cs - b.cc;
+  b.cm = b.cs > 0 ? b.cp / b.cs : 0;
+  b.mom = b.ps > 1 ? (b.cs - b.ps) / b.ps : 0;
+});
+
+// Totals
+const sum = k => RAW.reduce((s,b) => s + (b[k]||0), 0);
+const TOT = {
+  name:'إجمالي الفروع',
+  ps:sum('ps'), pc:sum('pc'), cs:sum('cs'), cc:sum('cc'),
+  allow:sum('allow'), mgmt:sum('mgmt'), remain:sum('remain')
+};
+TOT.pp = TOT.ps - TOT.pc; TOT.pm = TOT.ps > 0 ? TOT.pp/TOT.ps : 0;
+TOT.cp = TOT.cs - TOT.cc; TOT.cm = TOT.cs > 0 ? TOT.cp/TOT.cs : 0;
+TOT.mom = TOT.ps > 0 ? (TOT.cs - TOT.ps)/TOT.ps : 0;
+
+const CIRC    = 2 * Math.PI * 48; // r=48 → 301.593
+const TOT_S   = TOT.cs;
+const AVG_MG  = TOT.cm;
+const MAX_S   = Math.max(...RAW.map(b => b.cs));
+
+/* ====================================================
+   HELPERS
+==================================================== */
+const fmt  = n  => (isFinite(n) ? Math.round(n) : 0).toLocaleString('en-US');
+const fmtS = n  => fmt(n) + ' ر.س';
+const fmtP = (n,d=1) => isFinite(n) ? (n*100).toFixed(d)+'%' : '0%';
+const pp   = n  => (isFinite(n) ? (n>=0?'+':'') + (n*100).toFixed(1) : '0') + ' نقطة';
+const shrt = s  => s.length > 21 ? s.slice(0,20)+'…' : s;
+
+const isDark = () => document.documentElement.getAttribute('data-theme') !== 'light';
+
+let scope   = TOT;
+let sortK   = 'cs';
+let sortD   = -1;
+const CH    = {};   // chart instances
+
+/* ====================================================
+   THEME
+==================================================== */
+document.documentElement.setAttribute('data-theme','dark');
+const themeBtn = document.getElementById('themeBtn');
+themeBtn.addEventListener('click', () => {
+  const next = isDark() ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  themeBtn.textContent = next === 'dark' ? '🌙' : '☀️';
+  // rebuild charts so colors update
+  Object.values(CH).forEach(c => c.destroy());
+  for (const k in CH) delete CH[k];
+  buildCharts();
+  updateCharts();
+});
+
+/* ====================================================
+   CHART COLOR HELPERS — reads current CSS vars
+==================================================== */
+function cv(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+const C = () => ({
+  t     : cv('--t'),
+  t2    : cv('--t2'),
+  g     : cv('--g'),
+  g2    : cv('--g2'),
+  v     : cv('--v'),
+  pos   : cv('--pos'),
+  neg   : cv('--neg'),
+  tx3   : cv('--tx3'),
+  line  : 'rgba(128,128,128,0.12)',
+  tAlpha: isDark() ? 'rgba(0,212,170,0.65)' : 'rgba(0,122,99,0.60)',
+  vAlpha: isDark() ? 'rgba(167,139,250,0.55)' : 'rgba(109,68,208,0.50)',
+  tFill : isDark() ? 'rgba(0,212,170,0.07)' : 'rgba(0,122,99,0.06)',
+  gAlpha: isDark() ? 'rgba(245,200,66,0.82)' : 'rgba(184,134,11,0.80)',
+  tx    : cv('--tx'),
+  tx2   : cv('--tx2'),
+});
+
+/* ====================================================
+   SELECT INIT
+==================================================== */
+const selEl = document.getElementById('branchSel');
+selEl.innerHTML = '<option value="-1">إجمالي الفروع</option>' +
+  RAW.map((b,i) => `<option value="${i}">${b.name}</option>`).join('');
+selEl.addEventListener('change', e => {
+  const v = +e.target.value;
+  scope = v < 0 ? TOT : RAW[v];
+  renderAll();
+});
+
+/* ====================================================
+   DELTA BADGE
+==================================================== */
+function deltaBadge(cur, prev) {
+  if (!prev || !isFinite(prev) || !isFinite(cur))
+    return '<span class="dlt fl">— ش/ش</span>';
+  const r = (cur - prev) / Math.abs(prev);
+  const cls = Math.abs(r) < 0.005 ? 'fl' : r > 0 ? 'up' : 'dn';
+  const arr = cls==='fl' ? '■' : r>0 ? '▲' : '▼';
+  return `<span class="dlt ${cls}">${arr} ${r>=0?'+':''}${(r*100).toFixed(1)}% ش/ش</span>`;
+}
+
+/* ====================================================
+   KPI ROW
+==================================================== */
+function renderKPIs() {
+  const s = scope;
+  document.getElementById('kpiHint').textContent = s.name;
+  const items = [
+    {gc:'var(--tg)', lbl:'إجمالي المبيعات',    val:fmt(s.cs),              unit:'ر.س', d:deltaBadge(s.cs,s.ps), prev:`الشهر الماضي: ${fmtS(s.ps)}`},
+    {gc:'var(--gg)', lbl:'إجمالي التكاليف',     val:fmt(s.cc),              unit:'ر.س', d:deltaBadge(s.cc,s.pc), prev:`الشهر الماضي: ${fmtS(s.pc)}`},
+    {gc:'var(--posg)',lbl:'صافي الأرباح',        val:fmt(s.cp),              unit:'ر.س', d:deltaBadge(s.cp,s.pp), prev:`الشهر الماضي: ${fmtS(s.pp)}`},
+    {gc:'var(--vg)', lbl:'هامش الربح',           val:(isFinite(s.cm)?s.cm*100:0).toFixed(1), unit:'%',
+     d:`<span class="dlt ${s.cm>=s.pm?'up':'dn'}">${s.cm>=s.pm?'▲':'▼'} ${pp(s.cm-s.pm)}</span>`,
+     prev:`نسبة التكاليف: ${fmtP(s.cs>0?s.cc/s.cs:0)}`},
+  ];
+  document.getElementById('kpiRow').innerHTML = items.map(it => `
+    <div class="card kc">
+      <div class="glo" style="background:radial-gradient(circle,${it.gc},transparent 70%)"></div>
+      <div class="lbl">${it.lbl}</div>
+      <div class="val">${it.val}<span class="unit">${it.unit}</span></div>
+      ${it.d}
+      <div class="prev">${it.prev}</div>
+    </div>`).join('');
+}
+
+/* ====================================================
+   GAUGE
+==================================================== */
+function renderGov() {
+  const s = scope;
+  const pct = s.allow > 0 ? Math.min(1, Math.max(0, s.remain / s.allow)) : 0.8;
+  const p = Math.round(pct * 100);
+  document.getElementById('gaugePct').textContent = p + '%';
+  document.getElementById('gaugeArc').style.strokeDashoffset =
+    (CIRC * (1 - pct)).toFixed(4);
+
+  document.getElementById('wf').innerHTML = [
+    {c:'var(--g)',   nm:'مخصّص الصرف',    vl:fmtS(s.allow),              vc:'var(--g)'},
+    {c:'var(--neg)', nm:'نسبة الإدارة ٢٠٪',vl:'−'+fmt(s.mgmt)+' ر.س',   vc:'var(--neg)'},
+    {c:'var(--t)',   nm:'المتبقّي للصرف',  vl:fmtS(s.remain),             vc:'var(--t)'},
+  ].map(r => `<div class="wf-row">
+    <span class="wf-sw" style="background:${r.c}"></span>
+    <span class="wf-nm">${r.nm}</span>
+    <span class="wf-vl" style="color:${r.vc}">${r.vl}</span>
+  </div>`).join('');
+}
+
+/* ====================================================
+   EFFICIENCY
+==================================================== */
+function renderEff() {
+  const s = scope;
+  document.getElementById('effHint').textContent = s.name;
+  const cr  = s.cs > 0 ? s.cc / s.cs : 0;
+  const rem = s.allow > 0 ? Math.min(1, s.remain / s.allow) : 0.8;
+  const cm  = isFinite(s.cm) ? s.cm : 0;
+  const cards = [
+    {lbl:'نسبة التكاليف إلى المبيعات', val:fmtP(cr),    w:cr*100,  bar:'linear-gradient(90deg,var(--g2),var(--g))', a:'من كل ريال مبيعات', b:'الهدف ≤ ٧٠٪'},
+    {lbl:'نسبة صافي الربح',            val:fmtP(cm),    w:cm*100,  bar:'linear-gradient(90deg,var(--pos),var(--t))', a:'المحتجز من كل ريال', b:'المتوسط '+fmtP(AVG_MG)},
+    {lbl:'النسبة المتبقية للصرف',       val:fmtP(rem,0), w:rem*100, bar:'linear-gradient(90deg,var(--v),var(--t))',   a:'بعد اقتطاع ٢٠٪ للإدارة', b:'المخصّص: '+fmt(s.allow)+' ر.س'},
+  ];
+  document.getElementById('effRow').innerHTML = cards.map(c => `
+    <div class="card ec">
+      <div class="lbl">${c.lbl}</div>
+      <div class="val">${c.val}</div>
+      <div class="bar"><span style="width:${Math.min(100,Math.max(0,c.w)).toFixed(1)}%;background:${c.bar}"></span></div>
+      <div class="meta"><span>${c.a}</span><span>${c.b}</span></div>
+    </div>`).join('');
+}
+
+/* ====================================================
+   BUILD CHARTS
+==================================================== */
+function buildCharts() {
+  const c   = C();
+  const def = { font:{ family:"'Tajawal',system-ui,sans-serif" }, color: c.tx2 };
+  Chart.defaults.font.family = def.font.family;
+  Chart.defaults.color = def.color;
+
+  const sorted = [...RAW].sort((a,b) => b.cs - a.cs);
+  const top8   = sorted.slice(0, 8);
+  const topR   = [...RAW].filter(b => b.remain > 0).sort((a,b) => b.remain - a.remain).slice(0,10);
+
+  const gridColor = c.line;
+  const tickColor = c.tx2;
+
+  // ── SALES horizontal bar ──────────────────────────
+  CH.sales = new Chart(document.getElementById('chSales'), {
+    type:'bar',
+    data:{
+      labels: sorted.map(b => shrt(b.name)),
+      datasets:[{
+        data: sorted.map(b => b.cs),
+        backgroundColor: sorted.map(b => b===scope ? c.gAlpha : c.tAlpha),
+        borderRadius: 6,
+        barThickness: 'flex',
+        maxBarThickness: 17
+      }]
+    },
+    options:{
+      indexAxis:'y', responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label: ctx => '  '+fmtS(ctx.raw)}} },
+      scales:{
+        x:{ grid:{color:gridColor}, ticks:{color:tickColor, callback:v => v>=1e6?(v/1e6).toFixed(1)+'م':v>=1000?(v/1000)+'k':v} },
+        y:{ grid:{display:false},   ticks:{color:tickColor, font:{size:10.5}, autoSkip:false} }
+      },
+      onClick:(ev,els) => { if(els.length) pickBranch(sorted[els[0].index].name); }
+    }
+  });
+
+  // ── COMPARE grouped bar top-8 ─────────────────────
+  CH.cmp = new Chart(document.getElementById('chCmp'), {
+    type:'bar',
+    data:{
+      labels: top8.map(b => shrt(b.name)),
+      datasets:[
+        {label:'الشهر الماضي', data:top8.map(b=>b.ps), backgroundColor:c.vAlpha, borderRadius:5, maxBarThickness:20},
+        {label:'الشهر الحالي', data:top8.map(b=>b.cs), backgroundColor:c.tAlpha, borderRadius:5, maxBarThickness:20},
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{ position:'top', labels:{boxWidth:11,usePointStyle:true,pointStyle:'circle',color:tickColor} },
+        tooltip:{ callbacks:{label:ctx => ctx.dataset.label+': '+fmtS(ctx.raw)} }
+      },
+      scales:{
+        x:{ grid:{display:false}, ticks:{color:tickColor, font:{size:10}, maxRotation:38} },
+        y:{ grid:{color:gridColor}, ticks:{color:tickColor, callback:v=>v>=1000?(v/1000)+'k':v} }
+      }
+    }
+  });
+
+  // ── MARGIN line ───────────────────────────────────
+  CH.mrg = new Chart(document.getElementById('chMrg'), {
+    type:'line',
+    data:{
+      labels: sorted.map(b => shrt(b.name)),
+      datasets:[
+        {
+          label:'هامش الربح',
+          data: sorted.map(b => parseFloat((b.cm*100).toFixed(1))),
+          borderColor: c.t, backgroundColor: c.tFill, fill:true, tension:.35,
+          pointBackgroundColor: sorted.map(b => b===scope ? c.g : c.t),
+          pointRadius:          sorted.map(b => b===scope ? 6 : 3),
+          borderWidth: 2
+        },
+        {
+          label:'المتوسط العام',
+          data: sorted.map(() => parseFloat((AVG_MG*100).toFixed(1))),
+          borderColor: c.g, borderDash:[5,4], pointRadius:0, borderWidth:1.5, fill:false
+        }
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{ position:'top', labels:{boxWidth:11,usePointStyle:true,pointStyle:'line',color:tickColor} },
+        tooltip:{ callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.raw+'%'} }
+      },
+      scales:{
+        x:{ grid:{display:false}, ticks:{color:tickColor, font:{size:9}, maxRotation:55, autoSkip:false} },
+        y:{ grid:{color:gridColor}, ticks:{color:tickColor, callback:v=>v+'%'}, suggestedMin:0 }
+      }
+    }
+  });
+
+  // ── REMAIN vertical bar top-10 ────────────────────
+  CH.rem = new Chart(document.getElementById('chRem'), {
+    type:'bar',
+    data:{
+      labels: topR.map(b => shrt(b.name)),
+      datasets:[{
+        data: topR.map(b => b.remain),
+        backgroundColor: topR.map(b => b===scope ? c.gAlpha : c.tAlpha),
+        borderRadius: 6, maxBarThickness: 28
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>'  '+fmtS(ctx.raw)}} },
+      scales:{
+        x:{ grid:{display:false}, ticks:{color:tickColor, font:{size:10}, maxRotation:40} },
+        y:{ grid:{color:gridColor}, ticks:{color:tickColor, callback:v=>v>=1000?(v/1000)+'k':v} }
+      },
+      onClick:(ev,els) => { if(els.length) pickBranch(topR[els[0].index].name); }
+    }
+  });
+
+  // ── DONUT ─────────────────────────────────────────
+  CH.don = new Chart(document.getElementById('chDon'), {
+    type:'doughnut',
+    data:{
+      labels:['التكاليف','صافي الربح'],
+      datasets:[{
+        data:[scope.cc, Math.max(0, scope.cp)],
+        backgroundColor: [isDark()?'rgba(245,200,66,.80)':'rgba(184,134,11,.75)',
+                          isDark()?'rgba(0,212,170,.78)':'rgba(0,122,99,.72)'],
+        borderColor: [isDark()?'rgba(245,200,66,.2)':'rgba(184,134,11,.25)',
+                      isDark()?'rgba(0,212,170,.2)':'rgba(0,122,99,.25)'],
+        borderWidth:2, hoverOffset:6
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false, cutout:'67%',
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>'  '+fmtS(ctx.raw)}} }
+    }
+  });
+  renderDonLeg();
+}
+
+function renderDonLeg() {
+  const s = scope;
+  const tot = s.cs;
+  document.getElementById('donLbl').textContent = s.name;
+  document.getElementById('donLeg').innerHTML = [
+    {n:'التكاليف',  v:s.cc, c: isDark()?'rgba(245,200,66,.80)':'rgba(184,134,11,.75)'},
+    {n:'صافي الربح',v:Math.max(0,s.cp), c: isDark()?'rgba(0,212,170,.78)':'rgba(0,122,99,.72)'},
+  ].map(r => `<div class="dr">
+    <span class="don-sw" style="background:${r.c}"></span>
+    <span class="don-nm">${r.n}</span>
+    <span class="don-vl">${fmt(r.v)}</span>
+    <span class="don-pc">${tot>0?fmtP(r.v/tot):'—'}</span>
+  </div>`).join('') + `
+  <div class="dr" style="border-top:1px solid var(--line);padding-top:9px;margin-top:3px">
+    <span class="don-sw"></span>
+    <span class="don-nm" style="font-weight:800;color:var(--tx)">الإجمالي</span>
+    <span class="don-vl">${fmt(tot)}</span>
+    <span class="don-pc">100%</span>
+  </div>`;
+}
+
+/* ====================================================
+   UPDATE CHARTS (on scope change, no rebuild)
+==================================================== */
+function updateCharts() {
+  if (!CH.sales) return;
+  const c      = C();
+  const sorted = [...RAW].sort((a,b) => b.cs - a.cs);
+  const topR   = [...RAW].filter(b => b.remain>0).sort((a,b) => b.remain - a.remain).slice(0,10);
+
+  CH.sales.data.datasets[0].backgroundColor =
+    sorted.map(b => b===scope ? c.gAlpha : c.tAlpha);
+  CH.sales.update('none');
+
+  CH.mrg.data.datasets[0].pointBackgroundColor =
+    sorted.map(b => b===scope ? c.g : c.t);
+  CH.mrg.data.datasets[0].pointRadius =
+    sorted.map(b => b===scope ? 6 : 3);
+  CH.mrg.update('none');
+
+  CH.rem.data.datasets[0].backgroundColor =
+    topR.map(b => b===scope ? c.gAlpha : c.tAlpha);
+  CH.rem.update('none');
+
+  CH.don.data.datasets[0].data = [scope.cc, Math.max(0, scope.cp)];
+  CH.don.update('none');
+
+  renderDonLeg();
+}
+
+/* ====================================================
+   TABLE
+==================================================== */
+function renderTable() {
+  const rows = [...RAW].sort((a,b) => {
+    const x = sortK === 'name' ? a.name : a[sortK];
+    const y = sortK === 'name' ? b.name : b[sortK];
+    if (sortK === 'name') return sortD * (x.localeCompare(y, 'ar'));
+    return sortD * ((isFinite(x)?x:0) - (isFinite(y)?y:0));
+  });
+  document.getElementById('tbody').innerHTML =
+    rows.map(b => {
+      const isSel = b===scope ? ' sel' : '';
+      const up = b.mom >= 0;
+      const cm = isFinite(b.cm) ? b.cm : 0;
+      const mgC  = cm>=0.32 ? 'var(--pos)' : cm>=0.26 ? 'var(--g)' : 'var(--neg)';
+      const mgBg = cm>=0.32 ? 'var(--posg)': cm>=0.26 ? 'var(--gg)': 'var(--negg)';
+      return `<tr class="rrow${isSel}" data-name="${b.name}">
+        <td class="nm">${b.name}</td>
+        <td class="nb"><span class="mbar" style="width:${(4+b.cs/MAX_S*44).toFixed(0)}px"></span>${fmt(b.cs)}</td>
+        <td class="nb">${fmt(b.cc)}</td>
+        <td class="nb">${fmt(b.cp)}</td>
+        <td class="nb"><span class="pmg" style="color:${mgC};background:${mgBg}">${fmtP(cm)}</span></td>
+        <td class="nb ${up?'posc':'negc'}">${up?'▲':'▼'} ${isFinite(b.mom)?(b.mom*100).toFixed(0):0}%</td>
+        <td class="nb goldc">${fmt(b.remain)}</td>
+      </tr>`;
+    }).join('') + `
+    <tr class="tot-row">
+      <td class="nm">الإجمالي العام</td>
+      <td class="nb">${fmt(TOT.cs)}</td>
+      <td class="nb">${fmt(TOT.cc)}</td>
+      <td class="nb">${fmt(TOT.cp)}</td>
+      <td class="nb">${fmtP(TOT.cm)}</td>
+      <td class="nb ${TOT.mom>=0?'posc':'negc'}">${TOT.mom>=0?'▲':'▼'} ${(TOT.mom*100).toFixed(0)}%</td>
+      <td class="nb goldc">${fmt(TOT.remain)}</td>
+    </tr>`;
+
+  document.querySelectorAll('#tbody .rrow').forEach(tr =>
+    tr.addEventListener('click', () => pickBranch(tr.dataset.name)));
+}
+
+// Table header sort
+document.querySelectorAll('thead th[data-k]').forEach(th => {
+  th.addEventListener('click', () => {
+    const k = th.dataset.k;
+    sortD = sortK===k ? sortD*-1 : (k==='name'?1:-1);
+    sortK = k;
+    document.querySelectorAll('thead th .ar-s').forEach(s => s.textContent='');
+    const sp = th.querySelector('.ar-s');
+    if (sp) sp.textContent = sortD<0?'▾':'▴';
+    renderTable();
+  });
+});
+
+/* ====================================================
+   INSIGHTS
+==================================================== */
+function renderInsights() {
+  const retail  = RAW.filter(b => b.cs>10000 && !['الإدارة','قسم الخياطة','قسم المشاريع'].includes(b.name));
+  const sorted  = [...RAW].sort((a,b) => b.cs - a.cs);
+  const topS    = sorted[0];
+  const bestMg  = [...retail].sort((a,b) => b.cm - a.cm)[0];
+  const worstMg = [...retail].sort((a,b) => a.cm - b.cm)[0];
+  const costR   = TOT.cs > 0 ? TOT.cc/TOT.cs : 0;
+
+  let cards;
+  if (scope === TOT) {
+    const up = TOT.mom >= 0, flat = Math.abs(TOT.mom) < 0.02;
+    cards = [
+      { c:'good', tag:'الأعلى أداءً',    ic:'M3 17l6-6 4 4 7-7',
+        h:`${topS.name} يتصدّر المبيعات`,
+        p:`حقّق <b>${topS.name}</b> أعلى مبيعات بـ <b>${fmtS(topS.cs)}</b>، مستحوذاً على <b>${fmtP(topS.cs/TOT_S)}</b> من الإجمالي.`},
+      { c:'info',  tag:'كفاءة الصرف',    ic:'M3 3v18h18',
+        h:`نسبة التكاليف ${fmtP(costR)}`,
+        p:`بلغت نسبة التكاليف <b>${fmtP(costR)}</b> تاركةً هامش ربح صافٍ <b>${fmtP(TOT.cm)}</b>.`},
+      { c:up?'good':'warn', tag:'الاتجاه الشهري', ic:up?'M3 17l6-6 4 4 7-7':'M3 7l6 6 4-4 7 7',
+        h: flat?'استقرار المبيعات':up?'نموّ شهري':'تراجع شهري',
+        p:`${flat?'استقرّت':up?'ارتفعت':'انخفضت'} المبيعات <b>${(TOT.mom>=0?'+':'')}${(TOT.mom*100).toFixed(1)}%</b> مقارنةً بالشهر الماضي.`},
+      { c:'good', tag:'الهوامش',          ic:'M20 6 9 17l-5-5',
+        h:`${bestMg?.name||'—'} الأعلى ربحية`,
+        p:`هامش <b>${fmtP(bestMg?.cm||0)}</b>؛ و<b>${worstMg?.name||'—'}</b> الأدنى عند <b>${fmtP(worstMg?.cm||0)}</b>.`},
+    ];
+  } else {
+    const rank  = sorted.findIndex(x=>x===scope) + 1;
+    const vsAvg = scope.cm - AVG_MG;
+    const up    = scope.mom >= 0;
+    cards = [
+      { c:'info', tag:'الموقع التنافسي', ic:'M3 3v18h18',
+        h:`الترتيب #${rank} من ${RAW.length}`,
+        p:`يساهم بـ <b>${fmtS(scope.cs)}</b> أي <b>${fmtP(scope.cs/TOT_S)}</b> من إجمالي المبيعات.`},
+      { c:vsAvg>=0?'good':'warn', tag:'هامش الربح', ic:'M22 12h-4l-3 9L9 3l-3 9H2',
+        h:vsAvg>=0?'هامش أعلى من المتوسط':'هامش دون المتوسط',
+        p:`هامش <b>${fmtP(scope.cm)}</b> ${vsAvg>=0?'يفوق':'يقلّ عن'} المتوسط (${fmtP(AVG_MG)}) بفارق <b>${pp(vsAvg)}</b>.`},
+      { c:up?'good':'warn', tag:'التغيّر الشهري', ic:up?'M3 17l6-6 4 4 7-7':'M3 7l6 6 4-4 7 7',
+        h:up?'نموّ شهري إيجابي':'تراجع شهري',
+        p:`${up?'ارتفعت':'انخفضت'} المبيعات <b>${(scope.mom*100).toFixed(0)}%</b> (${fmtS(scope.ps)} ← ${fmtS(scope.cs)}).`},
+      { c:'rec', tag:'مخصّص الصرف', ic:'M12 1v22 M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6',
+        h:'المتبقّي للصرف',
+        p:`المخصّص <b>${fmtS(scope.allow)}</b>، بعد اقتطاع الإدارة <b>${fmtS(scope.mgmt)}</b> يتبقّى <b>${fmtS(scope.remain)}</b>.`},
+    ];
+  }
+  document.getElementById('insHint').textContent = scope.name;
+  document.getElementById('insGrid').innerHTML = cards.map(c => `
+    <div class="card ins ${c.c}">
+      <div class="mk"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="${c.ic}"/></svg></div>
+      <div class="bd"><span class="tag">${c.tag}</span><h4>${c.h}</h4><p>${c.p}</p></div>
+    </div>`).join('');
+}
+
+/* ====================================================
+   RECS (static)
+==================================================== */
+document.getElementById('recsList').innerHTML = [
+  'وضع سقف مستهدف لنسبة التكاليف (≤ ٧٠٪) ومتابعة الفروع المتجاوزة له شهرياً.',
+  'مراجعة هيكل التكاليف لدى الفروع ذات الهامش الأدنى عبر التفاوض مع الموردين.',
+  'ربط مخصّص الصرف بمؤشّرات أداء فعلية لكل فرع لا بحجم المبيعات وحده.',
+  'قراءة التغيّر الشهري على أساس موسمي/سنوي لتفادي القرارات المتسرّعة.',
+  'مراقبة الفروع ذات النموّ المرتفع لضمان استدامته وكفاية المخزون.',
+  'اعتماد لوحة متابعة شهرية تربط المبيعات بالهامش والمتبقّي للصرف.',
+].map((r,i) => `<li><span class="n">${String(i+1).padStart(2,'0')}</span><span>${r}</span></li>`).join('');
+
+/* ====================================================
+   SIDEBAR
+==================================================== */
+function buildSidebar() {
+  const maxR  = Math.max(...RAW.map(b => b.remain), 1);
+  const sorted = [...RAW].sort((a,b) => b.remain - a.remain);
+  let html = `<button class="sb-item tot" data-name="">
+    <div class="sb-row"><span class="sb-nm">إجمالي الفروع</span><span class="sb-vl">${fmt(TOT.remain)}</span></div>
+    <div class="sb-bar"><span style="width:100%"></span></div>
+  </button>`;
+  html += sorted.map(b => `<button class="sb-item" data-name="${b.name}">
+    <div class="sb-row">
+      <span class="sb-nm">${b.name}</span>
+      <span class="sb-vl">${fmt(b.remain)}</span>
+    </div>
+    <div class="sb-bar"><span style="width:${(Math.max(2,b.remain/maxR*100)).toFixed(1)}%"></span></div>
+  </button>`).join('');
+  document.getElementById('sbList').innerHTML = html;
+  document.getElementById('sbFt').textContent = fmt(TOT.remain) + ' ر.س';
+  document.querySelectorAll('#sbList .sb-item').forEach(el =>
+    el.addEventListener('click', () => { pickBranch(el.dataset.name); closeSB(); }));
+}
+
+function syncSB() {
+  document.querySelectorAll('#sbList .sb-item').forEach(el => {
+    const n = el.dataset.name;
+    el.classList.toggle('active',
+      (scope===TOT && n==='') || (scope!==TOT && n===scope.name));
+  });
+}
+
+function openSB()  { document.getElementById('sb').classList.add('open'); document.getElementById('ov').classList.add('open'); }
+function closeSB() { document.getElementById('sb').classList.remove('open'); document.getElementById('ov').classList.remove('open'); }
+document.getElementById('sbBtn').addEventListener('click', openSB);
+document.getElementById('sbCls').addEventListener('click', closeSB);
+document.getElementById('ov').addEventListener('click', closeSB);
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeSB(); });
+
+/* ====================================================
+   PICK BRANCH (central state change)
+==================================================== */
+function pickBranch(name) {
+  const idx = name ? RAW.findIndex(b => b.name===name) : -1;
+  selEl.value = idx;
+  scope = idx < 0 ? TOT : RAW[idx];
+  renderAll();
+}
+
+/* ====================================================
+   RENDER ALL
+==================================================== */
+function renderAll() {
+  const lbl = scope===TOT ? 'إجمالي الفروع' : scope.name;
+  document.getElementById('scopePill').textContent = lbl;
+  renderKPIs();
+  renderGov();
+  renderEff();
+  updateCharts();
+  renderTable();
+  renderInsights();
+  syncSB();
+}
+
+/* ====================================================
+   INIT
+==================================================== */
+buildCharts();
+buildSidebar();
+renderAll();
+</script>
+</body>
+</html>
