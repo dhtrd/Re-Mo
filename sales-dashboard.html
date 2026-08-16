@@ -1,0 +1,582 @@
+<title>لوحة مبيعات الفروع</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    color-scheme: light;
+    --plane:        #f2ede3;
+    --surface-1:    #fbf8f2;
+    --surface-2:    #f6f1e7;
+    --ink:          #241f19;
+    --ink-2:        #5b544a;
+    --muted:        #928a7c;
+    --grid:         #e4ddcf;
+    --baseline:     #cabfac;
+    --border:       rgba(36,31,25,0.10);
+    --accent:       #0f6e5a;   /* current month — deep viridian */
+    --accent-soft:  #d7e7e1;
+    --prev:         #9c8e73;   /* last month — warm stone (muted neutral) */
+    --brass:        #b07a1e;
+    --good:         #0ca30c;
+    --good-ink:     #0a6b2e;
+    --bad:          #cf3a2f;
+    --bad-ink:      #a32b22;
+    --shadow:       0 1px 2px rgba(36,31,25,.05), 0 8px 28px -14px rgba(36,31,25,.22);
+    --r:            14px;
+    --font: "Segoe UI", Tahoma, system-ui, -apple-system, "Noto Sans Arabic", "Geeza Pro", sans-serif;
+  }
+  :root:not([data-theme="light"]) { }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --plane:      #14120e;
+      --surface-1:  #1e1b16;
+      --surface-2:  #262117;
+      --ink:        #f4efe6;
+      --ink-2:      #c6bfb0;
+      --muted:      #938c7d;
+      --grid:       #322c22;
+      --baseline:   #453e30;
+      --border:     rgba(244,239,230,0.12);
+      --accent:     #23b895;
+      --accent-soft:#1d3b34;
+      --prev:       #8f836c;
+      --brass:      #e0a94a;
+      --good:       #2fbf4a;
+      --good-ink:   #6fe08a;
+      --bad:        #ef6a5c;
+      --bad-ink:    #ff9b8f;
+      --shadow:     0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --plane:      #14120e;
+    --surface-1:  #1e1b16;
+    --surface-2:  #262117;
+    --ink:        #f4efe6;
+    --ink-2:      #c6bfb0;
+    --muted:      #938c7d;
+    --grid:       #322c22;
+    --baseline:   #453e30;
+    --border:     rgba(244,239,230,0.12);
+    --accent:     #23b895;
+    --accent-soft:#1d3b34;
+    --prev:       #8f836c;
+    --brass:      #e0a94a;
+    --good:       #2fbf4a;
+    --good-ink:   #6fe08a;
+    --bad:        #ef6a5c;
+    --bad-ink:    #ff9b8f;
+    --shadow:     0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.7);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    direction: rtl;
+    background: var(--plane);
+    color: var(--ink);
+    font-family: var(--font);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: clamp(16px, 3vw, 34px); }
+  .num { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+
+  /* Header */
+  header.top {
+    display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px 24px;
+    justify-content: space-between;
+    padding-bottom: 20px; margin-bottom: 22px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand-eyebrow {
+    font-size: 12.5px; letter-spacing: .14em; font-weight: 700;
+    color: var(--brass); text-transform: none; margin: 0 0 6px;
+  }
+  h1 { margin: 0; font-size: clamp(22px, 3.4vw, 32px); font-weight: 800; letter-spacing: -.01em; }
+  .sub { margin: 8px 0 0; color: var(--ink-2); font-size: 14.5px; }
+  .prepared {
+    text-align: left; font-size: 13px; color: var(--ink-2);
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 12px; padding: 10px 14px; box-shadow: var(--shadow);
+  }
+  .prepared b { color: var(--ink); }
+  .prepared .role { color: var(--muted); font-size: 11.5px; }
+
+  /* KPI grid */
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 22px; }
+  .kpi {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--r);
+    padding: 16px 18px 15px; box-shadow: var(--shadow); position: relative; overflow: hidden;
+  }
+  .kpi::before { content:""; position:absolute; inset-inline-start:0; top:0; bottom:0; width:4px; background:var(--accent); opacity:.85; }
+  .kpi .label { font-size: 12.5px; color: var(--ink-2); font-weight: 600; margin-bottom: 8px; }
+  .kpi .value { font-size: clamp(22px, 2.6vw, 27px); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
+  .kpi .unit { font-size: 13px; font-weight: 600; color: var(--muted); margin-inline-start: 3px; }
+  .kpi .delta { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 700; margin-top: 9px; padding: 2px 8px; border-radius: 999px; }
+  .delta.up { color: var(--good-ink); background: color-mix(in srgb, var(--good) 15%, transparent); }
+  .delta.down { color: var(--bad-ink); background: color-mix(in srgb, var(--bad) 15%, transparent); }
+  .delta .cmp { color: var(--muted); font-weight: 600; }
+
+  /* Card */
+  .card {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--r);
+    box-shadow: var(--shadow); padding: 18px 18px 20px; margin-bottom: 22px;
+  }
+  .card-head { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: baseline; justify-content: space-between; margin-bottom: 4px; }
+  .card h2 { margin: 0; font-size: 17px; font-weight: 800; letter-spacing: -.01em; }
+  .card .hint { color: var(--muted); font-size: 12.5px; }
+
+  /* Controls */
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .seg { display: inline-flex; background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; padding: 3px; gap: 2px; }
+  .seg button {
+    border: 0; background: transparent; color: var(--ink-2); font-family: inherit;
+    font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; cursor: pointer;
+    transition: background .15s, color .15s;
+  }
+  .seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+  :root[data-theme="dark"] .seg button[aria-pressed="true"] { color: #08110e; }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .seg button[aria-pressed="true"]{ color:#08110e; } }
+  .seg button:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+  select.city {
+    font-family: inherit; font-size: 12.5px; font-weight: 700; color: var(--ink);
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px;
+    padding: 7px 14px; cursor: pointer;
+  }
+
+  /* Legend */
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 6px 2px 14px; font-size: 12.5px; color: var(--ink-2); font-weight: 600; }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; }
+  .sw { width: 13px; height: 13px; border-radius: 4px; display: inline-block; }
+
+  /* Chart */
+  .chart-scroll { overflow-x: auto; }
+  svg { display: block; width: 100%; height: auto; font-family: var(--font); }
+  .bar { transition: opacity .12s; cursor: pointer; }
+  .bar:hover { opacity: .82; }
+  .b-label { fill: var(--ink); font-size: 12.5px; font-weight: 600; }
+  .b-val { fill: var(--ink-2); font-size: 11px; font-weight: 700; }
+  .axis-line { stroke: var(--baseline); stroke-width: 1; }
+  .grid-line { stroke: var(--grid); stroke-width: 1; }
+  .tick-txt { fill: var(--muted); font-size: 10.5px; }
+
+  /* Tooltip */
+  .tt {
+    position: fixed; pointer-events: none; z-index: 30; opacity: 0; transform: translateY(4px);
+    transition: opacity .12s; background: var(--ink); color: var(--surface-1);
+    border-radius: 10px; padding: 9px 11px; font-size: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.28);
+    max-width: 240px; line-height: 1.45;
+  }
+  .tt b { color: #fff; }
+  :root[data-theme="dark"] .tt, .tt { }
+  .tt .r { display: flex; justify-content: space-between; gap: 14px; }
+  .tt .r .k { opacity: .8; }
+  .tt-title { font-weight: 800; margin-bottom: 5px; }
+
+  /* Table */
+  .table-scroll { overflow-x: auto; border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 760px; }
+  thead th {
+    position: sticky; top: 0; background: var(--surface-2); z-index: 2;
+    text-align: right; font-weight: 700; color: var(--ink-2); font-size: 12px;
+    padding: 10px 10px; border-bottom: 2px solid var(--border); white-space: nowrap; cursor: pointer; user-select: none;
+  }
+  thead th.sortable:hover { color: var(--ink); }
+  thead th .arw { color: var(--brass); font-size: 10px; }
+  tbody td { padding: 9px 10px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  tbody tr:hover { background: var(--surface-2); }
+  tbody td.name { font-weight: 700; white-space: normal; min-width: 190px; }
+  tbody td .city-tag { color: var(--muted); font-weight: 600; font-size: 11px; display:block; }
+  td.pos { color: var(--good-ink); font-weight: 700; }
+  td.neg { color: var(--bad-ink); font-weight: 700; }
+  tfoot td { padding: 11px 10px; font-weight: 800; border-top: 2px solid var(--baseline); background: var(--surface-2); }
+  .chip { display:inline-flex; align-items:center; gap:3px; padding:1px 7px; border-radius:999px; font-size:11px; font-weight:700; }
+  .chip.up { color: var(--good-ink); background: color-mix(in srgb, var(--good) 14%, transparent); }
+  .chip.down { color: var(--bad-ink); background: color-mix(in srgb, var(--bad) 14%, transparent); }
+
+  .foot-note { color: var(--muted); font-size: 12px; margin-top: 6px; }
+  .mini-mult { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 12px; }
+  .mm { background: var(--surface-2); border:1px solid var(--border); border-radius: 12px; padding: 13px 14px; }
+  .mm .t { font-size: 12px; color: var(--ink-2); font-weight: 700; margin-bottom: 6px; }
+  .mm .v { font-size: 20px; font-weight: 800; }
+  .mm .d { font-size: 12px; font-weight: 700; margin-top: 3px; }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <p class="brand-eyebrow">تقرير المبيعات الشهري · يوليو ٢٠٢٦</p>
+      <h1>لوحة مبيعات الفروع واحتساب النسبة</h1>
+      <p class="sub">إجمالي مبيعات كل الفروع ومقارنة الأداء بين الشهر الماضي (يونيو) والشهر الحالي (يوليو ٢٠٢٦)</p>
+    </div>
+    <div class="prepared">
+      <div>إعداد: <b>صالح علي العبري</b></div>
+      <div class="role">إدارة المبيعات · الإدارة المالية · المدير العام</div>
+    </div>
+  </header>
+
+  <section class="kpis" id="kpis"></section>
+
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <h2>مبيعات الفروع — مقارنة شهرية</h2>
+        <div class="hint">مرتبة تنازلياً · مرّر المؤشر على العمود لعرض التفاصيل</div>
+      </div>
+      <div class="controls">
+        <select class="city" id="citySel" aria-label="تصفية حسب الموقع"></select>
+        <div class="seg" id="metricSeg" role="group" aria-label="المقياس">
+          <button data-m="sales" aria-pressed="true">المبيعات</button>
+          <button data-m="profit" aria-pressed="false">الأرباح</button>
+          <button data-m="growth" aria-pressed="false">نمو المبيعات</button>
+        </div>
+      </div>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="chart-scroll"><svg id="chart" role="img" aria-label="مخطط مبيعات الفروع"></svg></div>
+    <p class="foot-note" id="chartNote"></p>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <h2>مؤشرات إجمالية للشركة</h2>
+      <div class="hint">الشهر الحالي مقابل الشهر الماضي</div>
+    </div>
+    <div class="mini-mult" id="miniMult"></div>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <h2>جدول تفصيلي لكل الفروع</h2>
+        <div class="hint">اضغط على رأس العمود للترتيب · القيم بالريال السعودي</div>
+      </div>
+    </div>
+    <div class="table-scroll">
+      <table id="tbl">
+        <thead><tr id="thead"></tr></thead>
+        <tbody id="tbody"></tbody>
+        <tfoot id="tfoot"></tfoot>
+      </table>
+    </div>
+    <p class="foot-note">نسبة العمولة: الأثاث ٠٫٧٥٪ وباقي الأقسام ٠٫٥٠٪ من مبيعات الشهر الحالي — تُقسَّم إلى ٢٠٪ للإدارة و٨٠٪ متبقٍّ للصرف.</p>
+  </section>
+
+  <p class="foot-note" style="text-align:center">لوحة تفاعلية مبنية من تقرير المبيعات الأصلي — العملة: ريال سعودي (﷼).</p>
+</div>
+
+<div class="tt" id="tt" role="status" aria-live="polite"></div>
+
+<script>
+/* ---------- Raw data from the report ---------- */
+/* [name, lmSales, lmCost, lmProfit, cmSales, cmCost, cmProfit, alloc, mgmt20, remain80] */
+const RAW = [
+  ["بن دايل - الضبيبي للأثاث والإنارة", 51310.31,34768.48,16541.83, 63944.71,44465.59,19479.12, 479.59,96,384],
+  ["العمرة - التميز للسجاد", 129842.49,89092.20,40750.29, 135361.60,92912.86,42448.74, 676.81,135,541],
+  ["بن دايل - الرائد للسجاد الراقي", 190188.20,138332.86,51855.34, 198492.18,145537.22,52954.96, 992.46,198,794],
+  ["الجموم - الضبيبي الأثاث", 57352.97,37625.81,19727.16, 61129.99,39739.73,21390.26, 458.47,92,367],
+  ["العمرة - الضبيبي للأثاث", 95198.30,61483.09,33715.21, 124777.79,81628.01,43149.78, 935.83,187,749],
+  ["العمرة - الضبيبي للسجاد", 105810.32,70749.04,35061.28, 113700.40,76819.87,36880.53, 568.50,114,455],
+  ["الدواس - الضبيبي للمفروشات", 81993.11,58531.33,23461.78, 128625.17,92908.17,35717.00, 643.13,129,515],
+  ["العمرة - الضبيبي للمفروشات", 196485.04,142528.13,53956.91, 205048.01,149568.78,55479.23, 1025.24,205,820],
+  ["بن دايل - الضبيبي للمفروشات", 158748.60,113983.21,44765.39, 144251.28,103819.23,40432.05, 721.26,144,577],
+  ["الدواس - الضبيبي للسجاد", 41799.12,26795.13,15003.99, 57622.62,37617.07,20005.55, 288.11,58,230],
+  ["الدواس - العز للأثاث والإنارة", 233031.48,161453.00,71578.48, 297111.72,202356.76,94754.96, 2228.34,446,1783],
+  ["الدواس - الرائد للسجاد الراقي", 36280.00,26045.20,10234.80, 16456.49,11947.54,4508.95, 82.28,16,66],
+  ["العمرة - العز للمفروشات والأثاث", 37584.16,24012.74,13571.42, 53336.42,33183.49,20152.93, 400.02,80,320],
+  ["الدواس - قمر للمفروشات", 117995.63,88287.52,29708.11, 155372.27,113356.48,42015.79, 776.86,155,621],
+  ["العمرة - قمر للمفروشات", 118891.10,83652.78,35238.32, 160817.64,111163.99,49653.65, 804.09,161,643],
+  ["قسم المشاريع", 448139.14,358639.09,89500.05, 243495.67,187011.85,56483.82, 2434.96,487,1948],
+  ["ولي العهد - الضبيبي للمفروشات والأثاث", 119332.03,72909.03,46423.00, 120430.39,74984.61,45445.78, 602.15,120,482],
+  ["قسم الخياطة", 226.08,74.29,151.79, 661.17,217.10,444.07, 16.53,3,13],
+  ["الإدارة", 95225.29,77077.67,18147.62, 0,0,0, 0,0,0],
+];
+
+const DEPARTMENTS = new Set(["قسم المشاريع","قسم الخياطة","الإدارة"]);
+const DATA = RAW.map(r => {
+  const [name,lmS,lmC,lmP,cmS,cmC,cmP,alloc,mgmt,remain] = r;
+  const isDept = DEPARTMENTS.has(name);
+  const city = isDept ? "أقسام مركزية" : name.split(" - ")[0];
+  const label = isDept ? name : name.split(" - ")[1];
+  return {
+    name, label, city, isDept,
+    lmS, lmC, lmP, cmS, cmC, cmP, alloc, mgmt, remain,
+    lmMargin: lmS ? lmP/lmS*100 : 0,
+    cmMargin: cmS ? cmP/cmS*100 : 0,
+    salesGrowth: lmS ? (cmS-lmS)/lmS*100 : 0,
+    profitGrowth: lmP ? (cmP-lmP)/lmP*100 : 0,
+  };
+});
+
+const fmt = (n, d=0) => n.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+const fmtAr = n => n.toLocaleString('en-US');
+const pct = n => (n>=0?'+':'') + n.toFixed(1) + '٪';
+
+/* ---------- Totals ---------- */
+const T = DATA.reduce((a,d)=>{
+  a.lmS+=d.lmS; a.lmC+=d.lmC; a.lmP+=d.lmP; a.cmS+=d.cmS; a.cmC+=d.cmC; a.cmP+=d.cmP;
+  a.alloc+=d.alloc; a.mgmt+=d.mgmt; a.remain+=d.remain; return a;
+},{lmS:0,lmC:0,lmP:0,cmS:0,cmC:0,cmP:0,alloc:0,mgmt:0,remain:0});
+T.lmMargin = T.lmP/T.lmS*100;
+T.cmMargin = T.cmP/T.cmS*100;
+T.salesGrowth = (T.cmS-T.lmS)/T.lmS*100;
+T.profitGrowth = (T.cmP-T.lmP)/T.lmP*100;
+
+/* ---------- KPIs ---------- */
+const kpiDefs = [
+  {label:"إجمالي مبيعات الشهر الحالي", val:T.cmS, cmp:T.lmS, d:T.salesGrowth, unit:"﷼"},
+  {label:"إجمالي أرباح الشهر الحالي", val:T.cmP, cmp:T.lmP, d:T.profitGrowth, unit:"﷼"},
+  {label:"نسبة الربح الحالية", val:T.cmMargin, cmp:T.lmMargin, d:T.cmMargin-T.lmMargin, unit:"٪", isPct:true},
+  {label:"إجمالي تكاليف المبيعات", val:T.cmC, cmp:T.lmC, d:(T.cmC-T.lmC)/T.lmC*100, unit:"﷼", invert:true},
+  {label:"إجمالي العمولة المحتسبة", val:T.alloc, cmp:null, d:null, unit:"﷼", sub:`للإدارة ${fmt(T.mgmt)} · للصرف ${fmt(T.remain)}`},
+];
+document.getElementById('kpis').innerHTML = kpiDefs.map(k=>{
+  const valStr = k.isPct ? k.val.toFixed(2) : fmt(k.val);
+  let delta = '';
+  if (k.d !== null && !k.sub) {
+    const good = k.invert ? k.d < 0 : k.d >= 0;
+    const cls = good ? 'up' : 'down';
+    const arrow = k.d >= 0 ? '▲' : '▼';
+    const dstr = k.isPct ? (k.d>=0?'+':'')+k.d.toFixed(2)+' نقطة' : pct(k.d);
+    delta = `<div class="delta ${cls}">${arrow} ${dstr} <span class="cmp">مقابل الشهر الماضي</span></div>`;
+  } else if (k.sub) {
+    delta = `<div class="delta" style="background:var(--surface-2);color:var(--ink-2)">${k.sub}</div>`;
+  }
+  return `<div class="kpi"><div class="label">${k.label}</div>
+    <div class="value num">${valStr}<span class="unit">${k.unit}</span></div>${delta}</div>`;
+}).join('');
+
+/* ---------- Mini multiples (company totals) ---------- */
+document.getElementById('miniMult').innerHTML = [
+  {t:"مبيعات الشهر الماضي", v:fmt(T.lmS)+" ﷼", d:null},
+  {t:"مبيعات الشهر الحالي", v:fmt(T.cmS)+" ﷼", d:T.salesGrowth},
+  {t:"أرباح الشهر الماضي", v:fmt(T.lmP)+" ﷼", d:null},
+  {t:"أرباح الشهر الحالي", v:fmt(T.cmP)+" ﷼", d:T.profitGrowth},
+].map(m=>{
+  let d='';
+  if(m.d!==null){const g=m.d>=0;d=`<div class="d" style="color:var(--${g?'good':'bad'}-ink)">${g?'▲':'▼'} ${pct(m.d)}</div>`;}
+  return `<div class="mm"><div class="t">${m.t}</div><div class="v num">${m.v}</div>${d}</div>`;
+}).join('');
+
+/* ---------- City filter ---------- */
+const cities = [...new Set(DATA.map(d=>d.city))];
+const citySel = document.getElementById('citySel');
+citySel.innerHTML = `<option value="__all">كل المواقع</option>` + cities.map(c=>`<option value="${c}">${c}</option>`).join('');
+
+/* ---------- Chart ---------- */
+const tt = document.getElementById('tt');
+let metric = 'sales';
+let cityFilter = '__all';
+
+const METRICS = {
+  sales:  {title:"المبيعات (﷼)", a:'cmS', b:'lmS', two:true},
+  profit: {title:"الأرباح (﷼)", a:'cmP', b:'lmP', two:true},
+  growth: {title:"نمو المبيعات ٪ (الحالي مقابل الماضي)", key:'salesGrowth', two:false},
+};
+
+function showTT(html, x, y){
+  tt.innerHTML = html; tt.style.opacity = 1;
+  const r = tt.getBoundingClientRect();
+  let left = x - r.width - 14; if(left < 8) left = x + 14;
+  let top = y - r.height/2; top = Math.max(8, Math.min(top, window.innerHeight - r.height - 8));
+  tt.style.left = left+'px'; tt.style.top = top+'px';
+}
+function hideTT(){ tt.style.opacity = 0; }
+
+function drawLegend(){
+  const L = document.getElementById('legend');
+  if(metric==='growth'){
+    L.innerHTML = `<span><i class="sw" style="background:var(--good)"></i> نمو موجب</span>
+      <span><i class="sw" style="background:var(--bad)"></i> تراجع</span>`;
+  } else {
+    L.innerHTML = `<span><i class="sw" style="background:var(--accent)"></i> الشهر الحالي</span>
+      <span><i class="sw" style="background:var(--prev)"></i> الشهر الماضي</span>`;
+  }
+}
+
+function drawChart(){
+  const svg = document.getElementById('chart');
+  const m = METRICS[metric];
+  let rows = DATA.filter(d => cityFilter==='__all' || d.city===cityFilter);
+  // sort
+  if(m.two) rows = rows.slice().sort((x,y)=> y[m.a]-x[m.a]);
+  else rows = rows.slice().sort((x,y)=> y[m.key]-x[m.key]);
+
+  const barH = 20, gap = m.two ? 6 : 0, groupPad = 16;
+  const rowH = m.two ? (barH*2 + gap + groupPad) : (barH + groupPad);
+  const padTop = 26, padBottom = 26, padRight = 12;
+  const padLeft = 8;
+  const labelW = 178;
+  const W = 900;
+  const plotX = labelW + 10;
+  const plotW = W - plotX - padRight - 60;
+  const H = padTop + rows.length*rowH + padBottom;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.setAttribute('style', `min-width:${Math.max(680, W*0.72)}px`);
+
+  let maxV;
+  if(m.two) maxV = Math.max(...rows.map(d=>Math.max(d[m.a], d[m.b])), 1);
+  else maxV = Math.max(...rows.map(d=>Math.abs(d[m.key])), 1);
+
+  const NS = "http://www.w3.org/2000/svg";
+  let out = '';
+
+  if(m.two){
+    // gridlines
+    const ticks = 4;
+    for(let i=0;i<=ticks;i++){
+      const gx = plotX + plotW*(i/ticks);
+      // RTL: bars grow leftwards from plotX+plotW anchor. We'll anchor baseline at right (plotX+plotW) growing left.
+    }
+    // Baseline anchor at right side (RTL): x0 = plotX + plotW ; bars extend to the left
+    const x0 = plotX + plotW;
+    for(let i=0;i<=ticks;i++){
+      const val = maxV*(i/ticks);
+      const gx = x0 - plotW*(i/ticks);
+      out += `<line class="grid-line" x1="${gx}" y1="${padTop-6}" x2="${gx}" y2="${H-padBottom}"/>`;
+      out += `<text class="tick-txt" x="${gx}" y="${H-padBottom+14}" text-anchor="middle">${maxV>=1000?fmt(val/1000)+'k':fmt(val)}</text>`;
+    }
+    rows.forEach((d,i)=>{
+      const gy = padTop + i*rowH + groupPad/2;
+      const wA = plotW*(d[m.a]/maxV), wB = plotW*(d[m.b]/maxV);
+      // current (top)
+      out += bar(x0-wA, gy, wA, barH, 'var(--accent)', d, 'a', m);
+      // last (bottom)
+      out += bar(x0-wB, gy+barH+gap, wB, barH, 'var(--prev)', d, 'b', m);
+      // value label current
+      out += `<text class="b-val num" x="${x0-wA-6}" y="${gy+barH-6}" text-anchor="end">${fmt(d[m.a])}</text>`;
+      // branch label
+      out += `<text class="b-label" x="${labelW+2}" y="${gy+barH+3}" text-anchor="end">${trim(d.label)}</text>`;
+      out += `<text class="tick-txt" x="${labelW+2}" y="${gy+barH+16}" text-anchor="end">${d.isDept?'قسم':d.city}</text>`;
+    });
+  } else {
+    // growth diverging: zero line in middle-ish. RTL.
+    const zeroX = plotX + plotW*0.42;
+    const posW = plotW*0.58, negW = plotW*0.42;
+    out += `<line class="axis-line" x1="${zeroX}" y1="${padTop-6}" x2="${zeroX}" y2="${H-padBottom}"/>`;
+    out += `<text class="tick-txt" x="${zeroX}" y="${padTop-10}" text-anchor="middle">٠٪</text>`;
+    rows.forEach((d,i)=>{
+      const gy = padTop + i*rowH + groupPad/2;
+      const v = d[m.key];
+      const w = (Math.abs(v)/maxV) * (v>=0?posW:negW);
+      const pos = v>=0;
+      const x = pos ? zeroX : zeroX - w;   // pos grows right, neg grows left
+      const xr = pos ? zeroX : zeroX;
+      const bx = pos ? zeroX : zeroX - w;
+      out += barGrowth(bx, gy, w, barH, pos?'var(--good)':'var(--bad)', d, m);
+      const lblX = pos ? zeroX + w + 6 : zeroX - w - 6;
+      out += `<text class="b-val num" x="${lblX}" y="${gy+barH-5}" text-anchor="${pos?'start':'end'}" fill="${pos?'var(--good-ink)':'var(--bad-ink)'}">${(pos?'▲ +':'▼ ')+Math.abs(v).toFixed(1)+'٪'}</text>`;
+      out += `<text class="b-label" x="${labelW+2}" y="${gy+barH-4}" text-anchor="end">${trim(d.label)}</text>`;
+    });
+  }
+  svg.innerHTML = out;
+  bindBars();
+  document.getElementById('chartNote').textContent = m.two
+    ? `${m.title} — ${rows.length} فرع/قسم`
+    : `تغير مبيعات الشهر الحالي عن الشهر الماضي — ${rows.length} فرع/قسم`;
+}
+
+function trim(s){ return s && s.length>26 ? s.slice(0,25)+'…' : (s||''); }
+
+function bar(x,y,w,h,color,d,which,m){
+  const r = Math.min(4, w/2);
+  return `<rect class="bar" data-i="${d.name}" data-w="${which}" x="${x}" y="${y}" width="${Math.max(w,0.5)}" height="${h}" rx="${r}" fill="${color}"></rect>`;
+}
+function barGrowth(x,y,w,h,color,d,m){
+  const r = Math.min(4, w/2);
+  return `<rect class="bar" data-i="${d.name}" data-w="g" x="${x}" y="${y}" width="${Math.max(w,0.5)}" height="${h}" rx="${r}" fill="${color}"></rect>`;
+}
+
+function bindBars(){
+  document.querySelectorAll('#chart .bar').forEach(el=>{
+    el.addEventListener('mousemove', e=>{
+      const d = DATA.find(x=>x.name===el.dataset.i);
+      showTT(ttHtml(d), e.clientX, e.clientY);
+    });
+    el.addEventListener('mouseleave', hideTT);
+  });
+}
+function ttHtml(d){
+  return `<div class="tt-title">${d.label}${d.isDept?'':' — '+d.city}</div>
+    <div class="r"><span class="k">مبيعات الحالي</span><b class="num">${fmt(d.cmS)} ﷼</b></div>
+    <div class="r"><span class="k">مبيعات الماضي</span><span class="num">${fmt(d.lmS)} ﷼</span></div>
+    <div class="r"><span class="k">أرباح الحالي</span><b class="num">${fmt(d.cmP)} ﷼</b></div>
+    <div class="r"><span class="k">نسبة الربح</span><span class="num">${d.cmMargin.toFixed(1)}٪</span></div>
+    <div class="r"><span class="k">نمو المبيعات</span><b class="num" style="color:${d.salesGrowth>=0?'#7fe0a0':'#ff9b8f'}">${pct(d.salesGrowth)}</b></div>`;
+}
+
+/* ---------- Table ---------- */
+const COLS = [
+  {k:'label', t:'الفرع', num:false},
+  {k:'lmS', t:'مبيعات الماضي', num:true},
+  {k:'cmS', t:'مبيعات الحالي', num:true},
+  {k:'salesGrowth', t:'النمو ٪', num:true, growth:true},
+  {k:'cmC', t:'التكاليف', num:true},
+  {k:'cmP', t:'الأرباح', num:true},
+  {k:'cmMargin', t:'نسبة الربح ٪', num:true, pctv:true},
+  {k:'alloc', t:'العمولة', num:true},
+];
+let sortKey='cmS', sortDir=-1;
+const thead = document.getElementById('thead');
+function renderHead(){
+  thead.innerHTML = COLS.map(c=>{
+    const active = c.k===sortKey;
+    const arw = active ? (sortDir<0?'▼':'▲') : '';
+    return `<th class="sortable" data-k="${c.k}">${c.t} <span class="arw">${arw}</span></th>`;
+  }).join('');
+  thead.querySelectorAll('th').forEach(th=>{
+    th.addEventListener('click', ()=>{
+      const k = th.dataset.k;
+      if(k===sortKey) sortDir*=-1; else {sortKey=k; sortDir = (k==='label')?1:-1;}
+      renderTable();
+    });
+  });
+}
+function renderTable(){
+  renderHead();
+  const rows = DATA.slice().sort((a,b)=>{
+    let va=a[sortKey], vb=b[sortKey];
+    if(typeof va==='string') return sortDir*va.localeCompare(vb,'ar');
+    return sortDir*(va-vb);
+  });
+  document.getElementById('tbody').innerHTML = rows.map(d=>{
+    const g = d.salesGrowth;
+    const gchip = d.lmS ? `<span class="chip ${g>=0?'up':'down'}">${g>=0?'▲':'▼'} ${Math.abs(g).toFixed(1)}٪</span>` : '—';
+    return `<tr>
+      <td class="name">${d.label}<span class="city-tag">${d.isDept?'قسم مركزي':d.city}</span></td>
+      <td class="num">${fmt(d.lmS)}</td>
+      <td class="num">${fmt(d.cmS)}</td>
+      <td class="num">${gchip}</td>
+      <td class="num">${fmt(d.cmC)}</td>
+      <td class="num">${fmt(d.cmP)}</td>
+      <td class="num">${d.cmS?d.cmMargin.toFixed(1)+'٪':'—'}</td>
+      <td class="num">${fmt(d.alloc)}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('tfoot').innerHTML = `<tr>
+    <td>الإجمالي</td>
+    <td class="num">${fmt(T.lmS)}</td>
+    <td class="num">${fmt(T.cmS)}</td>
+    <td class="num"><span class="chip ${T.salesGrowth>=0?'up':'down'}">${T.salesGrowth>=0?'▲':'▼'} ${Math.abs(T.salesGrowth).toFixed(1)}٪</span></td>
+    <td class="num">${fmt(T.cmC)}</td>
+    <td class="num">${fmt(T.cmP)}</td>
+    <td class="num">${T.cmMargin.toFixed(1)}٪</td>
+    <td class="num">${fmt(T.alloc)}</td>
+  </tr>`;
+}
+
+/* ---------- Wire controls ---------- */
+document.querySelectorAll('#metricSeg button').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    document.querySelectorAll('#metricSeg button').forEach(x=>x.setAttribute('aria-pressed','false'));
+    b.setAttribute('aria-pressed','true');
+    metric = b.dataset.m; drawLegend(); drawChart();
+  });
+});
+citySel.addEventListener('change', e=>{ cityFilter = e.target.value; drawChart(); });
+
+drawLegend(); drawChart(); renderTable();
+</script>
