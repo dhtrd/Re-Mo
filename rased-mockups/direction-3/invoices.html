@@ -1,0 +1,237 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>رصيد — فهرس الفواتير</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Readex+Pro:wght@600&display=swap">
+<link rel="stylesheet" href="../shared/riyal.css">
+<script src="../shared/core.js"></script>
+<script>/* المنصّة داكنة افتراضياً ما لم يُطلب غير ذلك */(function(){var s=null;try{s=localStorage.getItem('rased-theme')}catch(e){}if(!new URLSearchParams(location.search).get('theme')&&!s)document.documentElement.setAttribute('data-theme','dark');try{if(localStorage.getItem('d3-rail')==='c')document.documentElement.classList.add('rail-c')}catch(e){}})();</script>
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body class="pg-invoices">
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<symbol id="i-dash" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="9" rx="1"/><rect x="13.5" y="3.5" width="7" height="5" rx="1"/><rect x="13.5" y="11.5" width="7" height="9" rx="1"/><rect x="3.5" y="15.5" width="7" height="5" rx="1"/></symbol>
+<symbol id="i-stmt" viewBox="0 0 24 24"><path d="M6 3.5h9l3.5 3.5v13.5H6z"/><path d="M9 10h6M9 13.5h6M9 17h4"/></symbol>
+<symbol id="i-inv" viewBox="0 0 24 24"><path d="M5.5 3.5h13v17l-2.2-1.5-2.1 1.5-2.2-1.5-2.2 1.5-2.1-1.5-2.2 1.5z"/><path d="M9 8.5h6M9 12h6"/></symbol>
+<symbol id="i-add" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M12 8v8M8 12h8"/></symbol>
+<symbol id="i-rev" viewBox="0 0 24 24"><path d="M12 3.5l7.5 3v5.5c0 4.5-3.2 7.5-7.5 8.5-4.3-1-7.5-4-7.5-8.5V6.5z"/><path d="M8.8 12.2l2.2 2.2 4.3-4.4"/></symbol>
+<symbol id="i-cmd" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></symbol>
+<symbol id="i-theme" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 4.5v15a7.5 7.5 0 0 0 0-15z" class="fill"/></symbol>
+<symbol id="i-panel" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><path d="M14.5 4.5v15"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19.5h14"/></symbol>
+<symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 4l9 16H3z"/><path d="M12 10v4.5M12 17.2v.3"/></symbol>
+<symbol id="i-chev" viewBox="0 0 24 24"><path d="M14.5 7l-5 5 5 5"/></symbol>
+<symbol id="i-swap" viewBox="0 0 24 24"><path d="M18 8.5H6M9 5.5l-3 3 3 3M6 15.5h12M15 12.5l3 3-3 3"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+</svg>
+<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+<div class="app">
+<nav class="rail" id="rail" aria-label="التنقل الرئيسي">
+  <a class="brand" href="dashboard.html" aria-label="رصيد، لوحة الأرصدة"><svg class="logo" viewBox="0 0 120 120" aria-hidden="true"><rect class="lg-ink" x="30" y="36" width="76" height="16" rx="8"/><rect class="lg-acc" x="14" y="68" width="76" height="16" rx="8"/></svg><span class="brand-word">رصيد</span></a>
+  <ul class="rail-links">
+    <li><a href="dashboard.html" title="لوحة الأرصدة"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-dash"/></svg><span class="rl-label">الأرصدة</span></a></li>
+    <li><a href="statement.html" title="كشف حساب مورد"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-stmt"/></svg><span class="rl-label">الكشف</span></a></li>
+    <li><a href="invoices.html" aria-current="page" title="فهرس الفواتير"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-inv"/></svg><span class="rl-label">الفواتير</span></a></li>
+    <li><a href="add-entry.html" title="إضافة حركة"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-add"/></svg><span class="rl-label">إضافة</span></a></li>
+    <li><a href="review.html" title="مركز المراجعة"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-rev"/></svg><span class="rl-label">المراجعة</span></a></li>
+  </ul>
+  <button type="button" class="rail-toggle" data-rail-toggle aria-controls="rail" aria-expanded="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-panel"/></svg><span class="rl-label">طيّ القائمة</span></button>
+</nav>
+<header class="topbar">
+  <a class="brand brand-m" href="dashboard.html" aria-label="رصيد، لوحة الأرصدة"><svg class="logo" viewBox="0 0 120 120" aria-hidden="true"><rect class="lg-ink" x="30" y="36" width="76" height="16" rx="8"/><rect class="lg-acc" x="14" y="68" width="76" height="16" rx="8"/></svg><span class="brand-word">رصيد</span></a>
+  <h1 class="page-title">الفواتير وحالة Odoo</h1>
+  <button type="button" class="cmd" data-palette-open aria-haspopup="dialog"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-cmd"/></svg><span class="cmd-text">ابحث عن مورد أو نفّذ أمراً</span><span class="kbd-hint"><kbd>Ctrl</kbd><kbd>K</kbd></span></button>
+  <div class="viewctl">
+    <button type="button" class="icon-btn" data-theme-toggle><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-theme"/></svg></button>
+    <select class="role-sel" data-role-select aria-label="عرض بصلاحية">
+      <option value="owner">المالك</option>
+      <option value="admin">الإدارة</option>
+      <option value="entry">مدخل البيانات</option>
+    </select>
+  </div>
+</header>
+<aside class="pane-list" aria-label="تصفية الفواتير">
+<div class="lp-tools">
+  <div class="chips seg" role="group" aria-label="تصفية حسب حالة Odoo">
+    <button type="button" class="chip" data-status="all" aria-pressed="true">الكل <kbd class="kbd-hint">1</kbd></button>
+    <button type="button" class="chip" data-status="in" aria-pressed="false">دخلت <kbd class="kbd-hint">2</kbd></button>
+    <button type="button" class="chip" data-status="out" aria-pressed="false">لم تدخل <kbd class="kbd-hint">3</kbd></button>
+  </div>
+</div>
+<div class="lp-full">
+  <h2 class="pane-h">المورد</h2>
+  <ul class="sup-list">
+    <li><a href="invoices.html" aria-current="page"><span class="sl-name">مؤسسة عبدالرحمن الثقفي</span><span class="num muted">4</span></a></li>
+  </ul>
+  <p class="lp-note">الأمثلة الأربع كلها لهذا المورد. فواتير بقية الموردين تُحمّل بالأسلوب نفسه.</p>
+</div>
+</aside>
+<main id="main" class="pane-main">
+<section class="kpis kpis-inv" aria-label="عدّادات الفواتير">
+  <div class="kpi kpi-main"><span class="kpi-l">إجمالي الفواتير</span><span class="num kpi-v">1,468</span></div>
+  <div class="kpi"><span class="kpi-l">لم تدخل Odoo</span><span class="kpi-v"><span class="ph">[العدد]</span></span><a class="kpi-link" href="#report">التقرير</a></div>
+  <div class="kpi"><span class="kpi-l">معروضة هنا</span><span class="num kpi-v" data-shown>4</span><span class="kpi-s">حالاتها أمثلة</span></div>
+</section>
+
+<section aria-labelledby="h-inv" class="inv">
+  <div class="sec-bar">
+    <h2 id="h-inv" class="sec-h">فهرس الفواتير</h2>
+    <div class="chips seg seg-main" role="group" aria-label="تصفية حسب حالة Odoo">
+      <button type="button" class="chip" data-status="all" aria-pressed="true">الكل</button>
+      <button type="button" class="chip" data-status="in" aria-pressed="false">دخلت</button>
+      <button type="button" class="chip" data-status="out" aria-pressed="false">لم تدخل</button>
+    </div>
+  </div>
+  <div class="bulkbar act-edit" data-bulkbar>
+    <span class="bulk-count" aria-live="polite"><span class="num" data-selcount>0</span> محدّدة</span>
+    <button type="button" class="btn btn-primary" data-mark disabled><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>تحديد كـدخلت <span class="kbd-hint"><kbd>M</kbd></span></button>
+    <button type="button" class="btn btn-quiet sel-cancel" data-selcancel>إلغاء التحديد</button>
+  </div>
+  <p class="m-hint">اضغط مطوّلاً على فاتورة لبدء التحديد، ثم انقر لتحديد غيرها.</p>
+
+  <div class="tscroll" tabindex="0" role="region" aria-label="جدول الفواتير">
+  <table class="dt dt-inv">
+    <thead><tr>
+      <th scope="col" class="c-cb"><label class="cb"><input type="checkbox" data-selall><span class="sr-only">تحديد الكل</span></label></th>
+      <th scope="col">رقم الفاتورة</th>
+      <th scope="col" class="c-sec">التاريخ</th>
+      <th scope="col" class="c-sec">المورد</th>
+      <th scope="col" class="c-sec">السند</th>
+      <th scope="col" class="c-sec">الفرع</th>
+      <th scope="col" class="c-num">المبلغ</th>
+      <th scope="col">حالة Odoo</th>
+      <th scope="col" class="act-edit"><span class="sr-only">تبديل الحالة</span></th>
+      <th class="c-xp" scope="col"><span class="sr-only">تفاصيل</span></th>
+    </tr></thead>
+    <tbody>
+      <tr data-inv="P10590" data-status="in">
+        <td class="c-cb"><label class="cb"><input type="checkbox" data-sel value="P10590"><span class="sr-only">تحديد P10590</span></label></td>
+        <td><span class="num ref">P10590</span></td>
+        <td class="c-sec"><span class="num">2025-10-23</span></td>
+        <td class="c-sec">مؤسسة عبدالرحمن الثقفي</td>
+        <td class="c-sec"><span class="num">305</span></td>
+        <td class="c-sec">مستودع الأثاث</td>
+        <td class="c-num"><span class="money"> <svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,200.00</span></span></td>
+        <td class="c-status"><span class="badge b-in" data-badge>دخلت</span><span class="tag-ex" title="حالة توضيحية، الحالة الحقيقية غير معروفة">مثال</span></td>
+        <td class="act-edit"><button type="button" class="btn btn-quiet btn-sm tgl" data-toggle-status title="تبديل حالة Odoo"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-swap"/></svg><span class="tgl-t">تبديل</span><span class="sr-only"> حالة P10590</span></button></td>
+        <td class="c-xp"><button type="button" class="xp" data-xp aria-expanded="false" aria-controls="ix-0"><span class="sr-only">تفاصيل P10590</span><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chev"/></svg></button></td>
+      </tr>
+      <tr class="xrow" id="ix-0" hidden><td colspan="10"><dl class="xdl"><div><dt>التاريخ</dt><dd><span class="num">2025-10-23</span></dd></div><div><dt>السند</dt><dd><span class="num">305</span></dd></div><div><dt>الفرع</dt><dd>مستودع الأثاث</dd></div><div class="xdl-wide"><dt>المورد</dt><dd>مؤسسة عبدالرحمن الثقفي</dd></div></dl></td></tr>
+      <tr data-inv="P11405" data-status="out">
+        <td class="c-cb"><label class="cb"><input type="checkbox" data-sel value="P11405"><span class="sr-only">تحديد P11405</span></label></td>
+        <td><span class="num ref">P11405</span></td>
+        <td class="c-sec"><span class="num">2025-11-27</span></td>
+        <td class="c-sec">مؤسسة عبدالرحمن الثقفي</td>
+        <td class="c-sec"><span class="num">376</span></td>
+        <td class="c-sec">مستودع الأثاث</td>
+        <td class="c-num"><span class="money"> <svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,400.00</span></span></td>
+        <td class="c-status"><span class="badge b-out" data-badge>لم تدخل</span><span class="tag-ex" title="حالة توضيحية، الحالة الحقيقية غير معروفة">مثال</span></td>
+        <td class="act-edit"><button type="button" class="btn btn-quiet btn-sm tgl" data-toggle-status title="تبديل حالة Odoo"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-swap"/></svg><span class="tgl-t">تبديل</span><span class="sr-only"> حالة P11405</span></button></td>
+        <td class="c-xp"><button type="button" class="xp" data-xp aria-expanded="false" aria-controls="ix-1"><span class="sr-only">تفاصيل P11405</span><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chev"/></svg></button></td>
+      </tr>
+      <tr class="xrow" id="ix-1" hidden><td colspan="10"><dl class="xdl"><div><dt>التاريخ</dt><dd><span class="num">2025-11-27</span></dd></div><div><dt>السند</dt><dd><span class="num">376</span></dd></div><div><dt>الفرع</dt><dd>مستودع الأثاث</dd></div><div class="xdl-wide"><dt>المورد</dt><dd>مؤسسة عبدالرحمن الثقفي</dd></div></dl></td></tr>
+      <tr data-inv="P12291" data-status="in">
+        <td class="c-cb"><label class="cb"><input type="checkbox" data-sel value="P12291"><span class="sr-only">تحديد P12291</span></label></td>
+        <td><span class="num ref">P12291</span></td>
+        <td class="c-sec"><span class="num">2025-12-24</span></td>
+        <td class="c-sec">مؤسسة عبدالرحمن الثقفي</td>
+        <td class="c-sec"><span class="num">412</span></td>
+        <td class="c-sec">مستودع الأثاث</td>
+        <td class="c-num"><span class="money"> <svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,110.00</span></span></td>
+        <td class="c-status"><span class="badge b-in" data-badge>دخلت</span><span class="tag-ex" title="حالة توضيحية، الحالة الحقيقية غير معروفة">مثال</span></td>
+        <td class="act-edit"><button type="button" class="btn btn-quiet btn-sm tgl" data-toggle-status title="تبديل حالة Odoo"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-swap"/></svg><span class="tgl-t">تبديل</span><span class="sr-only"> حالة P12291</span></button></td>
+        <td class="c-xp"><button type="button" class="xp" data-xp aria-expanded="false" aria-controls="ix-2"><span class="sr-only">تفاصيل P12291</span><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chev"/></svg></button></td>
+      </tr>
+      <tr class="xrow" id="ix-2" hidden><td colspan="10"><dl class="xdl"><div><dt>التاريخ</dt><dd><span class="num">2025-12-24</span></dd></div><div><dt>السند</dt><dd><span class="num">412</span></dd></div><div><dt>الفرع</dt><dd>مستودع الأثاث</dd></div><div class="xdl-wide"><dt>المورد</dt><dd>مؤسسة عبدالرحمن الثقفي</dd></div></dl></td></tr>
+      <tr data-inv="P12786" data-status="out">
+        <td class="c-cb"><label class="cb"><input type="checkbox" data-sel value="P12786"><span class="sr-only">تحديد P12786</span></label></td>
+        <td><span class="num ref">P12786</span></td>
+        <td class="c-sec"><span class="num">2026-01-04</span></td>
+        <td class="c-sec">مؤسسة عبدالرحمن الثقفي</td>
+        <td class="c-sec"><span class="num">415</span></td>
+        <td class="c-sec">العز العمرة</td>
+        <td class="c-num"><span class="money"> <svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>825.00</span></span></td>
+        <td class="c-status"><span class="badge b-out" data-badge>لم تدخل</span><span class="tag-ex" title="حالة توضيحية، الحالة الحقيقية غير معروفة">مثال</span></td>
+        <td class="act-edit"><button type="button" class="btn btn-quiet btn-sm tgl" data-toggle-status title="تبديل حالة Odoo"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-swap"/></svg><span class="tgl-t">تبديل</span><span class="sr-only"> حالة P12786</span></button></td>
+        <td class="c-xp"><button type="button" class="xp" data-xp aria-expanded="false" aria-controls="ix-3"><span class="sr-only">تفاصيل P12786</span><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-chev"/></svg></button></td>
+      </tr>
+      <tr class="xrow" id="ix-3" hidden><td colspan="10"><dl class="xdl"><div><dt>التاريخ</dt><dd><span class="num">2026-01-04</span></dd></div><div><dt>السند</dt><dd><span class="num">415</span></dd></div><div><dt>الفرع</dt><dd>العز العمرة</dd></div><div class="xdl-wide"><dt>المورد</dt><dd>مؤسسة عبدالرحمن الثقفي</dd></div></dl></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <ul class="mlist mlist-inv" aria-label="الفواتير" data-mlist>
+    <li class="inv-card" data-inv="P10590" data-status="in" tabindex="0" aria-selected="false">
+      <span class="ic-check" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span>
+      <div class="ivc-top"><span class="num ref ivc-no">P10590</span><span class="money ivc-amt"> <svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,200.00</span></span></div>
+      <div class="ivc-meta"><span class="num">2025-10-23</span><span>سند <span class="num">305</span></span><span>مستودع الأثاث</span></div>
+      <div class="ivc-status"><span class="badge b-in" data-badge>دخلت</span><span class="tag-ex" title="حالة توضيحية، الحالة الحقيقية غير معروفة">مثال</span></div>
+    </li>
+    <li class="inv-card" data-inv="P11405" data-status="out" tabindex="0" aria-selected="false">
+      <span class="ic-check" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span>
+      <div class="ivc-top"><span class="num ref ivc-no">P11405</span><span class="money ivc-amt"> <svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,400.00</span></span></div>
+      <div class="ivc-meta"><span class="num">2025-11-27</span><span>سند <span class="num">376</span></span><span>مستودع الأثاث</span></div>
+      <div class="ivc-status"><span class="badge b-out" data-badge>لم تدخل</span><span class="tag-ex" title="حالة توضيحية، الحالة الحقيقية غير معروفة">مثال</span></div>
+    </li>
+    <li class="inv-card" data-inv="P12291" data-status="in" tabindex="0" aria-selected="false">
+      <span class="ic-check" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span>
+      <div class="ivc-top"><span class="num ref ivc-no">P12291</span><span class="money ivc-amt"> <svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,110.00</span></span></div>
+      <div class="ivc-meta"><span class="num">2025-12-24</span><span>سند <span class="num">412</span></span><span>مستودع الأثاث</span></div>
+      <div class="ivc-status"><span class="badge b-in" data-badge>دخلت</span><span class="tag-ex" title="حالة توضيحية، الحالة الحقيقية غير معروفة">مثال</span></div>
+    </li>
+    <li class="inv-card" data-inv="P12786" data-status="out" tabindex="0" aria-selected="false">
+      <span class="ic-check" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span>
+      <div class="ivc-top"><span class="num ref ivc-no">P12786</span><span class="money ivc-amt"> <svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>825.00</span></span></div>
+      <div class="ivc-meta"><span class="num">2026-01-04</span><span>سند <span class="num">415</span></span><span>العز العمرة</span></div>
+      <div class="ivc-status"><span class="badge b-out" data-badge>لم تدخل</span><span class="tag-ex" title="حالة توضيحية، الحالة الحقيقية غير معروفة">مثال</span></div>
+    </li>
+  </ul>
+  <p class="row-gap-p">بقية الفواتير (<span class="num">1,468</span> إجمالاً) تُعرض بالأسلوب نفسه.</p>
+</section>
+</main>
+<aside class="pane-side" aria-label="التقرير">
+<section class="side-block report" id="report" aria-labelledby="h-rep">
+  <h2 class="pane-h" id="h-rep">تقرير الفواتير التي لم تدخل</h2>
+  <p class="rep-count">العدد الكلي: <span class="ph">[العدد]</span></p>
+  <p class="side-note">من الأمثلة المعروضة الآن:</p>
+  <ul class="rep-list" data-report></ul>
+  <div class="rep-actions">
+    <button type="button" class="btn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-down"/></svg>تصدير Excel</button>
+    <button type="button" class="btn"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-down"/></svg>تصدير PDF</button>
+  </div>
+</section>
+</aside>
+<footer class="statusbar" aria-label="اختصارات لوحة المفاتيح">
+  <div class="sb-keys"><span class="sb-k"><span class="keys"><kbd>Ctrl</kbd><kbd>K</kbd></span><span>الأوامر</span></span><span class="sb-k"><span class="keys"><kbd>G</kbd></span><span>ثم حرف: تنقّل</span></span><span class="sb-k"><span class="keys"><kbd>N</kbd></span><span>حركة جديدة</span></span><span class="sb-k"><span class="keys"><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd></span><span>الكل، دخلت، لم تدخل</span></span><span class="sb-k"><span class="keys"><kbd>Space</kbd></span><span>تحديد</span></span><span class="sb-k"><span class="keys"><kbd>M</kbd></span><span>تحديد كـدخلت</span></span></div>
+  <div class="sb-meta">حالات Odoo هنا أمثلة</div>
+</footer>
+</div>
+<nav class="bottomnav" aria-label="التنقل السفلي">
+  <a href="dashboard.html" style="--i:0"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-dash"/></svg><span>الأرصدة</span></a>
+  <a href="statement.html" style="--i:1"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-stmt"/></svg><span>الكشف</span></a>
+  <a href="invoices.html" style="--i:2" aria-current="page"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-inv"/></svg><span>الفواتير</span></a>
+  <a href="review.html" style="--i:3"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-rev"/></svg><span>المراجعة</span></a>
+  <button type="button" style="--i:4" data-palette-open aria-haspopup="dialog"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-cmd"/></svg><span>الأوامر</span></button>
+</nav>
+<a class="fab" href="add-entry.html"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-add"/></svg><span>إضافة حركة</span></a>
+
+<dialog class="palette" aria-label="لوحة الأوامر">
+  <form method="dialog" class="pal-form">
+    <label class="pal-search"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-cmd"/></svg><span class="sr-only">ابحث في الأوامر</span><input type="text" data-pal-input placeholder="اكتب اسم مورد أو أمر" autocomplete="off"></label>
+    <ul class="pal-list" data-pal-list>
+      <li><a href="dashboard.html"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-dash"/></svg><span>لوحة الأرصدة</span><span class="pal-k"><kbd>G</kbd><kbd>D</kbd></span></a></li>
+      <li><a href="statement.html"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-stmt"/></svg><span>كشف حساب مورد</span><span class="pal-k"><kbd>G</kbd><kbd>S</kbd></span></a></li>
+      <li><a href="invoices.html"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-inv"/></svg><span>فهرس الفواتير</span><span class="pal-k"><kbd>G</kbd><kbd>I</kbd></span></a></li>
+      <li><a href="add-entry.html"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-add"/></svg><span>إضافة حركة</span><span class="pal-k"><kbd>N</kbd></span></a></li>
+      <li><a href="review.html"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-rev"/></svg><span>مركز المراجعة</span><span class="pal-k"><kbd>G</kbd><kbd>R</kbd></span></a></li>
+      <li><a href="statement.html"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-stmt"/></svg><span>كشف: مؤسسة عبدالرحمن الثقفي</span></a></li>
+      <li><a href="invoices.html#report"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-inv"/></svg><span>تقرير الفواتير التي لم تدخل</span></a></li>
+      <li><a href="review.html#dups"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-rev"/></svg><span>الأرقام المكررة</span></a></li>
+    </ul>
+    <p class="pal-empty" data-pal-empty hidden>لا أمر بهذا الاسم. جرّب اسم مورد أو «كشف».</p>
+    <div class="pal-foot"><span><kbd>Esc</kbd> إغلاق</span><button type="submit" class="btn">إغلاق</button></div>
+  </form>
+</dialog>
+</body></html>
