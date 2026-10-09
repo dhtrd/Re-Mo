@@ -66,7 +66,7 @@ async function checkPage(page, w, screen) {
 
     // الأرقام: المطلوب موجود، ولا مبالغ مخترعة
     for (const r of REQUIRED[screen] || []) if (!document.body.textContent.includes(r)) issues.push('نص/رقم مطلوب مفقود: ' + r);
-    const money = document.body.textContent.match(/-?\d{1,3}(?:,\d{3})*\.\d{2}/g) || [];
+    const money = document.body.textContent.match(/(?<![\d,.])-?\d{1,3}(?:,\d{3})*\.\d{2}(?![\d])/g) || [];
     const bad = [...new Set(money.filter(m => !ALLOWED.includes(m)))];
     if (bad.length) issues.push('مبالغ غير موجودة في البيانات: ' + bad.join(' '));
 
