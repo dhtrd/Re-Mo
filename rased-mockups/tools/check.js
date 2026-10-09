@@ -105,7 +105,7 @@ async function checkPage(page, w, screen) {
 
     // تداخل نصوص: أوراق نصية متجاورة تتقاطع صناديقها (عينة)
     const leaves = [...document.querySelectorAll('h1,h2,h3,p,td,th,label,button,a,.num,.money,dt,dd,li')]
-      .filter(el => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 0 && r.height > 0 && cs.visibility !== 'hidden' && cs.position !== 'fixed' && cs.position !== 'absolute' && !el.closest('[hidden],dialog:not([open])'); });
+      .filter(el => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 0 && r.height > 0 && cs.visibility !== 'hidden' && cs.position !== 'fixed' && cs.position !== 'absolute' && !el.closest('[hidden],dialog:not([open])') && !(el.closest('details:not([open])') && !el.closest('summary')); });
     let overlaps = [];
     for (let i = 0; i < leaves.length && overlaps.length < 5; i++) {
       const a = leaves[i], ra = a.getBoundingClientRect();
