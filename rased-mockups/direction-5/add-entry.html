@@ -1,0 +1,147 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>رصيد — إضافة حركة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300..900&family=Readex+Pro:wght@600&family=Space+Grotesk:wght@400..700&display=swap">
+<link rel="stylesheet" href="../shared/riyal.css">
+<link rel="stylesheet" href="style.css">
+<script src="../shared/core.js"></script>
+<script src="app.js" defer></script>
+</head>
+<body class="p-add">
+<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+<div class="app">
+<aside class="rail" id="rail" aria-label="القائمة الرئيسية">
+  <a class="brand" href="dashboard.html" aria-label="رصيد، لوحة الأرصدة"><svg viewBox="0 0 120 120" aria-hidden="true"><rect x="30" y="36" width="76" height="16" rx="8" class="l-ink"/><rect x="14" y="68" width="76" height="16" rx="8" class="l-acc"/></svg><span>رصيد</span></a>
+  <nav class="railnav" aria-label="الصفحات"><ul>
+    <li><a href="dashboard.html">الأرصدة</a></li>
+    <li><a href="statement.html">كشف الحساب</a></li>
+    <li><a href="invoices.html">الفواتير</a></li>
+    <li><a href="add-entry.html" aria-current="page">إضافة حركة</a></li>
+    <li><a href="review.html">المراجعة</a></li>
+  </ul></nav>
+  <div class="tools">
+    <select data-role-select aria-label="عرض بصلاحية"><option value="owner">المالك</option><option value="admin">الإدارة</option><option value="entry">مدخل البيانات</option></select>
+    <button type="button" class="themebtn" data-theme-toggle aria-label="تبديل الوضع"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>
+  </div>
+</aside>
+<main id="main" class="main">
+  <div class="topbar">
+    <button type="button" class="railbtn" data-rail-toggle aria-controls="rail" aria-expanded="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v3H3zM3 11h18v3H3zM3 17h18v3H3z" fill="currentColor"/></svg><span>القائمة</span></button>
+    <span class="brandmini">رصيد</span>
+  </div>
+
+<div class="addx">
+
+  <nav class="suplist" aria-labelledby="h-suplist">
+    <h2 id="h-suplist">الموردون</h2>
+    <ul>
+      <li><button type="button" data-pick="مؤسسة عبدالرحمن الثقفي" aria-pressed="false">مؤسسة عبدالرحمن الثقفي</button></li>
+      <li><button type="button" data-pick="منجرة العهد" aria-pressed="false">منجرة العهد</button></li>
+      <li><button type="button" data-pick="بدر زين للأثاث" aria-pressed="false">بدر زين للأثاث</button></li>
+      <li><button type="button" data-pick="مفروشات الجيزاني" aria-pressed="true">مفروشات الجيزاني</button></li>
+      <li><button type="button" data-pick="منجرة فارس العبدلي" aria-pressed="false">منجرة فارس العبدلي</button></li>
+      <li><button type="button" data-pick="مركز بلبل" aria-pressed="false">مركز بلبل</button></li>
+      <li><button type="button" data-pick="بيت الروائع" aria-pressed="false">بيت الروائع</button></li>
+      <li><button type="button" data-pick="عروسة البحر" aria-pressed="false">عروسة البحر</button></li>
+      <li><button type="button" data-pick="منجرة صالحة القارحي" aria-pressed="false">منجرة صالحة القارحي</button></li>
+    </ul>
+    <p class="rest">و[بقية الموردين]</p>
+  </nav>
+  <header class="phead">
+    <h1 class="ttl">إضافة حركة</h1>
+    <p class="sub">الرقم المرجعي يتولد من النوع والتاريخ والمرجع، ويُفحص تكراره قبل الحفظ.</p>
+  </header>
+
+  <form class="entry" id="entry" aria-label="بيانات الحركة" novalidate>
+    <div class="frow wide">
+      <label class="flab" for="f-sup">المورد</label>
+      <select id="f-sup" name="supplier">
+        <option>مؤسسة عبدالرحمن الثقفي</option>
+        <option>منجرة العهد</option>
+        <option>بدر زين للأثاث</option>
+        <option selected>مفروشات الجيزاني</option>
+        <option>منجرة فارس العبدلي</option>
+        <option>مركز بلبل</option>
+        <option>بيت الروائع</option>
+        <option>عروسة البحر</option>
+        <option>منجرة صالحة القارحي</option>
+      </select>
+      <p class="hint assign">لمدخل البيانات تظهر هنا فقط الموردون المسندون إليه: <b>[الموردون المسندون]</b></p>
+    </div>
+    <div class="frow wide" role="radiogroup" aria-labelledby="l-type">
+      <span class="flab" id="l-type">النوع</span>
+      <div class="seg">
+        <label><input type="radio" name="type" value="inv">فاتورة <kbd>Alt+1</kbd></label>
+        <label><input type="radio" name="type" value="misc" checked>قيد <kbd>Alt+2</kbd></label>
+      </div>
+    </div>
+    <div class="frow">
+      <label class="flab" for="f-date">التاريخ</label>
+      <input type="text" class="num" id="f-date" name="date" value="2026-08-14" inputmode="numeric" autocomplete="off">
+    </div>
+    <div class="frow">
+      <label class="flab" for="f-ref">المرجع</label>
+      <input type="text" class="num" id="f-ref" name="ref" value="0395" inputmode="numeric" autocomplete="off">
+    </div>
+    <div class="frow wide">
+      <span class="flab" id="l-gen">الرقم المرجعي</span>
+      <div class="refout" aria-labelledby="l-gen"><output class="num" id="genref" for="f-ref f-date" aria-live="polite">MISC/2026/08/0395</output><span class="tag" id="gentag">مكرر</span></div>
+    </div>
+    <div class="frow">
+      <label class="flab" for="f-vou">السند</label>
+      <input type="text" class="num" id="f-vou" name="voucher" inputmode="numeric" autocomplete="off">
+    </div>
+    <div class="frow">
+      <label class="flab" for="f-amt">المبلغ</label>
+      <div class="amt"><input type="text" class="num" id="f-amt" name="amount" placeholder="0.00" inputmode="decimal" autocomplete="off"><span class="side-l" id="amtside">مدين</span></div>
+    </div>
+    <div class="frow wide">
+      <label class="flab" for="f-desc">البيان</label>
+      <input type="text" id="f-desc" name="desc" autocomplete="off">
+    </div>
+  </form>
+
+  <section class="dup sheet" id="dup" role="alert" aria-labelledby="h-dup">
+    <button type="button" class="btn back" data-back>رجوع للتعديل</button>
+    <h2 id="h-dup">تحذير صارم: الرقم المرجعي مسجل من قبل</h2>
+    <span class="dref num" id="dupref">MISC/2026/08/0395</span>
+    <dl>
+      <div><dt>المورد</dt><dd>مفروشات الجيزاني</dd></div>
+      <div><dt>الصف</dt><dd><span class="num">148</span></dd></div>
+      <div><dt>المبلغ</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,700.00</span></span></dd></div>
+    </dl>
+    <p>غيّر المرجع إن كانت الحركة نفسها. إن كانت حركة مختلفة فأكّد ذلك ليُفعَّل الحفظ.</p>
+    <label class="confirm"><input type="checkbox" id="dupok">أؤكد أنها حركة مختلفة</label>
+    <button type="button" class="btn goon" data-goon disabled>متابعة إلى الحفظ</button>
+    <a class="lnk dlink" href="review.html#dups">عرض الأرقام المكررة في المراجعة</a>
+  </section>
+
+  <div class="acts">
+    <button type="submit" form="entry" class="btn btn-sig" id="save" disabled>حفظ الحركة <kbd>Ctrl+S</kbd></button>
+    <button type="button" class="btn" id="savenew" disabled>حفظ وإضافة أخرى <kbd>Ctrl+Enter</kbd></button>
+    <a class="btn btn-text" href="dashboard.html" id="cancel">إلغاء <kbd>Esc</kbd></a>
+  </div>
+
+  <aside class="keys" aria-labelledby="h-keys">
+    <h2 id="h-keys">اختصارات لوحة المفاتيح</h2>
+    <ul>
+      <li><span>حفظ الحركة</span><kbd>Ctrl+S</kbd></li>
+      <li><span>حفظ وإضافة أخرى</span><kbd>Ctrl+Enter</kbd></li>
+      <li><span>إلغاء</span><kbd>Esc</kbd></li>
+      <li><span>النوع: فاتورة</span><kbd>Alt+1</kbd></li>
+      <li><span>النوع: قيد</span><kbd>Alt+2</kbd></li>
+    </ul>
+  </aside>
+</div>
+</main>
+</div>
+<nav class="tabbar" aria-label="التنقل السفلي">
+  <a href="dashboard.html">الأرصدة</a>
+  <a href="statement.html">الكشف</a>
+  <a href="invoices.html">الفواتير</a>
+  <a href="review.html">المراجعة</a>
+</nav>
+<a class="fab" href="add-entry.html" aria-label="إضافة حركة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3h3v7.5H21v3h-7.5V21h-3v-7.5H3v-3h7.5z" fill="currentColor"/></svg></a>
+<div class="toast" role="status" aria-live="polite" hidden></div>
+</body></html>

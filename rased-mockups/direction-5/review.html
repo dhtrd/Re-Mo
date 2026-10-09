@@ -1,0 +1,100 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>رصيد — المراجعة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300..900&family=Readex+Pro:wght@600&family=Space+Grotesk:wght@400..700&display=swap">
+<link rel="stylesheet" href="../shared/riyal.css">
+<link rel="stylesheet" href="style.css">
+<script src="../shared/core.js"></script>
+<script src="app.js" defer></script>
+</head>
+<body class="p-rev">
+<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+<div class="app">
+<aside class="rail" id="rail" aria-label="القائمة الرئيسية">
+  <a class="brand" href="dashboard.html" aria-label="رصيد، لوحة الأرصدة"><svg viewBox="0 0 120 120" aria-hidden="true"><rect x="30" y="36" width="76" height="16" rx="8" class="l-ink"/><rect x="14" y="68" width="76" height="16" rx="8" class="l-acc"/></svg><span>رصيد</span></a>
+  <nav class="railnav" aria-label="الصفحات"><ul>
+    <li><a href="dashboard.html">الأرصدة</a></li>
+    <li><a href="statement.html">كشف الحساب</a></li>
+    <li><a href="invoices.html">الفواتير</a></li>
+    <li><a href="add-entry.html">إضافة حركة</a></li>
+    <li><a href="review.html" aria-current="page">المراجعة</a></li>
+  </ul></nav>
+  <div class="tools">
+    <select data-role-select aria-label="عرض بصلاحية"><option value="owner">المالك</option><option value="admin">الإدارة</option><option value="entry">مدخل البيانات</option></select>
+    <button type="button" class="themebtn" data-theme-toggle aria-label="تبديل الوضع"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>
+  </div>
+</aside>
+<main id="main" class="main">
+  <div class="topbar">
+    <button type="button" class="railbtn" data-rail-toggle aria-controls="rail" aria-expanded="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v3H3zM3 11h18v3H3zM3 17h18v3H3z" fill="currentColor"/></svg><span>القائمة</span></button>
+    <span class="brandmini">رصيد</span>
+  </div>
+
+<div class="revx" data-cat="dates">
+  <header class="phead">
+    <h1 class="ttl">مركز المراجعة</h1>
+    <p class="sub">سجلات تمنع اعتماد الأرصدة حتى تُراجع. الإجراءات للمالك والإدارة.</p>
+  </header>
+
+  <nav class="rindex" aria-label="أقسام المراجعة">
+    <ul>
+      <li><a href="#dates" data-cat="dates" aria-current="true"><span class="num">33</span><span>قيداً بتاريخ معطوب</span></a></li>
+      <li><a href="#dups" data-cat="dups"><span class="num">9</span><span>أرقام مرجعية مكررة</span></a></li>
+      <li><a href="#untyped" data-cat="untyped"><span class="num">19</span><span>سجلاً بلا نوع</span></a></li>
+    </ul>
+  </nav>
+
+  <div class="rsecs">
+  <section class="rsec sec" id="dates" aria-labelledby="h-dates">
+    <h2 id="h-dates" class="lab"><span class="giant-c num">33</span><span class="lt">قيداً بتاريخ معطوب</span><span class="lt2">التاريخ الحالي ↔ التاريخ المرجّح</span></h2>
+    <div class="tscroll" role="region" aria-label="قيود بتواريخ معطوبة" tabindex="0">
+      <table class="rt rv">
+        <thead><tr><th scope="col" class="c-main first">المورد</th><th scope="col">الخلية</th><th scope="col">الحالي ↔ المرجّح</th><th scope="col" class="last can-edit"><span class="sr-only">الإجراء</span></th></tr></thead>
+        <tbody>
+          <tr><th scope="row" class="c-main first">بدر زين للأثاث</th><td data-l="الخلية"><span class="num">B340</span></td>
+            <td class="cmp"><span class="was num">2014-08-01</span><span class="swap" aria-label="يصبح">↔</span><span class="will num">2026-08-14</span></td><td class="c-act last can-edit"><div class="ra"><button type="button" class="btn btn-sig" data-act="اعتماد المرجّح">اعتماد المرجّح</button><button type="button" class="btn btn-text" data-act="تجاهل">تجاهل</button></div></td></tr>
+          <tr><th scope="row" class="c-main first">مفروشات الجيزاني</th><td data-l="الخلية"><span class="num">B147</span></td>
+            <td class="cmp"><span class="was num">2026-10-08</span><span class="swap" aria-label="يصبح">↔</span><span class="will num">2026-08-10</span></td><td class="c-act last can-edit"><div class="ra"><button type="button" class="btn btn-sig" data-act="اعتماد المرجّح">اعتماد المرجّح</button><button type="button" class="btn btn-text" data-act="تجاهل">تجاهل</button></div></td></tr>
+          <tr class="rowmore"><td colspan="4" class="first"><span class="ph">[31 قيداً آخر]</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="rsec sec" id="dups" aria-labelledby="h-dups">
+    <h2 id="h-dups" class="lab"><span class="giant-c num">9</span><span class="lt">أرقام مرجعية مكررة</span><span class="lt2">رقم واحد مسجل لأكثر من حركة</span></h2>
+    <div class="tscroll" role="region" aria-label="أرقام مكررة" tabindex="0">
+      <table class="rt rv">
+        <thead><tr><th scope="col" class="c-main first">الرقم المرجعي</th><th scope="col">المورد</th><th scope="col">الصف</th><th scope="col" class="c-amt">المبلغ</th><th scope="col" class="last can-edit"><span class="sr-only">الإجراء</span></th></tr></thead>
+        <tbody>
+          <tr><th scope="row" class="c-main first"><span class="num">MISC/2026/08/0395</span></th><td data-l="المورد">مفروشات الجيزاني</td>
+            <td data-l="الصف"><span class="num">148</span></td>
+            <td class="c-amt"><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,700.00</span></span></td>
+            <td class="c-act last can-edit"><div class="ra"><button type="button" class="btn btn-sig" data-act="تأكيد أنها مختلفة">تأكيد أنها مختلفة</button><button type="button" class="btn btn-text" data-act="تجاهل">تجاهل</button></div></td></tr>
+          <tr class="rowmore"><td colspan="5" class="first"><span class="ph">[8 أرقام أخرى]</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="rsec sec" id="untyped" aria-labelledby="h-untyped">
+    <h2 id="h-untyped" class="lab"><span class="giant-c num">19</span><span class="lt">سجلاً بلا نوع</span><span class="lt2">لا فاتورة ولا قيد</span></h2>
+    <div class="untyped">
+      <p>لا توجد أمثلة معروفة لهذه السجلات بعد: <span class="ph">[تفاصيل السجلات]</span></p>
+      <p class="note">بعد ظهور التفاصيل يُحدَّد لكل سجل نوعه (فاتورة أو قيد) ليتولد رقمه المرجعي.</p>
+    </div>
+  </section>
+  </div>
+</div>
+</main>
+</div>
+<nav class="tabbar" aria-label="التنقل السفلي">
+  <a href="dashboard.html">الأرصدة</a>
+  <a href="statement.html">الكشف</a>
+  <a href="invoices.html">الفواتير</a>
+  <a href="review.html" aria-current="page">المراجعة</a>
+</nav>
+<a class="fab" href="add-entry.html" aria-label="إضافة حركة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3h3v7.5H21v3h-7.5V21h-3v-7.5H3v-3h7.5z" fill="currentColor"/></svg></a>
+<div class="toast" role="status" aria-live="polite" hidden></div>
+</body></html>
