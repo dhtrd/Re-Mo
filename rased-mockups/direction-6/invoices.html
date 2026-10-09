@@ -1,0 +1,157 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>رصيد — الفواتير</title>
+<link rel="stylesheet" href="../shared/riyal.css">
+<script src="../shared/core.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300..700&amp;display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body class="page-invoices has-split has-insp insp-wide">
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+<symbol id="i-bal" viewBox="0 0 24 24"><rect x="7" y="6" width="13" height="4.4" rx="2.2"/><rect x="4" y="13.6" width="13" height="4.4" rx="2.2"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3.5h7l4.5 4.5v12.5H7z"/><path d="M14 3.5V8h4.5M10 12.5h5.5M10 16h5.5"/></symbol>
+<symbol id="i-stack" viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="13" rx="2.5"/><path d="M8 4h8M9 11.5h6M9 15h4"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.3 12.4l2.6 2.6 4.8-5.2"/></symbol>
+<symbol id="i-side" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="M14.5 5v14"/></symbol>
+<symbol id="i-theme" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor"/></symbol>
+<symbol id="i-chev" viewBox="0 0 24 24"><path d="M14.5 6l-6 6 6 6"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M9.5 6l6 6-6 6"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+<symbol id="i-export" viewBox="0 0 24 24"><path d="M12 4v11M8 8l4-4 4 4M5 14v5.5h14V14"/></symbol>
+<symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 4.5l8.5 15h-17z"/><path d="M12 10.2v4.3M12 17.2v.2"/></symbol>
+<symbol id="i-swap" viewBox="0 0 24 24"><path d="M5 9h13M15 5.5L18.5 9 15 12.5M19 15H6M9 11.5L5.5 15 9 18.5"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M10 7l-5 5 5 5"/></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="14" rx="3"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/></symbol>
+<symbol id="i-dots" viewBox="0 0 24 24"><path d="M6 12h.01M12 12h.01M18 12h.01" stroke-width="3"/></symbol>
+</svg>
+<a class="skip" href="#content">تخطَّ إلى المحتوى</a>
+<div class="app">
+  <aside class="sidebar" id="sidebar" aria-label="التنقل الرئيسي">
+    <div class="side-head"><a class="brand " href="dashboard.html" aria-label="رصيد — الرئيسية"><svg viewBox="0 0 120 120" aria-hidden="true"><rect class="lg-ink" x="30" y="36" width="76" height="16" rx="8"/><rect class="lg-acc" x="14" y="68" width="76" height="16" rx="8"/></svg><span class="brand-word">رصيد</span></a><button type="button" class="icon-btn side-close" data-nav-toggle aria-label="إغلاق القائمة"><svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+    <nav class="nav" aria-label="الأقسام">
+      <a href="dashboard.html" title="الأرصدة"><svg class="ic" aria-hidden="true"><use href="#i-bal"/></svg><span class="nav-label">الأرصدة</span></a>
+      <a href="statement.html" title="كشف حساب"><svg class="ic" aria-hidden="true"><use href="#i-doc"/></svg><span class="nav-label">كشف حساب</span></a>
+      <a href="invoices.html" aria-current="page" title="الفواتير"><svg class="ic" aria-hidden="true"><use href="#i-stack"/></svg><span class="nav-label">الفواتير</span></a>
+      <a href="add-entry.html" title="إضافة حركة"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg><span class="nav-label">إضافة حركة</span></a>
+      <a href="review.html" title="المراجعة"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span class="nav-label">المراجعة</span></a>
+    </nav>
+    <div class="side-foot"><label class="role"><span>عرض بصلاحية</span><select data-role-select aria-label="عرض بصلاحية"><option value="owner">المالك</option><option value="admin">الإدارة</option><option value="entry">مدخل البيانات</option></select></label><p class="side-note">نموذج عرض فقط؛ لا يُحفظ أي تغيير.</p></div>
+  </aside>
+  <aside class="split" aria-label="الموردون">
+    <div class="split-head"><h2>الموردون</h2><label class="sr-only" for="supSearch">ابحث عن مورد</label><input id="supSearch" class="select" type="search" placeholder="ابحث عن مورد" autocomplete="off"></div>
+    <ul class="split-list">
+      <li><a class="pick" href="#content" aria-current="true"><span class="grow"><span class="nm">مؤسسة عبدالرحمن الثقفي</span><span class="sub">4 فواتير في النموذج</span></span><svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+      <li><button type="button" class="pick" data-unavail><span class="grow"><span class="nm">منجرة العهد</span><span class="sub">undefined</span></span><svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button></li>
+      <li><button type="button" class="pick" data-unavail><span class="grow"><span class="nm">بدر زين للأثاث</span><span class="sub">undefined</span></span><svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button></li>
+      <li><button type="button" class="pick" data-unavail><span class="grow"><span class="nm">مفروشات الجيزاني</span><span class="sub">undefined</span></span><svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button></li>
+      <li><button type="button" class="pick" data-unavail><span class="grow"><span class="nm">منجرة فارس العبدلي</span><span class="sub">undefined</span></span><svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button></li>
+      <li><button type="button" class="pick" data-unavail><span class="grow"><span class="nm">مركز بلبل</span><span class="sub">undefined</span></span><svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button></li>
+      <li><button type="button" class="pick" data-unavail><span class="grow"><span class="nm">بيت الروائع</span><span class="sub">undefined</span></span><svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button></li>
+      <li><button type="button" class="pick" data-unavail><span class="grow"><span class="nm">عروسة البحر</span><span class="sub">undefined</span></span><svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button></li>
+      <li><button type="button" class="pick" data-unavail><span class="grow"><span class="nm">منجرة صالحة القارحي</span><span class="sub">undefined</span></span><svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button></li>
+    </ul>
+    <p class="foot-note">بقية الموردين غير مضمّنة في هذا النموذج.</p>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="icon-btn nav-toggle" data-nav-toggle aria-controls="sidebar" aria-expanded="false" aria-label="إظهار أو طي القائمة الجانبية"><svg class="ic" aria-hidden="true"><use href="#i-side"/></svg></button>
+      <a class="brand m-brand" href="dashboard.html" aria-label="رصيد — الرئيسية"><svg viewBox="0 0 120 120" aria-hidden="true"><rect class="lg-ink" x="30" y="36" width="76" height="16" rx="8"/><rect class="lg-acc" x="14" y="68" width="76" height="16" rx="8"/></svg><span class="brand-word">رصيد</span></a>
+      <span class="compact-title" aria-hidden="true">الفواتير</span>
+      <span class="spacer"></span>
+      
+      <button type="button" class="icon-btn" data-theme-toggle><svg class="ic" aria-hidden="true"><use href="#i-theme"/></svg></button>
+    </header>
+    <main id="content" class="content">
+      <div class="title-row">
+        <div><h1 class="large-title">الفواتير</h1><p class="lede">فهرس فواتير المشتريات وحالة إدخالها في Odoo.</p></div>
+        <a class="btn hide-m" href="#report">تقرير الفواتير التي لم تدخل</a>
+      </div>
+      <div class="counters">
+        <div><b class="num">1,468</b><span>إجمالي الفواتير</span></div>
+        <div><b class="num">[العدد]</b><span>لم تدخل Odoo</span></div>
+      </div>
+
+      <section aria-labelledby="h-inv">
+        <div class="sec-row"><h2 class="sec" id="h-inv">فواتير مؤسسة عبدالرحمن الثقفي</h2><span class="cell-sub">4 من <span class="num">1,468</span>، والحالات أمثلة توضيحية</span></div>
+        <div class="inv-bar" style="margin-bottom:12px">
+          <div class="seg filterbar " role="radiogroup" aria-label="تصفية حسب حالة Odoo">
+  <label><input type="radio" name="invf" value="all" checked><span>الكل</span></label>
+  <label><input type="radio" name="invf" value="in"><span>دخلت</span></label>
+  <label><input type="radio" name="invf" value="out"><span>لم تدخل</span></label>
+</div>
+          <div class="btns" style="display:flex;gap:8px;flex-wrap:wrap">
+            <button type="button" class="btn can-edit m-only" data-select-mode>تحديد</button>
+            <button type="button" class="btn primary can-edit hide-m" data-mark disabled>تحديد كـدخلت</button>
+          </div>
+        </div>
+        <p class="hint-press m-only can-edit" style="margin:0 4px 10px">اضغط مطوّلاً على فاتورة لبدء التحديد.</p>
+        <ul class="group inv-list upto-tl" id="invList">
+          <li class="inv" data-ref="P10590" data-status="in">
+            <label class="ck can-edit"><input type="checkbox" data-sel="P10590" aria-label="تحديد P10590"></label>
+            <div class="inv-main"><span class="ref num">P10590</span><span class="meta"> <span class="num">2025-10-23</span> <span>سند  <span class="num">305</span> </span><span>مستودع الأثاث</span></span></div>
+            <div class="inv-side"> <span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,200.00</span></span><span class="st"><span class="badge ok" data-st-badge>دخلت</span><span class="ex">مثال</span></span></div>
+          </li>
+          <li class="inv" data-ref="P11405" data-status="out">
+            <label class="ck can-edit"><input type="checkbox" data-sel="P11405" aria-label="تحديد P11405"></label>
+            <div class="inv-main"><span class="ref num">P11405</span><span class="meta"> <span class="num">2025-11-27</span> <span>سند  <span class="num">376</span> </span><span>مستودع الأثاث</span></span></div>
+            <div class="inv-side"> <span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,400.00</span></span><span class="st"><span class="badge no" data-st-badge>لم تدخل</span><span class="ex">مثال</span></span></div>
+          </li>
+          <li class="inv" data-ref="P12291" data-status="in">
+            <label class="ck can-edit"><input type="checkbox" data-sel="P12291" aria-label="تحديد P12291"></label>
+            <div class="inv-main"><span class="ref num">P12291</span><span class="meta"> <span class="num">2025-12-24</span> <span>سند  <span class="num">412</span> </span><span>مستودع الأثاث</span></span></div>
+            <div class="inv-side"> <span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,110.00</span></span><span class="st"><span class="badge ok" data-st-badge>دخلت</span><span class="ex">مثال</span></span></div>
+          </li>
+          <li class="inv" data-ref="P12786" data-status="out">
+            <label class="ck can-edit"><input type="checkbox" data-sel="P12786" aria-label="تحديد P12786"></label>
+            <div class="inv-main"><span class="ref num">P12786</span><span class="meta"> <span class="num">2026-01-04</span> <span>سند  <span class="num">415</span> </span><span>العز العمرة</span></span></div>
+            <div class="inv-side"> <span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>825.00</span></span><span class="st"><span class="badge no" data-st-badge>لم تدخل</span><span class="ex">مثال</span></span></div>
+          </li>
+        </ul>
+        <div class="table-wrap only-d" tabindex="0" role="region" aria-labelledby="h-inv">
+          <table class="tbl" style="min-width:960px">
+            <caption class="sr-only">فواتير مؤسسة عبدالرحمن الثقفي وحالة Odoo</caption>
+            <thead><tr><th scope="col" class="can-edit"><label class="ck"><input type="checkbox" data-sel-all aria-label="تحديد الكل"></label></th><th scope="col">الرقم المرجعي</th><th scope="col">التاريخ</th><th scope="col">السند</th><th scope="col">البيان</th><th scope="col">المورد</th><th scope="col" class="n">المبلغ</th><th scope="col">حالة Odoo</th><th scope="col" class="can-edit"><span class="sr-only">إجراء</span></th></tr></thead>
+            <tbody>
+              <tr data-ref="P10590" data-status="in"><td class="can-edit"><label class="ck"><input type="checkbox" data-sel="P10590" aria-label="تحديد P10590"></label></td><td><b class="num">P10590</b></td><td> <span class="num">2025-10-23</span> </td><td> <span class="num">305</span> </td><td>فاتورة مشتريات - مستودع الأثاث</td><td>مؤسسة عبدالرحمن الثقفي</td><td class="n"> <span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,200.00</span></span></td><td><span class="st"><span class="badge ok" data-st-badge>دخلت</span><span class="ex">مثال</span></span></td><td class="can-edit"><button type="button" class="btn" data-toggle-st="P10590" style="min-height:36px;padding:0 12px;font-size:14px">تبديل الحالة</button></td></tr>
+              <tr data-ref="P11405" data-status="out"><td class="can-edit"><label class="ck"><input type="checkbox" data-sel="P11405" aria-label="تحديد P11405"></label></td><td><b class="num">P11405</b></td><td> <span class="num">2025-11-27</span> </td><td> <span class="num">376</span> </td><td>فاتورة مشتريات - مستودع الأثاث</td><td>مؤسسة عبدالرحمن الثقفي</td><td class="n"> <span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,400.00</span></span></td><td><span class="st"><span class="badge no" data-st-badge>لم تدخل</span><span class="ex">مثال</span></span></td><td class="can-edit"><button type="button" class="btn" data-toggle-st="P11405" style="min-height:36px;padding:0 12px;font-size:14px">تبديل الحالة</button></td></tr>
+              <tr data-ref="P12291" data-status="in"><td class="can-edit"><label class="ck"><input type="checkbox" data-sel="P12291" aria-label="تحديد P12291"></label></td><td><b class="num">P12291</b></td><td> <span class="num">2025-12-24</span> </td><td> <span class="num">412</span> </td><td>فاتورة مشتريات - مستودع الأثاث</td><td>مؤسسة عبدالرحمن الثقفي</td><td class="n"> <span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,110.00</span></span></td><td><span class="st"><span class="badge ok" data-st-badge>دخلت</span><span class="ex">مثال</span></span></td><td class="can-edit"><button type="button" class="btn" data-toggle-st="P12291" style="min-height:36px;padding:0 12px;font-size:14px">تبديل الحالة</button></td></tr>
+              <tr data-ref="P12786" data-status="out"><td class="can-edit"><label class="ck"><input type="checkbox" data-sel="P12786" aria-label="تحديد P12786"></label></td><td><b class="num">P12786</b></td><td> <span class="num">2026-01-04</span> </td><td> <span class="num">415</span> </td><td>فاتورة مشتريات - العز العمرة</td><td>مؤسسة عبدالرحمن الثقفي</td><td class="n"> <span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>825.00</span></span></td><td><span class="st"><span class="badge no" data-st-badge>لم تدخل</span><span class="ex">مثال</span></span></td><td class="can-edit"><button type="button" class="btn" data-toggle-st="P12786" style="min-height:36px;padding:0 12px;font-size:14px">تبديل الحالة</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="until-wide" id="report" aria-labelledby="report-h">
+        <div class="sec-row"><h2 class="sec" id="report-h">تقرير الفواتير التي لم تدخل</h2></div>
+        <ul class="group report" data-report style="--sep-inset:16px"></ul>
+        <p class="foot-note">العدد الكلي للفواتير التي لم تدخل Odoo: <span class="num">[العدد]</span>. القائمة أعلاه تتبع الأمثلة المعروضة وتتحدّث عند «تحديد كـدخلت».</p>
+      </section>
+      <div class="page-foot upto-tl"><label class="role"><span>عرض بصلاحية</span><select data-role-select aria-label="عرض بصلاحية"><option value="owner">المالك</option><option value="admin">الإدارة</option><option value="entry">مدخل البيانات</option></select></label></div>
+    </main>
+  </div>
+  <aside class="inspector" aria-label="تقرير الفواتير التي لم تدخل">
+    <section class="" id="report-d" aria-labelledby="report-d-h">
+        <div class="sec-row"><h2 class="sec" id="report-d-h">تقرير الفواتير التي لم تدخل</h2></div>
+        <ul class="group report" data-report style="--sep-inset:16px"></ul>
+        <p class="foot-note">العدد الكلي للفواتير التي لم تدخل Odoo: <span class="num">[العدد]</span>. القائمة أعلاه تتبع الأمثلة المعروضة وتتحدّث عند «تحديد كـدخلت».</p>
+      </section>
+  </aside>
+</div>
+<button type="button" class="scrim" data-nav-toggle aria-label="إغلاق القائمة" tabindex="-1"></button>
+<nav class="tabbar" aria-label="التنقل السفلي">
+  <a href="dashboard.html" style="--i:0"><svg class="ic" aria-hidden="true"><use href="#i-bal"/></svg><span>الأرصدة</span></a>
+  <a href="statement.html" style="--i:1"><svg class="ic" aria-hidden="true"><use href="#i-doc"/></svg><span>الكشف</span></a>
+  <a href="invoices.html" style="--i:2" aria-current="page"><svg class="ic" aria-hidden="true"><use href="#i-stack"/></svg><span>الفواتير</span></a>
+  <a href="review.html" style="--i:3"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>المراجعة</span></a>
+</nav>
+<a class="fab" href="add-entry.html" aria-label="إضافة حركة"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></a>
+<div class="sel-bar can-edit" id="selBar" hidden role="toolbar" aria-label="إجراءات التحديد">
+  <button type="button" class="btn" data-select-cancel>إلغاء</button>
+  <span id="selCount" aria-live="polite">لم يُحدَّد شيء</span>
+  <button type="button" class="btn primary" data-mark disabled>تحديد كـدخلت</button>
+</div>
+</body></html>

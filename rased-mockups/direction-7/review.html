@@ -1,0 +1,129 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>رصيد — مركز المراجعة</title>
+<meta name="description" content="مراجعة التواريخ المعطوبة والأرقام المكررة والسجلات بلا نوع">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Readex+Pro:wght@600&family=Sora:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="../shared/riyal.css">
+<link rel="stylesheet" href="style.css">
+<script src="../shared/core.js"></script>
+<script>try{if(localStorage.getItem('rased7-rail')==='collapsed')document.documentElement.classList.add('rail-collapsed')}catch(e){}</script>
+</head>
+<body class="p-review">
+<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+<header class="top">
+  <button type="button" class="rail-toggle" data-rail-toggle aria-controls="nav" aria-expanded="true" aria-label="طي القائمة الجانبية"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <a class="brand" href="dashboard.html" aria-label="رصيد — لوحة الأرصدة">
+    <svg class="logo" viewBox="0 0 120 120" aria-hidden="true"><rect x="30" y="36" width="76" height="16" rx="8" class="logo-ink"/><rect x="14" y="68" width="76" height="16" rx="8" class="logo-accent"/></svg>
+    <span class="brand-t">رصيد</span>
+  </a>
+  <nav id="nav" class="nav" aria-label="التنقل الرئيسي">
+      <a href="dashboard.html" class="nav-dashboard" style="--i:0"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v18M12 7h7M5 12h7M12 17h4"/></svg><span class="nav-t">الأرصدة</span></a>
+      <a href="statement.html" class="nav-statement" style="--i:1"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4v16h16"/><path d="M7 15l4-5 3 3 5-6"/></svg><span class="nav-t">كشف الحساب</span></a>
+      <a href="add-entry.html" class="nav-add" style="--i:2"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg><span class="nav-t">إضافة حركة</span></a>
+      <a href="invoices.html" class="nav-invoices" style="--i:3"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg><span class="nav-t">الفواتير</span></a>
+      <a href="review.html" class="nav-review" style="--i:4" aria-current="page"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 17h18M6 17v-3M10 17v-5M14 17v-3M18 17v-5"/><path d="M8 8l4-4 4 4"/></svg><span class="nav-t">المراجعة</span></a>
+  </nav>
+  <div class="tools">
+    <label class="role"><span class="sr-only">عرض بصلاحية</span>
+      <select data-role-select aria-label="عرض بصلاحية">
+        <option value="owner">المالك</option>
+        <option value="admin">الإدارة</option>
+        <option value="entry">مدخل البيانات</option>
+      </select>
+    </label>
+    <button type="button" class="theme" data-theme-toggle aria-label="التبديل إلى الوضع الداكن"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor"/></svg></button>
+  </div>
+</header>
+<main id="main" class="rev">
+  <div class="rev-head">
+    <h1>مركز المراجعة</h1>
+    <p class="rev-lead">كل نقطة سجلّ واحد. المعبّأة معروضة هنا بتفاصيلها، والبقية تنتظر بياناتها.</p>
+  </div>
+  <nav class="cats" aria-label="أقسام المراجعة">
+    <a class="cat" href="#dates" data-cat="dates"><span class="num cat-n">33</span><span class="cat-t">قيداً بتواريخ معطوبة</span><span class="dots" data-dots="33" data-shown="2" aria-hidden="true"></span></a>
+    <a class="cat" href="#dupes" data-cat="dupes"><span class="num cat-n">9</span><span class="cat-t">أرقام مرجعية مكررة</span><span class="dots" data-dots="9" data-shown="1" aria-hidden="true"></span></a>
+    <a class="cat" href="#untyped" data-cat="untyped"><span class="num cat-n">19</span><span class="cat-t">سجلاً بلا نوع</span><span class="dots" data-dots="19" data-shown="0" aria-hidden="true"></span></a>
+  </nav>
+  <section id="dates" class="rsec" aria-labelledby="h-dates" data-sec>
+    <h2 id="h-dates"><span class="num">33</span> قيداً بتواريخ معطوبة</h2>
+    <p class="sec-lead">التاريخ الحالي ↔ المرجّح على مسطرة زمنية واحدة لكل قيد. المنطقة المظللة: الربع الثالث 2026.</p>
+    <ul class="cmps">
+        <li class="cmp" data-cur="2014-08-01" data-likely="2026-08-14">
+          <div class="cmp-id">
+            <h3>بدر زين للأثاث</h3>
+            <p class="cell">الخلية <span class="num">B340</span></p>
+          </div>
+          <dl class="cmp-dates">
+            <div class="cd-cur"><dt>الحالي</dt><dd>«<span class="num">2014-08-01</span>»</dd></div>
+            <div class="cd-arrow" aria-hidden="true">↔</div>
+            <div class="cd-likely"><dt>المرجّح</dt><dd><span class="num">2026-08-14</span></dd></div>
+          </dl>
+          <div class="ruler" aria-hidden="true">
+            <span class="r-q3"></span><span class="r-line"></span>
+            <span class="r-arc"></span>
+            <span class="r-mark cur"></span><span class="r-mark likely"></span>
+            <span class="r-lab cur"></span><span class="r-lab likely"></span>
+            <span class="r-q3lab">الربع الثالث 2026</span>
+          </div>
+          <div class="cmp-act edit-only">
+            <button type="button" class="btn primary small" data-act="approve">اعتماد المرجّح</button>
+            <button type="button" class="btn ghost small" data-act="ignore">تجاهل</button>
+          </div>
+          <p class="cmp-state" data-state hidden></p>
+        </li>
+        <li class="cmp" data-cur="2026-10-08" data-likely="2026-08-10">
+          <div class="cmp-id">
+            <h3>مفروشات الجيزاني</h3>
+            <p class="cell">الخلية <span class="num">B147</span></p>
+          </div>
+          <dl class="cmp-dates">
+            <div class="cd-cur"><dt>الحالي</dt><dd>«<span class="num">2026-10-08</span>»</dd></div>
+            <div class="cd-arrow" aria-hidden="true">↔</div>
+            <div class="cd-likely"><dt>المرجّح</dt><dd><span class="num">2026-08-10</span></dd></div>
+          </dl>
+          <div class="ruler" aria-hidden="true">
+            <span class="r-q3"></span><span class="r-line"></span>
+            <span class="r-arc"></span>
+            <span class="r-mark cur"></span><span class="r-mark likely"></span>
+            <span class="r-lab cur"></span><span class="r-lab likely"></span>
+            <span class="r-q3lab">الربع الثالث 2026</span>
+          </div>
+          <div class="cmp-act edit-only">
+            <button type="button" class="btn primary small" data-act="approve">اعتماد المرجّح</button>
+            <button type="button" class="btn ghost small" data-act="ignore">تجاهل</button>
+          </div>
+          <p class="cmp-state" data-state hidden></p>
+        </li>
+    </ul>
+    <p class="more-unk">[31 قيداً آخر]</p>
+  </section>
+  <section id="dupes" class="rsec" aria-labelledby="h-dupes" data-sec>
+    <h2 id="h-dupes"><span class="num">9</span> أرقام مرجعية مكررة</h2>
+    <ul class="dups">
+      <li class="dupe">
+        <p class="num dupe-ref">MISC/2026/08/0395</p>
+        <dl class="dupe-dl">
+          <div><dt>المورد</dt><dd>مفروشات الجيزاني</dd></div>
+          <div><dt>الصف</dt><dd><span class="num">148</span></dd></div>
+          <div><dt>المبلغ</dt><dd><span class="money deb"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,700.00</span></span></dd></div>
+        </dl>
+        <div class="cmp-act edit-only">
+          <button type="button" class="btn primary small" data-act="approve">اعتماد كحركة مختلفة</button>
+          <button type="button" class="btn ghost small" data-act="ignore">تجاهل</button>
+        </div>
+        <p class="cmp-state" data-state hidden></p>
+      </li>
+    </ul>
+    <p class="more-unk">[8 أرقام أخرى]</p>
+  </section>
+  <section id="untyped" class="rsec" aria-labelledby="h-untyped" data-sec>
+    <h2 id="h-untyped"><span class="num">19</span> سجلاً بلا نوع</h2>
+    <p class="sec-lead">لا أمثلة معروفة بعد لهذه السجلات، فلا يمكن ترجيح نوعها هنا.</p>
+    <p class="more-unk">[تفاصيل السجلات]</p>
+  </section>
+</main>
+<div class="toast" role="status" aria-live="polite" hidden></div>
+<script src="app.js"></script>
+</body></html>
