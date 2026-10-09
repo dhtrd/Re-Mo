@@ -27,7 +27,7 @@ a{color:inherit}
 .skip:focus{inset-inline-start:12px;top:12px;background:var(--surface);padding:10px 14px;z-index:9}
 
 header.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;padding:16px clamp(16px,3vw,40px);border-bottom:1px solid var(--line);background:var(--surface)}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-height:44px}
 .brand svg{width:40px;height:40px}
 .brand b{font-family:"Readex Pro",sans-serif;font-weight:600;font-size:26px;letter-spacing:-.01em}
 .brand small{color:var(--muted);font-size:14px;font-weight:400}
@@ -130,8 +130,8 @@ figure.device figcaption{font-size:13px;color:var(--muted);display:flex;gap:8px;
   function fit(){
     document.querySelectorAll('.devices').forEach(function(row){
       var avail = row.clientWidth, figs = [].slice.call(row.children);
-      var pad = 40, gap = 20, total = figs.reduce(function(s,f){ return s + (+f.dataset.w) + pad; }, 0) + gap*(figs.length-1);
-      var s = avail / total;
+      var pad = 24, gap = 20, sumW = figs.reduce(function(s,f){ return s + (+f.dataset.w); }, 0);
+      var s = (avail - pad*figs.length - gap*(figs.length-1) - 4) / sumW;
       var stacked = s < 0.26; // على الشاشات الضيقة: كل إطار بعرض الحاوية
       figs.forEach(function(f){
         var w = +f.dataset.w, h = +f.dataset.h;

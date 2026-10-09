@@ -1,0 +1,154 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>رصيد — كشف حساب مورد</title>
+<link rel="stylesheet" href="../shared/riyal.css">
+<script src="../shared/core.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&family=Baloo+Bhaijaan+2:wght@600;700;800&family=Readex+Pro:wght@600&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body class="pg-statement">
+<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+<symbol id="i-bal" viewBox="0 0 24 24"><rect x="4" y="5" width="13" height="4" rx="2"/><rect x="7" y="11" width="13" height="4" rx="2"/><path d="M4 20h16"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M9 11h7M9 15h7M9 7h3"/></symbol>
+<symbol id="i-inv" viewBox="0 0 24 24"><path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2z"/><path d="M9 8h6M9 12h6"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-rev" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 13l2 2 4-4"/></symbol>
+<symbol id="i-theme" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor"/></symbol>
+<symbol id="i-rail" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16M10 10l-2 2 2 2"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+<symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+<symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></symbol>
+<symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+</svg>
+<div class="shell" id="shell">
+  <aside class="rail" aria-label="التنقل الرئيسي">
+    <div class="rail-top">
+      <a class="brand" href="dashboard.html" aria-label="رصيد: لوحة الأرصدة"><svg class="logo" viewBox="0 0 120 120" aria-hidden="true"><rect class="l1" x="30" y="36" width="76" height="16" rx="8"/><rect class="l2" x="14" y="68" width="76" height="16" rx="8"/></svg><span class="brand-word">رصيد</span></a>
+      <button type="button" class="rail-toggle" data-rail-toggle aria-expanded="false" aria-controls="railnav" aria-label="توسيع القائمة"><svg class="i" aria-hidden="true"><use href="#i-rail"/></svg></button>
+    </div>
+    <nav id="railnav" class="rail-nav" aria-label="الشاشات">
+    <a class="rn" href="dashboard.html"><svg class="i" aria-hidden="true"><use href="#i-bal"/></svg><span class="rn-label">الأرصدة</span></a>
+    <a class="rn" href="statement.html" aria-current="page"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg><span class="rn-label">كشف الحساب</span></a>
+    <a class="rn" href="invoices.html"><svg class="i" aria-hidden="true"><use href="#i-inv"/></svg><span class="rn-label">الفواتير</span></a>
+    <a class="rn" href="add-entry.html"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg><span class="rn-label">إضافة حركة</span></a>
+    <a class="rn" href="review.html"><svg class="i" aria-hidden="true"><use href="#i-rev"/></svg><span class="rn-label">المراجعة</span></a>
+    </nav>
+    <div class="rail-tools">
+      <label class="role"><span class="role-label">عرض بصلاحية</span><select data-role-select aria-label="عرض بصلاحية"><option value="owner">المالك</option><option value="admin">الإدارة</option><option value="entry">مدخل البيانات</option></select></label>
+      <button type="button" class="btn btn-sm theme-btn" data-theme-toggle><svg class="i" aria-hidden="true"><use href="#i-theme"/></svg><span class="rn-label">تبديل الوضع</span></button>
+    </div>
+  </aside>
+  <header class="mtop">
+    <a class="brand" href="dashboard.html" aria-label="رصيد: لوحة الأرصدة"><svg class="logo" viewBox="0 0 120 120" aria-hidden="true"><rect class="l1" x="30" y="36" width="76" height="16" rx="8"/><rect class="l2" x="14" y="68" width="76" height="16" rx="8"/></svg><span class="brand-word">رصيد</span></a>
+    <button type="button" class="btn btn-sm icon-btn" data-theme-toggle><svg class="i" aria-hidden="true"><use href="#i-theme"/></svg></button>
+  </header>
+  <main id="main" class="main">
+    <div class="stmt">
+      <nav class="sidelist" aria-label="اختيار المورد">
+        <h2>الموردون</h2>
+        <ul>
+          <li><a href="statement.html" aria-current="true">مؤسسة عبدالرحمن الثقفي</a></li>
+          <li><a href="dashboard.html">منجرة العهد</a></li>
+          <li><a href="dashboard.html">بدر زين للأثاث</a></li>
+          <li><a href="dashboard.html">مفروشات الجيزاني</a></li>
+          <li><a href="dashboard.html">منجرة فارس العبدلي</a></li>
+          <li><a href="dashboard.html">مركز بلبل</a></li>
+          <li><a href="dashboard.html">بيت الروائع</a></li>
+          <li><a href="dashboard.html">عروسة البحر</a></li>
+          <li><a href="dashboard.html">منجرة صالحة القارحي</a></li>
+        </ul>
+        <p class="hint">في النموذج كشف واحد فقط متاح: مؤسسة عبدالرحمن الثقفي.</p>
+      </nav>
+      <header class="plate shead band band-neg">
+        <div class="id"><p>كشف حساب مورد</p><h1>مؤسسة عبدالرحمن الثقفي</h1></div>
+        <div class="bal"><span class="lbl">الرصيد الكلي</span><span class="giant"><span class="money is-neg"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>-1,000.00</span></span></span><span class="flag flag-neg">مستحق للمورد</span></div>
+        <div class="act">
+          <button type="button" class="btn" data-toast="نموذج: تصدير Excel غير مفعّل هنا."><svg class="i" aria-hidden="true"><use href="#i-dl"/></svg>تصدير Excel</button>
+          <button type="button" class="btn" data-toast="نموذج: تصدير PDF غير مفعّل هنا."><svg class="i" aria-hidden="true"><use href="#i-dl"/></svg>تصدير PDF</button>
+        </div>
+      </header>
+
+      <form class="period" aria-label="فترة الكشف">
+        <label class="field"><span>من</span><input type="date" name="from"></label>
+        <label class="field"><span>إلى</span><input type="date" name="to"></label>
+        <button class="btn btn-primary" type="submit">تطبيق الفترة</button>
+        <p class="period-hint">اترك الحقلين فارغين لعرض الكشف من أوله إلى آخره.</p>
+      </form>
+
+      <section class="ledger" aria-labelledby="txH">
+        <h2 id="txH" class="sr-only">حركات الكشف</h2>
+        <div class="plate">
+        <div class="tbl-wrap" role="region" aria-label="جدول حركات الكشف" tabindex="0">
+          <table class="tx">
+            <thead><tr>
+              <th class="c-date">التاريخ</th><th class="c-type">النوع</th><th class="c-ref">المرجع</th><th class="c-rn">الرقم المرجعي</th><th class="c-voucher">السند</th><th class="c-desc">البيان</th><th class="c-dr n">مدين</th><th class="c-cr n">دائن</th><th class="c-bal n">الرصيد</th><th class="c-toggle"><span class="sr-only">تفاصيل</span></th>
+            </tr></thead>
+            <tbody>
+              <tr class="is-cr">
+                <td class="c-date"><span class="num">2025-10-23</span></td><td class="c-type"><span class="type type-inv">فاتورة</span></td><td class="c-ref"><span class="num">10590</span></td><td class="c-rn"><span class="num">P10590</span></td><td class="c-voucher"><span class="num">305</span></td><td class="c-desc">فاتورة مشتريات - مستودع الأثاث</td>
+                <td class="c-dr n empty" data-label="مدين"></td><td class="c-cr n" data-label="دائن"><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,200.00</span></span></td><td class="c-bal n" data-label="الرصيد"><span class="money is-neg"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>-1,200.00</span></span></td>
+                <td class="c-toggle"><button type="button" class="row-toggle" data-row-toggle aria-expanded="false" aria-controls="tm0" aria-label="تفاصيل حركة P10590"><svg class="i" aria-hidden="true"><use href="#i-down"/></svg></button></td>
+              </tr>
+              <tr class="more" id="tm0" hidden><td colspan="10"><dl class="more-grid"><div><dt>النوع</dt><dd>فاتورة</dd></div><div><dt>المرجع</dt><dd><span class="num">10590</span></dd></div><div><dt>السند</dt><dd><span class="num">305</span></dd></div><div><dt>البيان</dt><dd>فاتورة مشتريات - مستودع الأثاث</dd></div></dl></td></tr>
+              <tr class="is-dr">
+                <td class="c-date"><span class="num">2025-10-23</span></td><td class="c-type"><span class="type type-je">قيد</span></td><td class="c-ref"><span class="num">0791</span></td><td class="c-rn"><span class="num">MISC/2025/10/0791</span></td><td class="c-voucher"><span class="muted">—</span></td><td class="c-desc">سداد قيمة فاتورة رقم 0305</td>
+                <td class="c-dr n" data-label="مدين"><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,200.00</span></span></td><td class="c-cr n empty" data-label="دائن"></td><td class="c-bal n" data-label="الرصيد"><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>0.00</span></span></td>
+                <td class="c-toggle"><button type="button" class="row-toggle" data-row-toggle aria-expanded="false" aria-controls="tm1" aria-label="تفاصيل حركة MISC/2025/10/0791"><svg class="i" aria-hidden="true"><use href="#i-down"/></svg></button></td>
+              </tr>
+              <tr class="more" id="tm1" hidden><td colspan="10"><dl class="more-grid"><div><dt>النوع</dt><dd>قيد</dd></div><div><dt>المرجع</dt><dd><span class="num">0791</span></dd></div><div><dt>السند</dt><dd>بلا سند</dd></div><div><dt>البيان</dt><dd>سداد قيمة فاتورة رقم 0305</dd></div></dl></td></tr>
+              <tr class="is-cr">
+                <td class="c-date"><span class="num">2025-11-27</span></td><td class="c-type"><span class="type type-inv">فاتورة</span></td><td class="c-ref"><span class="num">11405</span></td><td class="c-rn"><span class="num">P11405</span></td><td class="c-voucher"><span class="num">376</span></td><td class="c-desc">فاتورة مشتريات - مستودع الأثاث</td>
+                <td class="c-dr n empty" data-label="مدين"></td><td class="c-cr n" data-label="دائن"><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,400.00</span></span></td><td class="c-bal n" data-label="الرصيد"><span class="money is-neg"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>-1,400.00</span></span></td>
+                <td class="c-toggle"><button type="button" class="row-toggle" data-row-toggle aria-expanded="false" aria-controls="tm2" aria-label="تفاصيل حركة P11405"><svg class="i" aria-hidden="true"><use href="#i-down"/></svg></button></td>
+              </tr>
+              <tr class="more" id="tm2" hidden><td colspan="10"><dl class="more-grid"><div><dt>النوع</dt><dd>فاتورة</dd></div><div><dt>المرجع</dt><dd><span class="num">11405</span></dd></div><div><dt>السند</dt><dd><span class="num">376</span></dd></div><div><dt>البيان</dt><dd>فاتورة مشتريات - مستودع الأثاث</dd></div></dl></td></tr>
+              <tr class="is-dr">
+                <td class="c-date"><span class="num">2025-11-27</span></td><td class="c-type"><span class="type type-je">قيد</span></td><td class="c-ref"><span class="num">0734</span></td><td class="c-rn"><span class="num">MISC/2025/11/0734</span></td><td class="c-voucher"><span class="muted">—</span></td><td class="c-desc">سداد قيمة فاتورة رقم 0305</td>
+                <td class="c-dr n" data-label="مدين"><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,400.00</span></span></td><td class="c-cr n empty" data-label="دائن"></td><td class="c-bal n" data-label="الرصيد"><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>0.00</span></span></td>
+                <td class="c-toggle"><button type="button" class="row-toggle" data-row-toggle aria-expanded="false" aria-controls="tm3" aria-label="تفاصيل حركة MISC/2025/11/0734"><svg class="i" aria-hidden="true"><use href="#i-down"/></svg></button></td>
+              </tr>
+              <tr class="more" id="tm3" hidden><td colspan="10"><dl class="more-grid"><div><dt>النوع</dt><dd>قيد</dd></div><div><dt>المرجع</dt><dd><span class="num">0734</span></dd></div><div><dt>السند</dt><dd>بلا سند</dd></div><div><dt>البيان</dt><dd>سداد قيمة فاتورة رقم 0305</dd></div></dl></td></tr>
+              <tr class="is-cr">
+                <td class="c-date"><span class="num">2025-12-24</span></td><td class="c-type"><span class="type type-inv">فاتورة</span></td><td class="c-ref"><span class="num">12291</span></td><td class="c-rn"><span class="num">P12291</span></td><td class="c-voucher"><span class="num">412</span></td><td class="c-desc">فاتورة مشتريات - مستودع الأثاث</td>
+                <td class="c-dr n empty" data-label="مدين"></td><td class="c-cr n" data-label="دائن"><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,110.00</span></span></td><td class="c-bal n" data-label="الرصيد"><span class="money is-neg"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>-1,110.00</span></span></td>
+                <td class="c-toggle"><button type="button" class="row-toggle" data-row-toggle aria-expanded="false" aria-controls="tm4" aria-label="تفاصيل حركة P12291"><svg class="i" aria-hidden="true"><use href="#i-down"/></svg></button></td>
+              </tr>
+              <tr class="more" id="tm4" hidden><td colspan="10"><dl class="more-grid"><div><dt>النوع</dt><dd>فاتورة</dd></div><div><dt>المرجع</dt><dd><span class="num">12291</span></dd></div><div><dt>السند</dt><dd><span class="num">412</span></dd></div><div><dt>البيان</dt><dd>فاتورة مشتريات - مستودع الأثاث</dd></div></dl></td></tr>
+              <tr class="is-cr">
+                <td class="c-date"><span class="num">2026-01-04</span></td><td class="c-type"><span class="type type-inv">فاتورة</span></td><td class="c-ref"><span class="num">12786</span></td><td class="c-rn"><span class="num">P12786</span></td><td class="c-voucher"><span class="num">415</span></td><td class="c-desc">فاتورة مشتريات - العز العمرة</td>
+                <td class="c-dr n empty" data-label="مدين"></td><td class="c-cr n" data-label="دائن"><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>825.00</span></span></td><td class="c-bal n" data-label="الرصيد"><span class="money is-neg"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>-1,935.00</span></span></td>
+                <td class="c-toggle"><button type="button" class="row-toggle" data-row-toggle aria-expanded="false" aria-controls="tm5" aria-label="تفاصيل حركة P12786"><svg class="i" aria-hidden="true"><use href="#i-down"/></svg></button></td>
+              </tr>
+              <tr class="more" id="tm5" hidden><td colspan="10"><dl class="more-grid"><div><dt>النوع</dt><dd>فاتورة</dd></div><div><dt>المرجع</dt><dd><span class="num">12786</span></dd></div><div><dt>السند</dt><dd><span class="num">415</span></dd></div><div><dt>البيان</dt><dd>فاتورة مشتريات - العز العمرة</dd></div></dl></td></tr>
+            </tbody>
+            <tfoot><tr>
+              <td colspan="6" class="rest"><strong>[العدد] حركة أخرى حتى نهاية الكشف</strong>، غير معروضة في هذا النموذج.</td>
+              <td class="c-dr"></td><td class="c-cr"></td><td class="c-bal n">الرصيد الكلي <span class="money is-neg"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>-1,000.00</span></span></td><td class="c-toggle"></td>
+            </tr></tfoot>
+          </table>
+        </div>
+        </div>
+      </section>
+
+      <aside class="sside" aria-labelledby="sideH">
+        <h2 id="sideH">تنبيهات هذا المورد</h2>
+        <div class="plate band band-neg"><strong>الرصيد سالب</strong><p class="note"><span class="money is-neg"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>-1,000.00</span></span> مستحق لمؤسسة عبدالرحمن الثقفي حتى نهاية الكشف.</p></div>
+        <div class="plate band band-acc"><strong>الحركات المعروضة جزئية</strong><p class="note">آخر حركة معروضة رصيدها <span class="money is-neg"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>-1,935.00</span></span>، وما بعدها [العدد] حركة غير معروفة بعد.</p><a class="btn btn-sm" href="invoices.html">فواتير المورد في Odoo</a></div>
+      </aside>
+    </div>
+    <footer class="mfoot"><label class="role"><span class="role-label">عرض بصلاحية</span><select data-role-select aria-label="عرض بصلاحية"><option value="owner">المالك</option><option value="admin">الإدارة</option><option value="entry">مدخل البيانات</option></select></label><span class="note">مبدّل العرض لتجربة الصلاحيات في النموذج.</span></footer>
+  </main>
+</div>
+<nav class="tabbar" aria-label="التنقل السفلي">
+  <a class="tab" href="dashboard.html"><svg class="i" aria-hidden="true"><use href="#i-bal"/></svg><span>الأرصدة</span></a><a class="tab" href="statement.html" aria-current="page"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg><span>كشف الحساب</span></a>
+  <a class="fab" href="add-entry.html" aria-label="إضافة حركة"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></a>
+  <a class="tab" href="invoices.html"><svg class="i" aria-hidden="true"><use href="#i-inv"/></svg><span>الفواتير</span></a><a class="tab" href="review.html"><svg class="i" aria-hidden="true"><use href="#i-rev"/></svg><span>المراجعة</span></a>
+</nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body></html>

@@ -1,0 +1,124 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>رصيد — مركز المراجعة</title>
+<link rel="stylesheet" href="../shared/riyal.css">
+<script src="../shared/core.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&family=Baloo+Bhaijaan+2:wght@600;700;800&family=Readex+Pro:wght@600&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body class="pg-review">
+<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+<symbol id="i-bal" viewBox="0 0 24 24"><rect x="4" y="5" width="13" height="4" rx="2"/><rect x="7" y="11" width="13" height="4" rx="2"/><path d="M4 20h16"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M9 11h7M9 15h7M9 7h3"/></symbol>
+<symbol id="i-inv" viewBox="0 0 24 24"><path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2z"/><path d="M9 8h6M9 12h6"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-rev" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 13l2 2 4-4"/></symbol>
+<symbol id="i-theme" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor"/></symbol>
+<symbol id="i-rail" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16M10 10l-2 2 2 2"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+<symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+<symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></symbol>
+<symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+</svg>
+<div class="shell" id="shell">
+  <aside class="rail" aria-label="التنقل الرئيسي">
+    <div class="rail-top">
+      <a class="brand" href="dashboard.html" aria-label="رصيد: لوحة الأرصدة"><svg class="logo" viewBox="0 0 120 120" aria-hidden="true"><rect class="l1" x="30" y="36" width="76" height="16" rx="8"/><rect class="l2" x="14" y="68" width="76" height="16" rx="8"/></svg><span class="brand-word">رصيد</span></a>
+      <button type="button" class="rail-toggle" data-rail-toggle aria-expanded="false" aria-controls="railnav" aria-label="توسيع القائمة"><svg class="i" aria-hidden="true"><use href="#i-rail"/></svg></button>
+    </div>
+    <nav id="railnav" class="rail-nav" aria-label="الشاشات">
+    <a class="rn" href="dashboard.html"><svg class="i" aria-hidden="true"><use href="#i-bal"/></svg><span class="rn-label">الأرصدة</span></a>
+    <a class="rn" href="statement.html"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg><span class="rn-label">كشف الحساب</span></a>
+    <a class="rn" href="invoices.html"><svg class="i" aria-hidden="true"><use href="#i-inv"/></svg><span class="rn-label">الفواتير</span></a>
+    <a class="rn" href="add-entry.html"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg><span class="rn-label">إضافة حركة</span></a>
+    <a class="rn" href="review.html" aria-current="page"><svg class="i" aria-hidden="true"><use href="#i-rev"/></svg><span class="rn-label">المراجعة</span></a>
+    </nav>
+    <div class="rail-tools">
+      <label class="role"><span class="role-label">عرض بصلاحية</span><select data-role-select aria-label="عرض بصلاحية"><option value="owner">المالك</option><option value="admin">الإدارة</option><option value="entry">مدخل البيانات</option></select></label>
+      <button type="button" class="btn btn-sm theme-btn" data-theme-toggle><svg class="i" aria-hidden="true"><use href="#i-theme"/></svg><span class="rn-label">تبديل الوضع</span></button>
+    </div>
+  </aside>
+  <header class="mtop">
+    <a class="brand" href="dashboard.html" aria-label="رصيد: لوحة الأرصدة"><svg class="logo" viewBox="0 0 120 120" aria-hidden="true"><rect class="l1" x="30" y="36" width="76" height="16" rx="8"/><rect class="l2" x="14" y="68" width="76" height="16" rx="8"/></svg><span class="brand-word">رصيد</span></a>
+    <button type="button" class="btn btn-sm icon-btn" data-theme-toggle><svg class="i" aria-hidden="true"><use href="#i-theme"/></svg></button>
+  </header>
+  <main id="main" class="main">
+    <div class="rev">
+      <header class="phead">
+        <h1>مركز المراجعة</h1>
+        <p class="lede">سجلات تحتاج قراراً قبل أن تُعتمد الأرصدة. الاعتماد والتجاهل للمالك والإدارة.</p>
+      </header>
+
+      <nav class="rindex" aria-label="أقسام المراجعة">
+        <div class="strip">
+          <a class="ri ri-1" href="#dates"><span class="cnt num">33</span><span class="what">قيداً بتواريخ معطوبة</span><span class="sub">الأهم: تغيّر الأرصدة بالفترات</span></a>
+          <a class="ri" href="#dups"><span class="cnt num">9</span><span class="what">أرقام مكررة</span><span class="sub">رقم مرجعي في أكثر من حركة</span></a>
+          <a class="ri" href="#untyped"><span class="cnt num">19</span><span class="what">سجلاً بلا نوع</span><span class="sub">لا فاتورة ولا قيد</span></a>
+        </div>
+      </nav>
+
+      <section class="rsec" id="dates" aria-labelledby="datesH">
+        <div class="rsec-h"><span class="cnt num">33</span><h2 id="datesH">قيود بتواريخ معطوبة</h2><p>التاريخ الحالي في الملف مقابل التاريخ المرجّح من سياق الحركة.</p></div>
+        <ul class="cmp-list">
+          <li class="cmp">
+            <div class="cmp-src"><strong>بدر زين للأثاث</strong><span class="cell">الخلية <span class="num">B340</span></span></div>
+            <div class="cmp-dates">
+              <div class="cmp-now"><span class="lbl">الحالي</span><span class="num">«2014-08-01»</span></div>
+              <span class="cmp-arrow"><svg class="i" aria-hidden="true"><use href="#i-left"/></svg><span class="sr-only">يُقترح استبداله بـ</span></span>
+              <div class="cmp-new"><span class="lbl">المرجّح</span><span class="num">2026-08-14</span></div>
+            </div>
+            <div class="cmp-act owner-only"><button type="button" class="btn btn-primary" data-resolve="approve"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>اعتماد المرجّح</button><button type="button" class="btn" data-resolve="ignore">تجاهل</button></div>
+            <p class="done-msg" role="status"></p>
+          </li>
+          <li class="cmp">
+            <div class="cmp-src"><strong>مفروشات الجيزاني</strong><span class="cell">الخلية <span class="num">B147</span></span></div>
+            <div class="cmp-dates">
+              <div class="cmp-now"><span class="lbl">الحالي</span><span class="num">«2026-10-08»</span></div>
+              <span class="cmp-arrow"><svg class="i" aria-hidden="true"><use href="#i-left"/></svg><span class="sr-only">يُقترح استبداله بـ</span></span>
+              <div class="cmp-new"><span class="lbl">المرجّح</span><span class="num">2026-08-10</span></div>
+            </div>
+            <div class="cmp-act owner-only"><button type="button" class="btn btn-primary" data-resolve="approve"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>اعتماد المرجّح</button><button type="button" class="btn" data-resolve="ignore">تجاهل</button></div>
+            <p class="done-msg" role="status"></p>
+          </li>
+        </ul>
+        <p class="more-line">[31 قيداً آخر]</p>
+      </section>
+
+      <section class="rsec" id="dups" aria-labelledby="dupsH">
+        <div class="rsec-h"><span class="cnt num">9</span><h2 id="dupsH">أرقام مرجعية مكررة</h2></div>
+        <ul class="cmp-list">
+          <li class="cmp dup-row">
+            <div class="cmp-src"><span class="dup-ref num">MISC/2026/08/0395</span></div>
+            <dl class="kv">
+              <div><dt>المورد</dt><dd>مفروشات الجيزاني</dd></div>
+              <div><dt>الصف</dt><dd><span class="num">148</span></dd></div>
+              <div><dt>المبلغ</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,700.00</span></span></dd></div>
+            </dl>
+            <div class="cmp-act owner-only"><button type="button" class="btn btn-primary" data-resolve="approve">اعتماد كحركة مختلفة</button><button type="button" class="btn" data-resolve="ignore">تجاهل</button></div>
+            <p class="done-msg" role="status"></p>
+          </li>
+        </ul>
+        <p class="more-line">[8 أرقام أخرى]</p>
+      </section>
+
+      <section class="rsec" id="untyped" aria-labelledby="untH">
+        <div class="rsec-h"><span class="cnt num">19</span><h2 id="untH">سجلات بلا نوع</h2><p>لا أمثلة معروفة لهذه السجلات بعد.</p></div>
+        <p class="more-line">[تفاصيل السجلات]</p>
+      </section>
+    </div>
+    <footer class="mfoot"><label class="role"><span class="role-label">عرض بصلاحية</span><select data-role-select aria-label="عرض بصلاحية"><option value="owner">المالك</option><option value="admin">الإدارة</option><option value="entry">مدخل البيانات</option></select></label><span class="note">مبدّل العرض لتجربة الصلاحيات في النموذج.</span></footer>
+  </main>
+</div>
+<nav class="tabbar" aria-label="التنقل السفلي">
+  <a class="tab" href="dashboard.html"><svg class="i" aria-hidden="true"><use href="#i-bal"/></svg><span>الأرصدة</span></a><a class="tab" href="statement.html"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg><span>كشف الحساب</span></a>
+  <a class="fab" href="add-entry.html" aria-label="إضافة حركة"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></a>
+  <a class="tab" href="invoices.html"><svg class="i" aria-hidden="true"><use href="#i-inv"/></svg><span>الفواتير</span></a><a class="tab" href="review.html" aria-current="page"><svg class="i" aria-hidden="true"><use href="#i-rev"/></svg><span>المراجعة</span></a>
+</nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body></html>
