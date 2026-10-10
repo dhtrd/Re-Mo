@@ -1,0 +1,172 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>رصيد — لوحة الأرصدة</title>
+<link rel="stylesheet" href="../shared/riyal.css">
+<script src="../shared/core.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&family=Baloo+Bhaijaan+2:wght@600;700;800&family=Readex+Pro:wght@600&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body class="pg-dashboard">
+<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+<symbol id="i-bal" viewBox="0 0 24 24"><rect x="4" y="5" width="13" height="4" rx="2"/><rect x="7" y="11" width="13" height="4" rx="2"/><path d="M4 20h16"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M9 11h7M9 15h7M9 7h3"/></symbol>
+<symbol id="i-inv" viewBox="0 0 24 24"><path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2z"/><path d="M9 8h6M9 12h6"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-rev" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 13l2 2 4-4"/></symbol>
+<symbol id="i-theme" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor"/></symbol>
+<symbol id="i-rail" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16M10 10l-2 2 2 2"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+<symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+<symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></symbol>
+<symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+</svg>
+<div class="shell" id="shell">
+  <aside class="rail" aria-label="التنقل الرئيسي">
+    <div class="rail-top">
+      <a class="brand" href="dashboard.html" aria-label="رصيد: لوحة الأرصدة"><svg class="logo" viewBox="0 0 120 120" aria-hidden="true"><rect class="l1" x="30" y="36" width="76" height="16" rx="8"/><rect class="l2" x="14" y="68" width="76" height="16" rx="8"/></svg><span class="brand-word">رصيد</span></a>
+      <button type="button" class="rail-toggle" data-rail-toggle aria-expanded="false" aria-controls="railnav" aria-label="توسيع القائمة"><svg class="i" aria-hidden="true"><use href="#i-rail"/></svg></button>
+    </div>
+    <nav id="railnav" class="rail-nav" aria-label="الشاشات">
+    <a class="rn" href="dashboard.html" aria-current="page"><svg class="i" aria-hidden="true"><use href="#i-bal"/></svg><span class="rn-label">الأرصدة</span></a>
+    <a class="rn" href="statement.html"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg><span class="rn-label">كشف الحساب</span></a>
+    <a class="rn" href="invoices.html"><svg class="i" aria-hidden="true"><use href="#i-inv"/></svg><span class="rn-label">الفواتير</span></a>
+    <a class="rn" href="add-entry.html"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg><span class="rn-label">إضافة حركة</span></a>
+    <a class="rn" href="review.html"><svg class="i" aria-hidden="true"><use href="#i-rev"/></svg><span class="rn-label">المراجعة</span></a>
+    </nav>
+    <div class="rail-tools">
+      <label class="role"><span class="role-label">عرض بصلاحية</span><select data-role-select aria-label="عرض بصلاحية"><option value="owner">المالك</option><option value="admin">الإدارة</option><option value="entry">مدخل البيانات</option></select></label>
+      <button type="button" class="btn btn-sm theme-btn" data-theme-toggle><svg class="i" aria-hidden="true"><use href="#i-theme"/></svg><span class="rn-label">تبديل الوضع</span></button>
+    </div>
+  </aside>
+  <header class="mtop">
+    <a class="brand" href="dashboard.html" aria-label="رصيد: لوحة الأرصدة"><svg class="logo" viewBox="0 0 120 120" aria-hidden="true"><rect class="l1" x="30" y="36" width="76" height="16" rx="8"/><rect class="l2" x="14" y="68" width="76" height="16" rx="8"/></svg><span class="brand-word">رصيد</span></a>
+    <button type="button" class="btn btn-sm icon-btn" data-theme-toggle><svg class="i" aria-hidden="true"><use href="#i-theme"/></svg></button>
+  </header>
+  <main id="main" class="main">
+    <div class="dash">
+      <header class="phead">
+        <h1>أرصدة الموردين</h1>
+        <p class="lede">الربع الثالث 2026، للفترة من <span class="num">2026-07-01</span> إلى <span class="num">2026-09-30</span>.</p>
+      </header>
+
+      <form class="period" aria-label="فترة الأرصدة">
+        <label class="field"><span>من</span><input type="date" name="from" value="2026-07-01"></label>
+        <label class="field"><span>إلى</span><input type="date" name="to" value="2026-09-30"></label>
+        <button class="btn btn-primary" type="submit">عرض الفترة</button>
+      </form>
+
+      <section class="hero" aria-label="ملخص الفترة">
+        <div class="hero-main">
+          <h2>صافي الأرصدة النهائية لـ19 مورداً</h2>
+          <p class="giant"><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>48,952.73</span></span></p>
+          <p>موجب، أي أن مجموع الأرصدة لصالحنا. الرصيد = مدين − دائن، والسالب مبلغ مستحق للمورد.</p>
+        </div>
+        <div class="plate hero-side hero-owed band band-neg">
+          <h2>أكبر مبلغ مستحق لمورد</h2>
+          <p class="big"><span class="money is-neg"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>-42,210.00</span></span></p>
+          <p class="who">بدر زين للأثاث</p>
+        </div>
+        <div class="plate hero-side hero-ours band band-pos">
+          <h2>أكبر رصيد لصالحنا</h2>
+          <p class="big"><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>138,902.73</span></span></p>
+          <p class="who">منجرة العهد</p>
+        </div>
+      </section>
+
+      <aside class="alerts" aria-labelledby="alertsH">
+        <h2 id="alertsH">تنبيهات المراجعة</h2>
+        <div class="strip">
+          <a class="alert alert-lg" href="review.html#dates"><span class="cnt num">33</span><span class="what">قيداً بتواريخ معطوبة</span><span class="go">افتح مركز المراجعة</span></a>
+          <a class="alert" href="review.html#dups"><span class="cnt num">9</span><span class="what">أرقام مرجعية مكررة</span><span class="go">افتح مركز المراجعة</span></a>
+          <a class="alert" href="review.html#untyped"><span class="cnt num">19</span><span class="what">سجلاً بلا نوع</span><span class="go">افتح مركز المراجعة</span></a>
+        </div>
+      </aside>
+
+      <section class="sups" aria-labelledby="supsH">
+        <div class="sec-head"><h2 id="supsH">الموردون المعروضون</h2><p class="note">8 من 19 مورداً، مرتبة بحجم الرصيد النهائي.</p></div>
+        <div class="sup-grid">
+          <article class="sup band band-pos" aria-current="true">
+            <div class="sup-top"><h3><button type="button" class="sup-pick" aria-controls="supDetail">منجرة العهد</button></h3><span class="flag flag-pos">لصالحنا</span></div>
+            <p class="sup-final"><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>138,902.73</span></span></p>
+            <button type="button" class="sup-toggle" aria-expanded="false" aria-controls="sm0"><svg class="i" aria-hidden="true"><use href="#i-down"/></svg>سابق ومدين ودائن</button><div class="sup-more" id="sm0" hidden><dl class="trio"><div><dt>سابق</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>145,213.66</span></span></dd></div><div><dt>مدين</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>286,869.07</span></span></dd></div><div><dt>دائن</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>293,180.00</span></span></dd></div></dl></div>
+          </article>
+          <article class="sup band band-neg">
+            <div class="sup-top"><h3><button type="button" class="sup-pick" aria-controls="supDetail">بدر زين للأثاث</button></h3><span class="flag flag-neg">مستحق للمورد</span></div>
+            <p class="sup-final"><span class="money is-neg"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>-42,210.00</span></span></p>
+            <button type="button" class="sup-toggle" aria-expanded="false" aria-controls="sm1"><svg class="i" aria-hidden="true"><use href="#i-down"/></svg>سابق ومدين ودائن</button><div class="sup-more" id="sm1" hidden><dl class="trio"><div><dt>سابق</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>16,900.00</span></span></dd></div><div><dt>مدين</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>35,300.00</span></span></dd></div><div><dt>دائن</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>94,410.00</span></span></dd></div></dl></div>
+          </article>
+          <article class="sup band band-neg">
+            <div class="sup-top"><h3><button type="button" class="sup-pick" aria-controls="supDetail">مفروشات الجيزاني</button></h3><span class="flag flag-neg">مستحق للمورد</span></div>
+            <p class="sup-final"><span class="money is-neg"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>-22,560.00</span></span></p>
+            <button type="button" class="sup-toggle" aria-expanded="false" aria-controls="sm2"><svg class="i" aria-hidden="true"><use href="#i-down"/></svg>سابق ومدين ودائن</button><div class="sup-more" id="sm2" hidden><dl class="trio"><div><dt>سابق</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,500.00</span></span></dd></div><div><dt>مدين</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>6,500.00</span></span></dd></div><div><dt>دائن</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>30,560.00</span></span></dd></div></dl></div>
+          </article>
+          <article class="sup band band-neg">
+            <div class="sup-top"><h3><button type="button" class="sup-pick" aria-controls="supDetail">منجرة فارس العبدلي</button></h3><span class="flag flag-neg">مستحق للمورد</span></div>
+            <p class="sup-final"><span class="money is-neg"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>-19,205.00</span></span></p>
+            <button type="button" class="sup-toggle" aria-expanded="false" aria-controls="sm3"><svg class="i" aria-hidden="true"><use href="#i-down"/></svg>سابق ومدين ودائن</button><div class="sup-more" id="sm3" hidden><dl class="trio"><div><dt>سابق</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>11,945.00</span></span></dd></div><div><dt>مدين</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>25,630.00</span></span></dd></div><div><dt>دائن</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>56,780.00</span></span></dd></div></dl></div>
+          </article>
+          <article class="sup band band-neg">
+            <div class="sup-top"><h3><button type="button" class="sup-pick" aria-controls="supDetail">مركز بلبل</button></h3><span class="flag flag-neg">مستحق للمورد</span></div>
+            <p class="sup-final"><span class="money is-neg"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>-3,960.00</span></span></p>
+            <button type="button" class="sup-toggle" aria-expanded="false" aria-controls="sm4"><svg class="i" aria-hidden="true"><use href="#i-down"/></svg>سابق ومدين ودائن</button><div class="sup-more" id="sm4" hidden><dl class="trio"><div><dt>سابق</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>0.00</span></span></dd></div><div><dt>مدين</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>0.00</span></span></dd></div><div><dt>دائن</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>3,960.00</span></span></dd></div></dl></div>
+          </article>
+          <article class="sup band band-pos">
+            <div class="sup-top"><h3><button type="button" class="sup-pick" aria-controls="supDetail">بيت الروائع</button></h3><span class="flag flag-pos">لصالحنا</span></div>
+            <p class="sup-final"><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>2,900.00</span></span></p>
+            <button type="button" class="sup-toggle" aria-expanded="false" aria-controls="sm5"><svg class="i" aria-hidden="true"><use href="#i-down"/></svg>سابق ومدين ودائن</button><div class="sup-more" id="sm5" hidden><dl class="trio"><div><dt>سابق</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>2,700.00</span></span></dd></div><div><dt>مدين</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>200.00</span></span></dd></div><div><dt>دائن</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>0.00</span></span></dd></div></dl></div>
+          </article>
+          <article class="sup band band-neg">
+            <div class="sup-top"><h3><button type="button" class="sup-pick" aria-controls="supDetail">عروسة البحر</button></h3><span class="flag flag-neg">مستحق للمورد</span></div>
+            <p class="sup-final"><span class="money is-neg"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>-1,700.00</span></span></p>
+            <button type="button" class="sup-toggle" aria-expanded="false" aria-controls="sm6"><svg class="i" aria-hidden="true"><use href="#i-down"/></svg>سابق ومدين ودائن</button><div class="sup-more" id="sm6" hidden><dl class="trio"><div><dt>سابق</dt><dd><span class="money is-neg"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>-3,300.00</span></span></dd></div><div><dt>مدين</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>5,950.00</span></span></dd></div><div><dt>دائن</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>4,350.00</span></span></dd></div></dl></div>
+          </article>
+          <article class="sup band band-neg">
+            <div class="sup-top"><h3><button type="button" class="sup-pick" aria-controls="supDetail">منجرة صالحة القارحي</button></h3><span class="flag flag-neg">مستحق للمورد</span></div>
+            <p class="sup-final"><span class="money is-neg"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>-1,615.00</span></span></p>
+            <button type="button" class="sup-toggle" aria-expanded="false" aria-controls="sm7"><svg class="i" aria-hidden="true"><use href="#i-down"/></svg>سابق ومدين ودائن</button><div class="sup-more" id="sm7" hidden><dl class="trio"><div><dt>سابق</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,825.00</span></span></dd></div><div><dt>مدين</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>2,500.00</span></span></dd></div><div><dt>دائن</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>5,940.00</span></span></dd></div></dl></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="plate plate-major detail band band-pos" id="supDetail" aria-live="polite" aria-label="تفاصيل المورد المحدد">
+        <div class="sup-top"><h2 class="d-name">منجرة العهد</h2><span class="d-flag flag flag-pos">لصالحنا</span></div>
+        <p class="giant d-final"><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>138,902.73</span></span></p>
+        <div class="d-trio"><dl class="trio"><div><dt>سابق</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>145,213.66</span></span></dd></div><div><dt>مدين</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>286,869.07</span></span></dd></div><div><dt>دائن</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>293,180.00</span></span></dd></div></dl></div>
+        <p class="note">اختر مورداً من القائمة لعرض أرقامه هنا.</p>
+      </section>
+
+      <section class="totals" aria-labelledby="totH">
+        <h2 id="totH">الإجمالي (19 مورداً)</h2>
+        <dl>
+          <div><dt>سابق</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>175,183.66</span></span></dd></div>
+          <div><dt>مدين</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>387,034.07</span></span></dd></div>
+          <div><dt>دائن</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>513,265.00</span></span></dd></div>
+          <div class="t-final"><dt>نهائي</dt><dd><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>48,952.73</span></span></dd></div>
+        </dl>
+      </section>
+
+      <div class="notes">
+        <p class="note"><strong>11 مورداً آخر</strong> داخلون في الإجمالي أعلاه، لكن أرقامهم الفردية غير معروضة هنا.</p>
+        <div class="sign-key">
+          <p><strong>كيف تقرأ الإشارة؟</strong></p>
+          <p><span class="money is-neg"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>-42,210.00</span></span> <span>سالب: مبلغ مستحق للمورد علينا.</span></p>
+          <p><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>2,900.00</span></span> <span>موجب: رصيد لصالحنا عند المورد.</span></p>
+        </div>
+      </div>
+    </div>
+    <footer class="mfoot"><label class="role"><span class="role-label">عرض بصلاحية</span><select data-role-select aria-label="عرض بصلاحية"><option value="owner">المالك</option><option value="admin">الإدارة</option><option value="entry">مدخل البيانات</option></select></label><span class="note">مبدّل العرض لتجربة الصلاحيات في النموذج.</span></footer>
+  </main>
+</div>
+<nav class="tabbar" aria-label="التنقل السفلي">
+  <a class="tab" href="dashboard.html" aria-current="page"><svg class="i" aria-hidden="true"><use href="#i-bal"/></svg><span>الأرصدة</span></a><a class="tab" href="statement.html"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg><span>كشف الحساب</span></a>
+  <a class="fab" href="add-entry.html" aria-label="إضافة حركة"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></a>
+  <a class="tab" href="invoices.html"><svg class="i" aria-hidden="true"><use href="#i-inv"/></svg><span>الفواتير</span></a><a class="tab" href="review.html"><svg class="i" aria-hidden="true"><use href="#i-rev"/></svg><span>المراجعة</span></a>
+</nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body></html>

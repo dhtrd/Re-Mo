@@ -1,0 +1,108 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>رصيد — مركز المراجعة</title>
+<link rel="stylesheet" href="../shared/riyal.css">
+<script src="../shared/core.js"></script>
+<script>try{if(localStorage.getItem('rased-d4-rail')==='1')document.documentElement.classList.add('rail-collapsed')}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;600;700&family=Vazirmatn:wght@400;500;600;700;800&family=Readex+Pro:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body class="rev-page" data-page="review">
+<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+<div class="shell">
+  <header class="bar wood">
+    <div class="bar-in">
+      <a class="brand" href="dashboard.html" aria-label="رصيد: لوحة الأرصدة">
+        <span class="plaque"><svg viewBox="0 0 120 120" aria-hidden="true"><rect class="logo-ink" x="30" y="36" width="76" height="16" rx="8"/><rect class="logo-acc" x="14" y="68" width="76" height="16" rx="8"/></svg></span>
+        <span class="word">رصيد</span>
+      </a>
+      <button type="button" class="rail-toggle" data-rail-toggle aria-expanded="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h16"/><path d="M17 9l3 3-3 3"/></svg><span class="lbl">طيّ القائمة</span></button>
+      <nav class="nav" aria-label="التنقل الرئيسي">
+      <a class="n1" href="dashboard.html" title="الأرصدة"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="6" width="13" height="4.5" rx="2.25"/><rect x="3" y="13.5" width="13" height="4.5" rx="2.25"/></svg><span class="lbl">الأرصدة</span></a>
+      <a class="n2" href="statement.html" title="كشف حساب"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M9.5 11h6M9.5 15h6M9.5 7h3"/></svg><span class="lbl">كشف حساب</span></a>
+      <a class="n3" href="invoices.html" title="الفواتير"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg><span class="lbl">الفواتير</span></a>
+      <a class="n4" href="add-entry.html" title="إضافة حركة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span class="lbl">إضافة حركة</span></a>
+      <a class="n5" href="review.html" title="المراجعة" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H9l-5 4z"/><path d="M9 10l2 2 4-4"/></svg><span class="lbl">المراجعة</span></a>
+      </nav>
+      <div class="tools">
+        <label class="role"><span>عرض بصلاحية</span>
+          <select data-role-select aria-label="عرض بصلاحية">
+            <option value="owner">المالك</option>
+            <option value="admin">الإدارة</option>
+            <option value="entry">مدخل البيانات</option>
+          </select>
+        </label>
+        <button type="button" class="icon-btn" data-theme-toggle><svg viewBox="0 0 24 24" aria-hidden="true" class="i-moon"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" class="i-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+<main id="main" class="main rev" data-cat="dates">
+  <section class="hero frame" aria-labelledby="h1">
+    <div class="fh"><h1 id="h1">مركز المراجعة</h1></div>
+    <p class="lede">سجلات تحتاج قراراً قبل أن تُعتمد أرصدتها.</p>
+    <nav class="cats" aria-label="أقسام المراجعة">
+      <a class="win cat is-neg" href="#dates" data-cat-link="dates" aria-current="true"><span class="wb"><span class="wv num">33</span><span class="wl">قيداً بتواريخ معطوبة</span></span></a>
+      <a class="win cat is-neg" href="#dups" data-cat-link="dups"><span class="wb"><span class="wv num">9</span><span class="wl">أرقام مرجعية مكررة</span></span></a>
+      <a class="win cat is-neg" href="#untyped" data-cat-link="untyped"><span class="wb"><span class="wv num">19</span><span class="wl">سجلاً بلا نوع</span></span></a>
+    </nav>
+  </section>
+
+  <div class="secs">
+    <section class="sec frame" id="dates" aria-labelledby="s1">
+      <div class="fh"><h2 id="s1">تواريخ معطوبة (<span class="num">33</span>)</h2><p class="lede">التاريخ الحالي ↔ التاريخ المرجّح</p></div>
+      <ul class="fixes">
+        <li class="fix hdr" aria-hidden="true"><span class="who">المورد</span><span>الخلية</span><span>الحالي ↔ المرجّح</span><span class="can-edit">الإجراء</span></li>
+        <li class="fix" data-item="B340">
+          <span class="who">بدر زين للأثاث</span>
+          <span class="cell"><span class="cell-lbl">الخلية </span><span class="num">B340</span></span>
+          <span class="cmp"><span class="cur-w"><span class="cell-lbl">الحالي </span><span class="cur num">2014-08-01</span></span><span class="arr">↔</span><span class="cell-lbl">المرجّح </span><span class="sug num">2026-08-14</span></span>
+          <span class="acts can-edit"><button type="button" class="btn" data-act="اعتُمد المرجّح">اعتماد المرجّح</button><button type="button" class="btn plain" data-act="تُجوهل">تجاهل</button></span><span class="state" data-state></span>
+          <details class="rowmore"><summary>المورد</summary><p>بدر زين للأثاث</p></details>
+        </li>
+        <li class="fix" data-item="B147">
+          <span class="who">مفروشات الجيزاني</span>
+          <span class="cell"><span class="cell-lbl">الخلية </span><span class="num">B147</span></span>
+          <span class="cmp"><span class="cur-w"><span class="cell-lbl">الحالي </span><span class="cur num">2026-10-08</span></span><span class="arr">↔</span><span class="cell-lbl">المرجّح </span><span class="sug num">2026-08-10</span></span>
+          <span class="acts can-edit"><button type="button" class="btn" data-act="اعتُمد المرجّح">اعتماد المرجّح</button><button type="button" class="btn plain" data-act="تُجوهل">تجاهل</button></span><span class="state" data-state></span>
+          <details class="rowmore"><summary>المورد</summary><p>مفروشات الجيزاني</p></details>
+        </li>
+        <li class="fix more"><span class="ph">[31 قيداً آخر]</span></li>
+      </ul>
+    </section>
+
+    <section class="sec frame" id="dups" aria-labelledby="s2">
+      <div class="fh"><h2 id="s2">أرقام مكررة (<span class="num">9</span>)</h2></div>
+      <ul class="fixes">
+        <li class="fix" data-item="MISC/2026/08/0395">
+          <span class="who num" style="font-weight:700">MISC/2026/08/0395</span>
+          <span class="cell"><span class="cell-lbl">الصف </span><span class="num">148</span></span>
+          <span class="cmp"><span>مفروشات الجيزاني</span><span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,700.00</span></span></span>
+          <span class="acts can-edit"><button type="button" class="btn" data-act="عُلّم كحركة مختلفة">حركة مختلفة</button><button type="button" class="btn plain" data-act="تُجوهل">تجاهل</button></span><span class="state" data-state></span>
+          <details class="rowmore"><summary>الرقم</summary><p class="num">MISC/2026/08/0395</p></details>
+        </li>
+        <li class="fix more"><span class="ph">[8 أرقام أخرى]</span></li>
+      </ul>
+    </section>
+
+    <section class="sec frame" id="untyped" aria-labelledby="s3">
+      <div class="fh"><h2 id="s3">سجلات بلا نوع (<span class="num">19</span>)</h2></div>
+      <p class="help">لا توجد أمثلة معروفة لهذه السجلات بعد.</p>
+      <ul class="fixes" style="margin-top:12px"><li class="fix more"><span class="ph">[تفاصيل السجلات]</span></li></ul>
+    </section>
+  </div>
+
+  <aside class="log frame" aria-labelledby="lg-h">
+    <div class="fh"><h2 id="lg-h">قرارات هذه الجلسة</h2></div>
+    <p class="empty" data-log-empty>لم تتخذ قراراً بعد. اعتمد المرجّح أو تجاهله من القوائم.</p>
+    <ol data-log></ol>
+  </aside>
+</main>
+</div>
+<a class="fab" href="add-entry.html" aria-label="إضافة حركة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></a>
+
+<div class="toast" role="status" aria-live="polite"></div>
+</body></html>

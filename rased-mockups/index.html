@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>رصيد — معرض النماذج</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;700&family=Readex+Pro:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/riyal.css">
+<script src="shared/core.js"></script>
+<style>
+:root{
+  --bg:#E4E7EB; --surface:#F6F7F9; --ink:#1D232B; --muted:#4D5663; --line:#C3C9D1;
+  --accent:#1E4634; --accent-2:#C9822B; --on-accent:#FFFFFF; --frame:#2A3038; --focus:#C9822B;
+}
+html[data-theme="dark"]{
+  --bg:#171B20; --surface:#20252C; --ink:#E7EAEE; --muted:#A9B1BC; --line:#363D47;
+  --accent:#8FCBAE; --accent-2:#E3A55A; --on-accent:#10241A; --frame:#0E1114; --focus:#E3A55A;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Noto Sans Arabic",sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
+.skip{position:absolute;inset-inline-start:-999px;top:0}
+.skip:focus{inset-inline-start:12px;top:12px;background:var(--surface);padding:10px 14px;z-index:9}
+
+header.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;padding:16px clamp(16px,3vw,40px);border-bottom:1px solid var(--line);background:var(--surface)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-height:44px}
+.brand svg{width:40px;height:40px}
+.brand b{font-family:"Readex Pro",sans-serif;font-weight:600;font-size:26px;letter-spacing:-.01em}
+.brand small{color:var(--muted);font-size:14px;font-weight:400}
+.controls{display:flex;flex-wrap:wrap;gap:8px;margin-inline-start:auto;align-items:center}
+.ctl{min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit;font-size:15px;cursor:pointer}
+.ctl[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+label.sel{display:flex;align-items:center;gap:6px;font-size:14px;color:var(--muted)}
+
+nav.dirs{display:flex;gap:6px;overflow-x:auto;padding:12px clamp(16px,3vw,40px);border-bottom:1px solid var(--line);scrollbar-width:thin}
+nav.dirs a{flex:none;display:flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:10px;text-decoration:none;color:var(--muted);border:1px solid transparent;white-space:nowrap}
+nav.dirs a:hover{color:var(--ink);border-color:var(--line)}
+nav.dirs a[aria-current="page"]{background:var(--accent);color:var(--on-accent)}
+nav.dirs .n{font-variant-numeric:tabular-nums}
+
+main{padding:20px clamp(16px,3vw,40px) 64px}
+.intro{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;max-width:980px;margin-bottom:20px}
+.intro h1{margin:0;font-size:clamp(24px,3vw,34px);line-height:1.3}
+.intro p{margin:0;color:var(--muted);max-width:72ch}
+.facts{display:flex;flex-wrap:wrap;gap:6px 18px;margin:6px 0 0;padding:0;list-style:none;color:var(--muted);font-size:14px}
+.facts b{color:var(--ink);font-weight:500}
+.swatches{display:inline-flex;gap:4px;vertical-align:middle}
+.swatches i{width:18px;height:18px;border-radius:5px;border:1px solid var(--line);display:inline-block}
+
+section.screen{margin-top:28px;border-top:1px solid var(--line);padding-top:16px}
+.screen-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin-bottom:12px}
+.screen-head h2{margin:0;font-size:20px}
+.screen-head a{font-size:14px;color:var(--muted);min-height:44px;display:inline-flex;align-items:center}
+.devices{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start}
+figure.device{margin:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+figure.device figcaption{font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:center}
+.bezel{background:var(--frame);padding:8px;border-radius:18px;max-width:100%}
+.device.phone .bezel{border-radius:28px;padding:10px}
+.viewport{position:relative;overflow:hidden;border-radius:12px;background:#fff}
+.device.phone .viewport{border-radius:20px}
+.viewport iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;background:#fff}
+.loading{position:absolute;inset:0;display:grid;place-items:center;color:#5a6370;font-size:13px}
+
+.logo-callout{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-bottom:8px}
+.logo-callout a{min-height:44px;display:inline-flex;align-items:center;padding:0 14px;border-radius:10px;background:var(--accent);color:var(--on-accent);text-decoration:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">تخطَّ إلى المعرض</a>
+<header class="top">
+  <a class="brand" href="#logo" aria-label="رصيد — المعرض">
+    <svg viewBox="0 0 120 120" aria-hidden="true"><rect x="30" y="36" width="76" height="16" rx="8" fill="var(--ink)"/><rect x="14" y="68" width="76" height="16" rx="8" fill="var(--accent-2)"/></svg>
+    <b>رصيد</b><small>معرض النماذج</small>
+  </a>
+  <div class="controls">
+    <button type="button" class="ctl" id="orient" aria-pressed="false">اللوحي أفقي</button>
+    <label class="sel">الصلاحية
+      <select class="ctl" id="role" aria-label="عرض بصلاحية">
+        <option value="owner">المالك</option><option value="admin">الإدارة</option><option value="entry">مدخل البيانات</option>
+      </select>
+    </label>
+    <button type="button" class="ctl" data-theme-toggle>الوضع الداكن</button>
+  </div>
+</header>
+<nav class="dirs" aria-label="الاتجاهات" id="dirs"></nav>
+<main id="main" tabindex="-1"></main>
+
+<script>
+(function(){
+  var DIRS = [
+    {id:'logo', name:'الشعار: 8 لوحات'},
+    {id:'1', name:'الدفتر', fonts:'Noto Naskh Arabic + Source Serif 4', colors:['#EEF2F5','#1B2A44','#2B4C7E','#A3242B'], who:'المالك الذي يقرأ الأرقام كما في الدفتر المحاسبي.', idea:'دفتر أستاذ: ورق أزرق بارد، حبر كحلي، خط مزدوج تحت الإجمالي، تبويبات كألسنة الدفتر.'},
+    {id:'2', name:'الورشة', fonts:'Baloo Bhaijaan 2 + Alexandria', colors:['#E7E8E3','#232A1E','#3F5A2A','#B98A12'], who:'مدخل البيانات الذي يعمل بسرعة على الجوال.', idea:'كتل كبيرة وأزرار عريضة وكثافة منخفضة؛ خطوات مرقّمة في الإدخال.'},
+    {id:'3', name:'المنصّة', fonts:'IBM Plex Sans Arabic + IBM Plex Mono', colors:['#0E1A2B','#DCE6F2','#F2A93B','#FF8A7A'], who:'الإدارة التي تعمل بلوحة المفاتيح وكثافة عالية.', idea:'غرفة عمليات: ثلاثة أعمدة، لوحة أوامر، اختصارات ظاهرة، داكن افتراضياً.'},
+    {id:'4', name:'روشن', fonts:'Reem Kufi + Vazirmatn', colors:['#E9EEEA','#4A2F22','#1F7F73','#B0352B'], who:'هوية محلية للشركة: جدة وتجارة الأثاث.', idea:'نِسب الرواشين الحجازية كبنية: إطارات رفيعة وشرائح خشبية تحمل التنقل.'},
+    {id:'5', name:'اللافتة', fonts:'Noto Kufi Arabic + Space Grotesk', colors:['#FFFFFF','#1A1A1A','#FFD400','#C4141B'], who:'من يريد الرقم الأهم أولاً بلا زخرفة.', idea:'شبكة سويسرية، أرقام عملاقة، بلا بطاقات ولا ظلال، الأصفر للإجراء الأهم فقط.'},
+    {id:'6', name:'هادئ', fonts:'Readex Pro', colors:['#F2F2F5','#1C1C1E','#5B4BD1','#C62D3E'], who:'الإدارة التي تريد الوضوح بلا ضجيج، ومستخدمو iPad.', idea:'أسلوب iOS/iPadOS: عناوين كبيرة، قوائم مجمّعة، Split View، Sheet سفلي.'},
+    {id:'7', name:'الميزان', fonts:'Almarai + Sora', colors:['#F1F4F8','#2A1838','#1F7A5C','#B4236A'], who:'من يريد رؤية «من يميل» بنظرة.', idea:'كل رصيد شريط متباعد حول الصفر، كشف كخط زمني بمنحنى الرصيد.'}
+  ];
+  var SCREENS = [
+    ['dashboard','لوحة الأرصدة بفترة'],['statement','كشف حساب مورد'],['invoices','فهرس الفواتير وحالة Odoo'],
+    ['add-entry','إضافة حركة (تحذير التكرار)'],['review','مركز المراجعة']
+  ];
+  var nav = document.getElementById('dirs'), main = document.getElementById('main');
+  var orient = document.getElementById('orient'), roleSel = document.getElementById('role');
+  var state = { landscape:false, role:'owner' };
+
+  DIRS.forEach(function(d){
+    var a = document.createElement('a'); a.href = '#' + (d.id === 'logo' ? 'logo' : 'd' + d.id);
+    a.innerHTML = d.id === 'logo' ? d.name : '<span class="n">' + d.id + '</span> ' + d.name;
+    nav.appendChild(a);
+  });
+
+  function theme(){ return document.documentElement.getAttribute('data-theme'); }
+  function src(dir, screen){ return 'direction-' + dir + '/' + screen + '.html?theme=' + theme() + '&role=' + state.role; }
+
+  function frame(kind, w, h, url, label){
+    var fig = document.createElement('figure'); fig.className = 'device ' + kind;
+    fig.dataset.w = w; fig.dataset.h = h;
+    fig.innerHTML = '<div class="bezel"><div class="viewport"><span class="loading">جارٍ التحميل…</span><iframe loading="lazy" title="' + label + '" width="' + w + '" height="' + h + '" src="' + url + '"></iframe></div></div>' +
+      '<figcaption><span>' + label + '</span><span class="num">' + w + '×' + h + '</span></figcaption>';
+    return fig;
+  }
+
+  function fit(){
+    document.querySelectorAll('.devices').forEach(function(row){
+      var avail = row.clientWidth, figs = [].slice.call(row.children);
+      var pad = 24, gap = 20, sumW = figs.reduce(function(s,f){ return s + (+f.dataset.w); }, 0);
+      var s = (avail - pad*figs.length - gap*(figs.length-1) - 4) / sumW;
+      var stacked = s < 0.26; // على الشاشات الضيقة: كل إطار بعرض الحاوية
+      figs.forEach(function(f){
+        var w = +f.dataset.w, h = +f.dataset.h;
+        var sc = stacked ? Math.min(1, (avail - pad) / w) : s;
+        var vp = f.querySelector('.viewport'), ifr = f.querySelector('iframe');
+        vp.style.width = Math.floor(w*sc) + 'px'; vp.style.height = Math.floor(h*sc) + 'px';
+        ifr.style.transform = 'scale(' + sc + ')';
+      });
+    });
+  }
+
+  function render(){
+    var hash = location.hash.replace('#','') || 'd1';
+    var id = hash === 'logo' ? 'logo' : hash.replace('d','');
+    var d = DIRS.filter(function(x){ return x.id === id; })[0] || DIRS[1];
+    [].forEach.call(nav.children, function(a, i){ a.setAttribute('aria-current', DIRS[i] === d ? 'page' : 'false'); });
+    main.innerHTML = '';
+    if (d.id === 'logo') {
+      main.innerHTML = '<div class="intro"><h1>الشعار «علامة التوازن» — ثماني لوحات ألوان</h1><p>كل لوحة على خلفية فاتحة وداكنة، أيقونات 512 و180 و64 و32، رؤوس الجوال والحاسوب، وعينة واجهة.</p></div>' +
+        '<div class="logo-callout"><a href="logo/palettes.html">فتح صفحة اللوحات كاملة</a><span>أو استعرضها في الإطارات أدناه.</span></div><div class="devices"></div>';
+      var row = main.querySelector('.devices'), u = 'logo/palettes.html?theme=' + theme();
+      row.appendChild(frame('phone', 390, 844, u, 'جوال'));
+      row.appendChild(frame('tablet', state.landscape?1194:834, state.landscape?834:1194, u, state.landscape?'لوحي أفقي':'لوحي عمودي'));
+      row.appendChild(frame('desktop', 1440, 900, u, 'حاسوب'));
+    } else {
+      var intro = document.createElement('div'); intro.className = 'intro';
+      intro.innerHTML = '<h1>الاتجاه ' + d.id + ': ' + d.name + '</h1><p>' + d.idea + '</p>' +
+        '<ul class="facts"><li><b>الخطوط:</b> <span class="num">' + d.fonts + '</span></li><li><b>الألوان:</b> <span class="swatches">' +
+        d.colors.map(function(c){ return '<i style="background:' + c + '" title="' + c + '"></i>'; }).join('') + '</span></li><li><b>يناسب:</b> ' + d.who + '</li></ul>';
+      main.appendChild(intro);
+      SCREENS.forEach(function(s){
+        var sec = document.createElement('section'); sec.className = 'screen';
+        var url = src(d.id, s[0]);
+        sec.innerHTML = '<div class="screen-head"><h2>' + s[1] + '</h2><a href="' + url + '" target="_blank" rel="noopener">فتح الصفحة منفردة</a></div><div class="devices"></div>';
+        var row = sec.querySelector('.devices');
+        row.appendChild(frame('phone', 390, 844, url, 'جوال'));
+        row.appendChild(frame('tablet', state.landscape?1194:834, state.landscape?834:1194, url, state.landscape?'لوحي أفقي':'لوحي عمودي'));
+        row.appendChild(frame('desktop', 1440, 900, url, 'حاسوب'));
+        main.appendChild(sec);
+      });
+    }
+    fit();
+  }
+
+  orient.addEventListener('click', function(){ state.landscape = !state.landscape; orient.setAttribute('aria-pressed', String(state.landscape)); render(); });
+  roleSel.addEventListener('change', function(){ state.role = roleSel.value; render(); });
+  document.querySelectorAll('[data-theme-toggle]').forEach(function(b){ b.addEventListener('click', function(){ setTimeout(render, 0); }); });
+  window.addEventListener('hashchange', render);
+  window.addEventListener('resize', fit);
+  render();
+})();
+</script>
+</body>
+</html>

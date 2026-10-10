@@ -1,0 +1,144 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>رصيد — إضافة حركة</title>
+<link rel="stylesheet" href="../shared/riyal.css">
+<script src="../shared/core.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300..700&amp;display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body class="page-add-entry has-insp sheet-open">
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+<symbol id="i-bal" viewBox="0 0 24 24"><rect x="7" y="6" width="13" height="4.4" rx="2.2"/><rect x="4" y="13.6" width="13" height="4.4" rx="2.2"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3.5h7l4.5 4.5v12.5H7z"/><path d="M14 3.5V8h4.5M10 12.5h5.5M10 16h5.5"/></symbol>
+<symbol id="i-stack" viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="13" rx="2.5"/><path d="M8 4h8M9 11.5h6M9 15h4"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.3 12.4l2.6 2.6 4.8-5.2"/></symbol>
+<symbol id="i-side" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="M14.5 5v14"/></symbol>
+<symbol id="i-theme" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor"/></symbol>
+<symbol id="i-chev" viewBox="0 0 24 24"><path d="M14.5 6l-6 6 6 6"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M9.5 6l6 6-6 6"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+<symbol id="i-export" viewBox="0 0 24 24"><path d="M12 4v11M8 8l4-4 4 4M5 14v5.5h14V14"/></symbol>
+<symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 4.5l8.5 15h-17z"/><path d="M12 10.2v4.3M12 17.2v.2"/></symbol>
+<symbol id="i-swap" viewBox="0 0 24 24"><path d="M5 9h13M15 5.5L18.5 9 15 12.5M19 15H6M9 11.5L5.5 15 9 18.5"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M10 7l-5 5 5 5"/></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="14" rx="3"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/></symbol>
+<symbol id="i-dots" viewBox="0 0 24 24"><path d="M6 12h.01M12 12h.01M18 12h.01" stroke-width="3"/></symbol>
+</svg>
+<a class="skip" href="#content">تخطَّ إلى المحتوى</a>
+<div class="app">
+  <aside class="sidebar" id="sidebar" aria-label="التنقل الرئيسي">
+    <div class="side-head"><a class="brand " href="dashboard.html" aria-label="رصيد — الرئيسية"><svg viewBox="0 0 120 120" aria-hidden="true"><rect class="lg-ink" x="30" y="36" width="76" height="16" rx="8"/><rect class="lg-acc" x="14" y="68" width="76" height="16" rx="8"/></svg><span class="brand-word">رصيد</span></a><button type="button" class="icon-btn side-close" data-nav-toggle aria-label="إغلاق القائمة"><svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+    <nav class="nav" aria-label="الأقسام">
+      <a href="dashboard.html" title="الأرصدة"><svg class="ic" aria-hidden="true"><use href="#i-bal"/></svg><span class="nav-label">الأرصدة</span></a>
+      <a href="statement.html" title="كشف حساب"><svg class="ic" aria-hidden="true"><use href="#i-doc"/></svg><span class="nav-label">كشف حساب</span></a>
+      <a href="invoices.html" title="الفواتير"><svg class="ic" aria-hidden="true"><use href="#i-stack"/></svg><span class="nav-label">الفواتير</span></a>
+      <a href="add-entry.html" aria-current="page" title="إضافة حركة"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg><span class="nav-label">إضافة حركة</span></a>
+      <a href="review.html" title="المراجعة"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span class="nav-label">المراجعة</span></a>
+    </nav>
+    <div class="side-foot"><label class="role"><span>عرض بصلاحية</span><select data-role-select aria-label="عرض بصلاحية"><option value="owner">المالك</option><option value="admin">الإدارة</option><option value="entry">مدخل البيانات</option></select></label><p class="side-note">نموذج عرض فقط؛ لا يُحفظ أي تغيير.</p></div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="icon-btn nav-toggle" data-nav-toggle aria-controls="sidebar" aria-expanded="false" aria-label="إظهار أو طي القائمة الجانبية"><svg class="ic" aria-hidden="true"><use href="#i-side"/></svg></button>
+      <a class="brand m-brand" href="dashboard.html" aria-label="رصيد — الرئيسية"><svg viewBox="0 0 120 120" aria-hidden="true"><rect class="lg-ink" x="30" y="36" width="76" height="16" rx="8"/><rect class="lg-acc" x="14" y="68" width="76" height="16" rx="8"/></svg><span class="brand-word">رصيد</span></a>
+      <span class="compact-title" aria-hidden="true">إضافة حركة</span>
+      <span class="spacer"></span>
+      
+      <button type="button" class="icon-btn" data-theme-toggle><svg class="ic" aria-hidden="true"><use href="#i-theme"/></svg></button>
+    </header>
+    <main id="content" class="content">
+      <div class="title-row">
+        <div><h1 class="large-title">إضافة حركة</h1><p class="lede">فاتورة أو قيد لمورد واحد. الرقم المرجعي يُولَّد من النوع والتاريخ والمرجع.</p></div>
+      </div>
+      <p class="assign-note">بصلاحية «مدخل البيانات» تظهر في قائمة الموردين الموردون المسندون إليك فقط: <span class="ph">[الموردون المسندون]</span>.</p>
+      <p class="dup-inline" id="dupInline" hidden><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg><span class="grow" style="flex:1">الرقم  <span class="num">MISC/2026/08/0395</span>  مكرّر</span><button type="button" class="btn" data-sheet-open>عرض التحذير</button></p>
+
+      <div class="entry-layout">
+        <form class="form-stack" id="entryForm" novalidate aria-label="بيانات الحركة">
+          <div class="form-two">
+            <div class="group">
+              <label class="fld"><span class="lab">المورد</span><select name="supplier" id="supSel"><option>منجرة العهد</option><option>بدر زين للأثاث</option><option selected>مفروشات الجيزاني</option><option>منجرة فارس العبدلي</option><option>مركز بلبل</option><option>بيت الروائع</option><option>عروسة البحر</option><option>منجرة صالحة القارحي</option><option>مؤسسة عبدالرحمن الثقفي</option></select></label>
+              <div class="fld" role="radiogroup" aria-labelledby="typeL"><span class="lab" id="typeL">النوع</span>
+                <div class="seg">
+                  <label><input type="radio" name="type" value="invoice"><span>فاتورة <kbd class="only-d">Alt+1</kbd></span></label>
+                  <label><input type="radio" name="type" value="misc" checked><span>قيد <kbd class="only-d">Alt+2</kbd></span></label>
+                </div>
+              </div>
+              <label class="fld"><span class="lab">التاريخ</span><input class="ltr num" name="date" value="2026-08-14" inputmode="numeric" autocomplete="off" aria-describedby="dateHint"><small class="cell-sub" id="dateHint">بصيغة سنة-شهر-يوم</small></label>
+              <label class="fld"><span class="lab">المرجع</span><input class="ltr num" name="ref" value="0395" inputmode="numeric" autocomplete="off"></label>
+            </div>
+            <div class="form-stack">
+              <div class="group">
+                <div class="fld"><span class="lab" id="genL">الرقم المرجعي <span class="cell-sub">يُولَّد تلقائياً، للقراءة فقط</span></span>
+                  <div class="gen-out"><output id="genRef" class="num dup-on" for="supSel" aria-labelledby="genL">MISC/2026/08/0395</output><span class="badge no" id="genBadge">مكرّر</span></div>
+                </div>
+              </div>
+              <div class="group">
+                <label class="fld"><span class="lab">السند</span><input class="ltr num" name="voucher" inputmode="numeric" autocomplete="off" placeholder="اختياري"></label>
+                <label class="fld"><span class="lab">البيان</span><textarea name="desc" rows="2" placeholder="مثل: سداد قيمة فاتورة"></textarea></label>
+                <label class="fld"><span class="lab">المبلغ <span class="badge acc amount-side" id="sideBadge">مدين</span></span><input class="ltr num" name="amount" inputmode="decimal" autocomplete="off" placeholder="0.00"></label>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn primary" id="saveBtn" disabled>حفظ <kbd>Ctrl+S</kbd></button>
+            <button type="button" class="btn" id="saveNewBtn" disabled>حفظ وجديد <kbd>Ctrl+Enter</kbd></button>
+            <a class="btn" href="dashboard.html" id="cancelBtn">إلغاء <kbd>Esc</kbd></a>
+          </div>
+          <p class="cell-sub" id="saveHint" style="padding-inline:4px">الحفظ معطّل حتى تؤكد أن الحركة مختلفة عن الحركة المسجّلة بالرقم نفسه.</p>
+        </form>
+
+        <section class="dup" id="dup" aria-labelledby="dupH">
+          <div class="sheet-head"><button type="button" class="btn" data-sheet-back><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg>رجوع للتعديل</button><span class="badge no">تحذير صارم</span></div>
+          <div class="dup-card">
+            <div class="dup-top"><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg><span class="strict hide-m">تحذير صارم</span></div>
+            <h2 id="dupH">الرقم المرجعي  <span class="num">MISC/2026/08/0395</span>  مستخدم في حركة أخرى</h2>
+            <p>التحذير لا يمنعك من متابعة الإدخال، لكن تأكد أن هذه الحركة ليست تكراراً للحركة المسجّلة.</p>
+            <dl class="group facts">
+              <div><dt>المورد</dt><dd>مفروشات الجيزاني</dd></div>
+              <div><dt>الصف</dt><dd> <span class="num">148</span> </dd></div>
+              <div><dt>المبلغ</dt><dd> <span class="money"><svg class="sar" role="img" aria-label="ريال سعودي"><use href="#sar"/></svg><span>1,700.00</span></span></dd></div>
+            </dl>
+            <label class="confirm"><input type="checkbox" id="confirmDup">أؤكد أنها حركة مختلفة</label>
+            <div class="dup-actions hide-m"><button type="button" class="btn" data-edit-ref>تعديل المرجع</button><a class="btn" href="review.html#dups">فتح في مركز المراجعة</a></div>
+          </div>
+          <div class="dup-cta"><button type="button" class="btn primary" data-sheet-continue disabled>متابعة الإدخال</button><a class="btn" href="review.html#dups">فتح في مركز المراجعة</a></div>
+        </section>
+      </div>
+      <div class="page-foot upto-tl"><label class="role"><span>عرض بصلاحية</span><select data-role-select aria-label="عرض بصلاحية"><option value="owner">المالك</option><option value="admin">الإدارة</option><option value="entry">مدخل البيانات</option></select></label></div>
+    </main>
+  </div>
+  <aside class="inspector" aria-label="مساعدة الإدخال">
+    <section aria-labelledby="h-kbd"><h2 id="h-kbd">اختصارات لوحة المفاتيح</h2>
+      <div class="group kbd-list">
+        <div><span>حفظ</span><kbd>Ctrl+S</kbd></div>
+        <div><span>حفظ وبدء حركة جديدة</span><kbd>Ctrl+Enter</kbd></div>
+        <div><span>إلغاء</span><kbd>Esc</kbd></div>
+        <div><span>النوع: فاتورة</span><kbd>Alt+1</kbd></div>
+        <div><span>النوع: قيد</span><kbd>Alt+2</kbd></div>
+      </div>
+    </section>
+    <section aria-labelledby="h-gen"><h2 id="h-gen">كيف يُولَّد الرقم المرجعي</h2>
+      <div class="group">
+        <div class="cell"><span class="grow">فاتورة</span> <span class="num">P + المرجع</span> </div>
+        <div class="cell"><span class="grow">قيد</span> <span class="num">MISC/السنة/الشهر/المرجع</span> </div>
+      </div>
+      <p class="foot-note">الشهر برقمين من حقل التاريخ.</p>
+    </section>
+  </aside>
+</div>
+<button type="button" class="scrim" data-nav-toggle aria-label="إغلاق القائمة" tabindex="-1"></button>
+<nav class="tabbar" aria-label="التنقل السفلي">
+  <a href="dashboard.html" style="--i:0"><svg class="ic" aria-hidden="true"><use href="#i-bal"/></svg><span>الأرصدة</span></a>
+  <a href="statement.html" style="--i:1"><svg class="ic" aria-hidden="true"><use href="#i-doc"/></svg><span>الكشف</span></a>
+  <a href="invoices.html" style="--i:2"><svg class="ic" aria-hidden="true"><use href="#i-stack"/></svg><span>الفواتير</span></a>
+  <a href="review.html" style="--i:3"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>المراجعة</span></a>
+</nav>
+
+
+</body></html>
