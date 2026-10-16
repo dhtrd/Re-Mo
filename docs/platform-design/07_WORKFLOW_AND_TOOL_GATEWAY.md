@@ -44,6 +44,14 @@ stateDiagram-v2
 | EXECUTING → COMPLETED | نتيجة مؤكدة | البوابة | استجابة النظام | `execution.completed` | — | نعم | — |
 | EXECUTING → EXECUTION_UNCERTAIN | انقطاع/مهلة بلا تأكيد | البوابة | آخر حالة معروفة | `execution.uncertain` | **ممنوع حتى التحقق** | محتمل | يُسأل النظام الهدف بالمفتاح |
 | أي → FAILED | خطأ غير قابل للاستئناف | المنسق | سبب | `task.failed` | حسب النوع | حسب المرحلة | — |
+| POLICY_CHECK → ESCALATED | السياسة تتطلب قرارًا بشريًا | محرك السياسات | سبب التصعيد | `task.escalated` | — | لا | — |
+| POLICY_CHECK → FAILED | السياسة ترفض | محرك السياسات | سبب الرفض | `policy.denied` | لا | لا | — |
+| VALIDATING → COMPLETED | مهمة قراءة/تحليل فقط وتحقق ناجح | المنسق | مخرج + أدلة | `task.completed` | — | لا | — |
+| VALIDATING → ESCALATED | فروقات أو تعارض بين نتائج | المنسق | وصف الفروقات (لا تُخفى ولا تُصحَّح بصمت) | `task.escalated` | — | لا | — |
+| WAITING_APPROVAL → CANCELLED | رفض أو انتهاء الموافقة | الموافقات | سبب | `approval.rejected` / `approval.expired` | طلب جديد ببيانات جديدة فقط | لا | — |
+| EXECUTION_UNCERTAIN → ESCALATED | تعذر تأكيد النتيجة | البوابة | مفتاح المطابقة وآخر حالة | `task.escalated` | لا | محتمل | — |
+| ESCALATED → PLANNED | قرار مسؤول مخوّل | مالك العملية | قرار موثق وسبب | `escalation.resolved` | — | لا | — |
+| ESCALATED → CANCELLED | قرار مسؤول مخوّل بالإلغاء | مالك العملية | سبب | `task.cancelled` | — | لا إن لم يبدأ التنفيذ | — |
 | أي → CANCELLED | طلب إلغاء مصرح | المستخدم/المسؤول | سبب | `task.cancelled` | — | لا إن لم يبدأ التنفيذ | — |
 
 ## 3. المهل وإعادة المحاولة (سياسة مقترحة)
