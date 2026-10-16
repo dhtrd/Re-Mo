@@ -55,9 +55,10 @@ tr.sel{background:var(--accent-soft)}
   <h1>شاشة الموافقات — ثلاثة خيارات للمقارنة</h1>
   <div class="banner">نموذج تصميم فقط. كل البيانات <strong>اصطناعية</strong> (SYNTHETIC) ولا تمثل شركة أو مبلغًا حقيقيًا. لا يتصل بأي نظام. المبالغ والحدود مجرد أمثلة شكلية والحدود الفعلية UNKNOWN.</div>
 
+  <p class="muted" style="margin-bottom:10px">المعتمد اتجاهًا: الخيار «ب» مع دمج مقارنة النسخة من «ج» (D-012، D-013). «أ» و«ج» للمرجع فقط.</p>
   <div class="tabs" role="tablist" aria-label="الخيارات">
     <button class="tab" role="tab" aria-selected="true" data-p="a">أ — قائمة + لوحة تفاصيل</button>
-    <button class="tab" role="tab" aria-selected="false" data-p="b">ب — طابور بطاقات + مسار</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="b">ب — طابور بطاقات + مسار + مقارنة (المعتمد)</button>
     <button class="tab" role="tab" aria-selected="false" data-p="c">ج — مقارنة نسخة الموافقة</button>
   </div>
 
@@ -103,6 +104,22 @@ tr.sel{background:var(--accent-soft)}
         </ul>
         <div class="row"><button class="btn p" disabled title="أنت لست المعتمد لهذا النوع">اعتماد</button><button class="btn d">رفض</button></div>
         <p class="note">الزر معطّل لأن دورك لا يخوّلك. الخادم يرفض أيضًا لو فعّلته.</p>
+      </article>
+      <article class="card" style="grid-column:1/-1">
+        <div class="row"><strong>دفعة لمورد اصطناعي — الموافقة أُبطلت</strong><span class="chip bad">النسخة تغيّرت</span></div>
+        <p class="muted">CO-A / BR-A1 · عُدّل حقل جوهري بعد الموافقة، فلا تنفيذ قبل موافقة جديدة</p>
+        <ul class="tl">
+          <li>اعتُمدت النسخة <code>9f3a…c1</code></li>
+          <li>عُدّل المبلغ بعد الاعتماد</li>
+          <li>أُبطلت الموافقة وأُعيد التحقق (<code>41be…7d</code>)</li>
+          <li class="pend">بانتظار موافقة جديدة</li>
+        </ul>
+        <div class="grid">
+          <dl class="kv"><dt>المعتمد</dt><dd>المبلغ <span class="diff-old">1,000.00 SYN</span></dd><dt>الطرف</dt><dd>SUP-001 (دون تغيير)</dd></dl>
+          <dl class="kv"><dt>الحالي</dt><dd>المبلغ <span class="diff-new">1,250.00 SYN</span></dd><dt>الحساب</dt><dd>ACC-5100 (دون تغيير)</dd></dl>
+        </div>
+        <div class="row"><button class="btn" disabled title="hash الحالي ≠ hash المعتمد">تنفيذ</button><button class="btn p">طلب موافقة جديدة</button></div>
+        <p class="note">الحقول الجوهرية يحددها مالك كل عملية (UNKNOWN). الأرقام أمثلة اصطناعية.</p>
       </article>
     </div>
   </section>
