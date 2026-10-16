@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>نماذج شاشة الموافقات</title>
+<style>
+:root{
+  --bg:#f4f1ea;--card:#fffdf8;--ink:#1d2430;--ink2:#566070;--line:#e2dccd;
+  --accent:#0f5f57;--accent-soft:#d9ece8;--warn:#a65a00;--warn-soft:#fbead2;
+  --bad:#a3312b;--bad-soft:#f7dedb;--ok:#1f6b3a;--ok-soft:#dcefe2;--r:14px;
+  --font:"Segoe UI",Tahoma,"Noto Sans Arabic",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#12171d;--card:#1a2129;--ink:#e9edf2;--ink2:#9aa6b4;--line:#2b3541;
+  --accent:#58c4b7;--accent-soft:#17342f;--warn:#e8a64a;--warn-soft:#3a2b12;
+  --bad:#f08a82;--bad-soft:#3b1d1b;--ok:#7fd49a;--ok-soft:#15301f;}}
+*{box-sizing:border-box;margin:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:1.35rem}
+.banner{margin:10px 0 16px;padding:10px 14px;border-radius:10px;background:var(--warn-soft);color:var(--warn);font-size:.9rem}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 16px;border-radius:999px;cursor:pointer;font:inherit}
+.tab[aria-selected=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.panel{display:none}.panel.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.muted{color:var(--ink2);font-size:.88rem}
+.chip{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.78rem;background:var(--accent-soft);color:var(--accent)}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}.chip.bad{background:var(--bad-soft);color:var(--bad)}.chip.ok{background:var(--ok-soft);color:var(--ok)}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:10px;cursor:pointer;font:inherit}
+.btn.p{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn.d{color:var(--bad);border-color:var(--bad)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.82rem;background:var(--accent-soft);padding:1px 6px;border-radius:6px;direction:ltr;unicode-bidi:embed}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{padding:10px 8px;text-align:start;border-bottom:1px solid var(--line)}
+tr.sel{background:var(--accent-soft)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:720px){.grid{grid-template-columns:1fr}.hide-m{display:none}}
+.kv{display:grid;grid-template-columns:130px 1fr;gap:6px 10px;font-size:.92rem;margin:10px 0}
+.kv dt{color:var(--ink2)}
+.diff-old{background:var(--bad-soft);padding:1px 6px;border-radius:6px;text-decoration:line-through}
+.diff-new{background:var(--ok-soft);padding:1px 6px;border-radius:6px}
+.tl{list-style:none;padding:0;margin:8px 0}
+.tl li{padding:6px 14px 6px 0;position:relative;border-inline-start:2px solid var(--line);padding-inline-start:14px;margin-inline-start:6px}
+.tl li::before{content:"";position:absolute;inset-inline-start:-6px;top:12px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.tl li.pend::before{background:var(--line)}
+.note{font-size:.84rem;color:var(--ink2);margin-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>شاشة الموافقات — ثلاثة خيارات للمقارنة</h1>
+  <div class="banner">نموذج تصميم فقط. كل البيانات <strong>اصطناعية</strong> (SYNTHETIC) ولا تمثل شركة أو مبلغًا حقيقيًا. لا يتصل بأي نظام. المبالغ والحدود مجرد أمثلة شكلية والحدود الفعلية UNKNOWN.</div>
+
+  <div class="tabs" role="tablist" aria-label="الخيارات">
+    <button class="tab" role="tab" aria-selected="true" data-p="a">أ — قائمة + لوحة تفاصيل</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="b">ب — طابور بطاقات + مسار</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="c">ج — مقارنة نسخة الموافقة</button>
+  </div>
+
+  <!-- Option A -->
+  <section class="panel on" id="a">
+    <div class="grid">
+      <div class="card">
+        <h3>طلبات بانتظار القرار</h3>
+        <table>
+          <thead><tr><th>الطلب</th><th class="hide-m">النوع</th><th>الخطورة</th></tr></thead>
+          <tbody id="list"></tbody>
+        </table>
+        <p class="note">يُعرض لكل مستخدم ما ضمن نطاقه فقط. الإخفاء هنا للراحة، والمنع الفعلي من الخادم.</p>
+      </div>
+      <div class="card" id="detail"></div>
+    </div>
+  </section>
+
+  <!-- Option B -->
+  <section class="panel" id="b">
+    <div class="row" style="margin-bottom:12px">
+      <span class="chip warn">بانتظار القرار: 2</span><span class="chip">تنتهي قريبًا: 1</span><span class="chip ok">مُنفّذة اليوم: 0</span>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <div class="row"><strong>مسودة قيد — تسوية بنكية</strong><span class="chip warn">متوسطة</span></div>
+        <p class="muted">CO-A / BR-A1 · أعدّه: وكيل المالية (مسودة) · طلبه: <code>u-preparer</code></p>
+        <ul class="tl">
+          <li>أُنشئت المسودة بأدلة (3)</li>
+          <li>اجتازت التحقق: متوازنة</li>
+          <li class="pend">بانتظار المعتمد (≠ المنشئ)</li>
+          <li class="pend">الصلاحية تُفحص لحظة التنفيذ</li>
+        </ul>
+        <div class="row"><button class="btn p">اعتماد</button><button class="btn d">رفض</button><button class="btn">طلب توضيح</button></div>
+      </article>
+      <article class="card">
+        <div class="row"><strong>طلب شراء — استثناء مطابقة</strong><span class="chip bad">عالية</span></div>
+        <p class="muted">CO-A / BR-A2 · أعدّه: وكيل المشتريات (اقتراح) · يحتاج مالك الميزانية</p>
+        <ul class="tl">
+          <li>اكتُشف فرق بين أمر الشراء والفاتورة</li>
+          <li>صُعِّد كاستثناء (لا يُخفى)</li>
+          <li class="pend">بانتظار مالك الميزانية</li>
+        </ul>
+        <div class="row"><button class="btn p" disabled title="أنت لست المعتمد لهذا النوع">اعتماد</button><button class="btn d">رفض</button></div>
+        <p class="note">الزر معطّل لأن دورك لا يخوّلك. الخادم يرفض أيضًا لو فعّلته.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Option C -->
+  <section class="panel" id="c">
+    <div class="card">
+      <div class="row"><strong>موافقة مرتبطة بنسخة المعاملة</strong><span class="chip bad">النسخة تغيّرت — الموافقة باطلة</span></div>
+      <p class="muted">أي تغيير في حقل جوهري بعد الموافقة يبطلها ويستلزم إعادة التحقق وموافقة جديدة.</p>
+      <div class="grid" style="margin-top:12px">
+        <div>
+          <h4>النسخة المعتمدة <code>hash: 9f3a…c1</code></h4>
+          <dl class="kv"><dt>الطرف</dt><dd>مورد اصطناعي SUP-001</dd><dt>الحساب</dt><dd>ACC-5100</dd><dt>المبلغ</dt><dd><span class="diff-old">1,000.00 SYN</span></dd><dt>التاريخ</dt><dd>2026-10-01</dd></dl>
+        </div>
+        <div>
+          <h4>النسخة الحالية <code>hash: 41be…7d</code></h4>
+          <dl class="kv"><dt>الطرف</dt><dd>مورد اصطناعي SUP-001</dd><dt>الحساب</dt><dd>ACC-5100</dd><dt>المبلغ</dt><dd><span class="diff-new">1,250.00 SYN</span></dd><dt>التاريخ</dt><dd>2026-10-01</dd></dl>
+        </div>
+      </div>
+      <div class="row"><button class="btn" id="cexec" disabled>تنفيذ</button><button class="btn p">طلب موافقة جديدة</button></div>
+      <p class="note" id="cmsg">التنفيذ محظور: hash الحالي ≠ hash المعتمد. الحقول «الجوهرية» يحددها مالك العملية (UNKNOWN).</p>
+    </div>
+  </section>
+</div>
+
+<script>
+const items=[
+ {id:"AP-001",t:"مسودة قيد",r:"متوسطة",c:"warn",by:"u-preparer",sc:"CO-A / BR-A1",st:"بانتظار معتمد مستقل"},
+ {id:"AP-002",t:"استثناء مطابقة",r:"عالية",c:"bad",by:"agent:procurement",sc:"CO-A / BR-A2",st:"بانتظار مالك الميزانية"},
+ {id:"AP-003",t:"تقرير للنشر",r:"منخفضة",c:"ok",by:"u-preparer",sc:"CO-A",st:"بانتظار مراجع"}
+];
+const list=document.getElementById('list'),detail=document.getElementById('detail');
+function show(i){
+  [...list.children].forEach((tr,k)=>tr.classList.toggle('sel',k===i));
+  const it=items[i];
+  detail.innerHTML=`<h3>${it.id} — ${it.t}</h3>
+  <dl class="kv"><dt>النطاق</dt><dd>${it.sc}</dd><dt>طالب الموافقة</dt><dd><code>${it.by}</code></dd><dt>الحالة</dt><dd>${it.st}</dd><dt>الأدلة</dt><dd>3 مراجع مصدر</dd><dt>الصلاحية</dt><dd>تنتهي خلال 24 ساعة (مثال)</dd></dl>
+  <div class="row"><button class="btn p" ${it.r==='عالية'?'disabled':''}>اعتماد</button><button class="btn d">رفض</button><button class="btn">طلب توضيح</button></div>
+  <p class="note">يُسجَّل القرار والمعتمد والوقت والسبب. لا يعتمد المنشئ معاملته.</p>`;
+}
+items.forEach((it,i)=>{
+  const tr=document.createElement('tr');tr.style.cursor='pointer';
+  tr.innerHTML=`<td><code>${it.id}</code></td><td class="hide-m">${it.t}</td><td><span class="chip ${it.c}">${it.r}</span></td>`;
+  tr.onclick=()=>show(i);list.appendChild(tr);
+});
+show(0);
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===b));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.id===b.dataset.p));
+});
+</script>
+</body>
+</html>
